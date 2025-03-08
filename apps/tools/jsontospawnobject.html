@@ -1,0 +1,884 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/jsontospawnobject by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:28:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>JSON to SpawnObject Converter &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Convert JSON files to SpawnObject code for DayZ quickly. Upload or paste JSON, generate init.c-ready code, and download or copy output with ease for streamlined server configuration." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <script src="../../assets/js/config.js"></script>
+	
+	<link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+	<link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/darcula.min.css">
+	<link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.css">
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  
+	  .CodeMirror {
+		  height: auto;
+		  max-height: 400px; 
+		  overflow: hidden; 
+		}
+
+		.CodeMirror-scroll {
+		  max-height: 400px; 
+		  overflow: auto; 
+		  margin-right: -15px; 
+		}
+
+		.CodeMirror-lint-markers {
+		  width: 16px;
+		}
+
+		/* Adjust the editor container height */
+		#jsonEditor, #outputEditor {
+		  min-height: 200px;
+		}
+
+	  
+	</style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+          </nav>
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+			<div class="content-wrapper">
+			  <!-- Content -->
+			  <div class="container-xxl flex-grow-1 container-p-y">
+				<!-- Header -->
+				<div class="row mb-4">
+				  <div class="col-12">
+					<div class="card  border-0">
+					  <div class="card-body d-flex align-items-center p-4">
+						<div class="avatar avatar-lg rounded me-3">
+						  <i class="ti ti-file-code fs-2"></i>
+						</div>
+						<div>
+						  <h4 class="card-title mb-0">JSON to INIT.C Converter</h4>
+						  <p class="card-text mb-0 text-muted">Convert your JSON coordinates to SpawnObject format</p>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+				<div class="row">
+				  <!-- Converter Card -->
+				  <div class="col-12 col-xl-8 mb-4">
+					<div class="card">
+					  <div class="card-header border-bottom">
+						<h5 class="card-title mb-0">
+						  <i class="ti ti-code-dots me-2"></i>
+						  Convert JSON to SpawnObject
+						</h5>
+					  </div>
+					  <div class="card-body">
+						<form id="jsonToInitForm">
+						
+						  <div class="mb-4">
+							  <label class="form-label d-flex justify-content-between" for="jsonInput">
+								<span>JSON Input</span>
+								<span class="text-muted">Supports standard & .dze format</span>
+							  </label>
+							  <div id="jsonEditor" class="border rounded"></div>
+							</div>
+							
+						  <div class="text-end mb-4">
+							<button type="submit" class="btn btn-primary btn-lg waves-effect">
+							  <i class="ti ti-code me-2"></i>
+							  Convert to INIT.C
+							</button>
+						  </div>
+						  
+						</form>
+
+						<div class="mb-4">
+						  <label class="form-label d-flex justify-content-between" for="output">
+							<span>Generated SpawnObject Code</span>
+							<span class="text-muted">Ready for init.c</span>
+						  </label>
+						  <div id="outputEditor" class="border rounded"></div>
+						</div>
+
+						<div class="d-flex gap-2 justify-content-end">
+						  <button id="copyButton" class="btn btn-primary btn-lg waves-effect">
+							<i class="ti ti-copy me-2"></i>
+							Copy Code
+						  </button>
+						  <button id="downloadButton" class="btn btn-success btn-lg waves-effect">
+							<i class="ti ti-download me-2"></i>
+							Download init.c
+						  </button>
+						</div>
+					  </div>
+					</div>
+				  </div>
+
+				  <!-- Info Card -->
+				  <div class="col-12 col-xl-4">
+					<div class="card">
+					  <div class="card-header border-bottom">
+						<h5 class="card-title mb-0">
+						  <i class="ti ti-info-circle me-2"></i>
+						  Quick Guide
+						</h5>
+					  </div>
+					  <div class="card-body">
+						<div class="alert alert-warning border-0 mt-4">
+						  <div class="d-flex">
+							<i class="ti ti-bulb text-warning fs-4 me-2"></i>
+							<div>
+							  This tool works with our SpawnObject Mover tool for easy object placement.
+							</div>
+						  </div>
+						</div>
+
+						<h6 class="mb-3">Supported JSON Formats:</h6>
+						<div class="mb-4">
+						  <div class="d-flex align-items-start mb-3">
+							<div class="badge p-2 me-2">
+							  <i class="ti ti-file text-primary fs-4"></i>
+							</div>
+							<div>
+							  <h6 class="mb-0">Standard JSON Format</h6>
+							  <small class="text-muted">Uses "Objects" array with name, pos, ypr properties</small>
+							</div>
+						  </div>
+						  <div class="d-flex align-items-start">
+							<div class="badge  p-2 me-2">
+							  <i class="ti ti-file-code text-success fs-4"></i>
+							</div>
+							<div>
+							  <h6 class="mb-0">Unbinarised .dze Format</h6>
+							  <small class="text-muted">Uses "EditorObjects" with Type, Position, Orientation</small>
+							</div>
+						  </div>
+						</div>
+
+						<h6 class="mb-3">How to Use:</h6>
+						<ul class="ps-3 mb-0">
+						  <li class="mb-2">Paste your JSON data into the input field</li>
+						  <li class="mb-2">Click "Convert to INIT.C" to generate the code</li>
+						  <li class="mb-2">Copy the generated code or download as init.c file</li>
+						  <li>Import the file into your server configuration</li>
+						</ul>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/json-lint.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
+
+    <!-- JSON Converter Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const jsonInput = document.getElementById('jsonInput');
+        const output = document.getElementById('output');
+        const form = document.getElementById('jsonToInitForm');
+		
+		const jsonEditor = CodeMirror(document.getElementById('jsonEditor'), {
+		  mode: 'application/json',
+		  theme: 'darcula',
+		  lineNumbers: true,
+		  autoCloseBrackets: true,
+		  matchBrackets: true,
+		  indentUnit: 2,
+		  tabSize: 2,
+		  lineWrapping: true, // Enable line wrapping
+		  gutters: ["CodeMirror-lint-markers"],
+		  lint: {
+			getAnnotations: function(content) {
+			  if (!content.trim()) {
+				return [];
+			  }
+			  return CodeMirror.lint.json(content);
+			}
+		  },
+		  viewportMargin: Infinity // Ensure rendering optimizations
+		});
+
+		// Set a template/placeholder
+		jsonEditor.setValue(`{
+		  "Objects": [
+			{
+			  "placeholder": "Paste your JSON here",
+			  "example": {
+				"name": "Land_Container_1Bo",
+				"pos": [11491.4, 385.386, 8937.11],
+				"ypr": [0, 0, 0]
+			  }
+			}
+		  ]
+		}`);
+
+		// Clear the editor when clicked if it still contains the template
+		jsonEditor.on('focus', function() {
+		  if (jsonEditor.getValue().includes('"placeholder": "Paste your JSON here"')) {
+			jsonEditor.setValue('');
+		  }
+		});
+
+
+		  // Initialize Output Editor
+		  const outputEditor = CodeMirror(document.getElementById('outputEditor'), {
+			mode: 'javascript',
+			theme: 'darcula',
+			lineNumbers: true,
+			readOnly: true,
+			lineWrapping: true,
+			viewportMargin: Infinity
+		  });
+
+        // Handle form submission
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+		  const jsonInputValue = jsonEditor.getValue().trim();
+
+          if (!jsonInputValue) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Input Error',
+              text: 'Please provide valid JSON input.'
+            });
+            return;
+          }
+
+          let parsedJson;
+          try {
+            parsedJson = JSON.parse(jsonInputValue);
+          } catch (error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Invalid JSON',
+              text: 'Error parsing JSON: ' + error.message
+            });
+            return;
+          }
+
+          // Check which format is being used: .dze or the standard format
+          let objects;
+          let isDZE = false;
+
+          if (Array.isArray(parsedJson.Objects)) {
+            objects = parsedJson.Objects;
+          } else if (Array.isArray(parsedJson.EditorObjects)) {
+            objects = parsedJson.EditorObjects;
+            isDZE = true;
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Invalid Format',
+              text: 'The JSON input must have an "Objects" or "EditorObjects" array.'
+            });
+            return;
+          }
+
+          // Convert JSON to SpawnObject calls
+          let spawnObjectCode = '';
+          objects.forEach((obj, index) => {
+            // For the standard format
+            if (!isDZE) {
+              if (obj.name && obj.pos && obj.ypr) {
+                const objectName = obj.name.replace(/\\/g, '\\\\');
+                const pos = obj.pos.join(' ');
+                const ypr = obj.ypr.join(' ');
+                const scale = obj.scale || 1;
+
+                spawnObjectCode += `SpawnObject("${objectName}", "${pos}", "${ypr}", ${scale});\n`;
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: `Invalid Object at Index ${index + 1}`,
+                  text: 'Each object must have "name", "pos", and "ypr" properties.'
+                });
+                return;
+              }
+            } else {
+              // For the .dze format
+              if (obj.Type && obj.Position && obj.Orientation) {
+                const objectName = obj.Type.replace(/\\/g, '\\\\');
+                const pos = obj.Position.map(coord => coord.toFixed(6)).join(' ');
+                const ypr = obj.Orientation.map(coord => coord.toFixed(6)).join(' ');
+                const scale = obj.Scale || 1;
+
+                spawnObjectCode += `SpawnObject("${objectName}", "${pos}", "${ypr}", ${scale});\n`;
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: `Invalid Object at Index ${index + 1}`,
+                  text: 'Each object must have "Type", "Position", and "Orientation" properties in the .dze format.'
+                });
+                return;
+              }
+            }
+          });
+
+          // Output the SpawnObject code
+          outputEditor.setValue(spawnObjectCode);
+        });
+
+        // Copy output to clipboard
+        document.getElementById('copyButton').addEventListener('click', () => {
+          const text = outputEditor.getValue().trim();
+		  
+          if (!text) {
+            Swal.fire({
+              icon: 'warning',
+              title: 'No Output',
+              text: 'There is no output to copy.'
+            });
+            return;
+          }
+          navigator.clipboard.writeText(text).then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Copied!',
+              text: 'SpawnObject code copied to clipboard.'
+            });
+          });
+        });
+
+        // Download output as an INIT.C file
+        document.getElementById('downloadButton').addEventListener('click', () => {
+          const text = outputEditor.getValue().trim();
+          if (!text) {
+            Swal.fire({
+              icon: 'warning',
+              title: 'No Output',
+              text: 'There is no output to download.'
+            });
+            return;
+          }
+          const blob = new Blob([text], { type: 'text/plain' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'init.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          });
+        });
+		
+		
+    </script>
+
+    <!-- Include SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/jsontospawnobject by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:28:07 GMT -->
+</html>

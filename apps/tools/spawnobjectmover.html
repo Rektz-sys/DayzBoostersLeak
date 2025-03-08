@@ -1,0 +1,1444 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/spawnobjectmover by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:28:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>SpawnObject Mover &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Move and adjust spawn objects effortlessly with the Spawn Object Mover tool. Input coordinates manually or use XML entries to create precise object placement and export as JSON for DayZ server setups." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+	
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  
+	</style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>		
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+			
+			<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <!-- Header Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-0">
+                    <div class="card-body d-flex align-items-center p-4">
+                        <div class="avatar avatar-lg rounded me-3">
+                            <i class="ti ti-file-code fs-2"></i>
+                        </div>
+                        <div>
+                            <h4 class="card-title mb-0">Spawn Object Mover</h4>
+                            <p class="card-text mb-0 text-muted">Tool for adjusting spawn object positions in DayZ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Main Input Card -->
+                <form id="spawnerForm">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="ti ti-input me-2"></i>Input Configuration</h5>
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#howToModal">
+                                <i class="ti ti-help me-1"></i>View Guide
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-info d-flex align-items-center mb-4">
+                                <i class="ti ti-info-circle me-2"></i>
+                                Compatible with &nbsp; <a href="jsontospawnobject.html" class="alert-link"> JSON to SpawnObject Converter</a>
+                            </div>
+
+                            <!-- SpawnObject Input -->
+                            <div class="form-group mb-4">
+                                <label class="form-label d-flex align-items-center">
+                                    <i class="ti ti-code me-2"></i>
+                                    Original SpawnObject Calls
+                                </label>
+                                <textarea 
+                                    id="spawnObjectInput" 
+                                    class="form-control" 
+                                    rows="6" 
+                                    placeholder='SpawnObject("Land_Village_store", "4418.120117 341.256989 10938.799805", "0.000000 0.000000 -0.000000", 1);'
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <!-- XML Input -->
+                            <div class="form-group mb-4">
+                                <label class="form-label d-flex align-items-center">
+                                    <i class="ti ti-file-code me-2"></i>
+                                    Mapgrouppos XML Entry
+                                </label>
+                                <textarea 
+                                    id="mapGroupPosInput" 
+                                    class="form-control" 
+                                    rows="4" 
+                                    placeholder='<group name="Land_Village_store" pos="1167.294678 152.374146 6220.293945" rpy="-0.000000 0.000000 -0.492173" a="90.492165" />'
+                                ></textarea>
+                                <small class="form-text text-muted mt-1">
+                                    <i class="ti ti-info-circle me-1"></i>
+                                    Paste from mapgrouppos.xml for existing location data
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manual Position Input Card -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="ti ti-arrows-maximize me-2"></i>Manual Position Entry
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="positionsContainer">
+                                <div class="position-card mb-3">
+									<div class="row g-3">
+										<div class="col-md-3">
+											<div class="form-floating">
+												<input type="text" class="position-input form-control" placeholder="4418.120117">
+												<label>X Position</label>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-floating">
+												<input type="text" class="position-input form-control" placeholder="341.256989">
+												<label>Y Position</label>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-floating">
+												<input type="text" class="position-input form-control" placeholder="10938.799805">
+												<label>Z Position</label>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-floating">
+												<input type="text" class="yaw-input form-control" placeholder="0">
+												<label>Yaw (Rotation)</label>
+											</div>
+										</div>
+									</div>
+									<div class="text-end mt-3">
+										<button type="button" class="btn btn-danger btn-sm deleteButton">
+											<i class="ti ti-trash me-1"></i>Remove
+										</button>
+									</div>
+								</div>
+                            </div>
+                            <button type="button" id="addMoreButton" class="btn btn-outline-primary">
+                                <i class="ti ti-plus me-1"></i>Add Position
+                            </button>
+							
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-4">
+                <!-- Action Card -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="ti ti-wand me-2"></i>Actions
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" form="spawnerForm" class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="ti ti-sparkles me-2"></i>Generate Output
+                        </button>
+						
+						<div class="form-check form-switch mb-3">
+							<input class="form-check-input" type="checkbox" id="anchorObjectToggle">
+							<label class="form-check-label d-flex align-items-center gap-1" for="anchorObjectToggle">
+								Remove Anchor Object?
+								<i class="ti ti-info-circle text-muted" 
+								   data-bs-toggle="tooltip" 
+								   data-bs-placement="top" 
+								   title="Marking as active will remove the anchor object from the output json, this is helpful when you want to put object into a specific building without adding a new building"></i>
+							</label>
+						</div>
+						
+						<div class="alert alert-danger d-flex align-items-center" role="alert">
+							<i class="ti ti-alert-circle me-2" style="font-size: 1.5rem;"></i>
+							<div>
+								Please note that spawning a large number of objects using ObjectSpawner may impact both server and client performance.
+							</div>
+						</div>
+                        
+                        <div class="form-group mb-3">
+                            <label class="form-label d-flex align-items-center">
+                                <i class="ti ti-code me-2"></i>Generated Output
+                            </label>
+                            <textarea 
+                                id="output" 
+                                class="form-control" 
+                                rows="8" 
+                                readonly 
+                                placeholder="Your generated JSON will appear here..."
+                            ></textarea>
+                        </div>
+
+                        <div class="mb-3">
+							<div class="btn-group w-100 mb-2">
+								<button type="button" id="copyButton" class="btn btn-outline-primary">
+									<i class="ti ti-copy me-1"></i>Copy
+								</button>
+								<button type="button" id="downloadButton" class="btn btn-outline-success">
+									<i class="ti ti-download me-1"></i>Download
+								</button>
+							</div>
+							<button type="button" id="exampleCodeButton" class="btn btn-outline-warning w-100" data-bs-toggle="modal" data-bs-target="#exampleCodeModal">
+								<i class="ti ti-code me-1"></i>Example Code
+							</button>
+						</div>
+                    </div>
+                </div>
+
+                <!-- Credits Card -->
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <i class="ti ti-heart fs-3 me-2"></i>
+                            <div>
+                                <h6 class="mb-1">Credits</h6>
+                                <p class="mb-0">Original script by 
+                                    <a href="https://discord.gg/ZaGzSJF3H5" class="text-white text-decoration-underline">
+                                        DonSibley
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+    <!-- Footer -->
+    <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>    <!-- / Footer -->
+    <div class="content-backdrop fade"></div>
+</div>
+
+<!-- Example Code Modal -->
+<div class="modal fade" id="exampleCodeModal" tabindex="-1" aria-labelledby="exampleCodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-white">
+                <h5 class="modal-title" id="exampleCodeModalLabel">
+                    <i class="ti ti-code me-2"></i>Example Code & Usage
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <!-- SpawnObject Example -->
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3">
+                        <i class="ti ti-file-code me-2"></i>SpawnObject Input Example
+                    </h6>
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <pre class="text-success mb-0"><code>SpawnObject("Land_Village_Store", "5500.123 450.789 7800.456", "0.000000 0.000000 0.000000", 1);
+SpawnObject("LootSpot", "5501.234 451.789 7801.567", "0.000000 0.000000 0.000000", 1);
+SpawnObject("LootSpot", "5502.345 452.789 7802.678", "0.000000 0.000000 0.000000", 1);</code></pre>
+                        </div>
+                    </div>
+                    <small class="text-muted d-block mb-3">
+                        <i class="ti ti-info-circle me-1"></i>
+                        Main building should be first, followed by associated objects
+                    </small>
+                </div>
+
+                <!-- XML Example -->
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3">
+                        <i class="ti ti-brackets me-2"></i>Mapgrouppos XML Example
+                    </h6>
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <pre class="text-success mb-0"><code>&lt;group name="Land_Village_Store" pos="1167.294678 152.374146 6220.293945" rpy="-0.000000 0.000000 -0.492173" a="90.492165" /&gt;</code></pre>
+                        </div>
+                    </div>
+                    <small class="text-muted d-block mb-3">
+                        <i class="ti ti-info-circle me-1"></i>
+                        Copy from mapgrouppos.xml for the new location
+                    </small>
+                </div>
+
+                <!-- Manual Entry Example -->
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3">
+                        <i class="ti ti-keyboard me-2"></i>Manual Position Example
+                    </h6>
+                    <div class="alert alert-info">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>X:</strong> 1167.294678
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Y:</strong> 152.374146
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Z:</strong> 6220.293945
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Yaw:</strong> -0.492173
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Notes -->
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3">
+                        <i class="ti ti-notes me-2"></i>Important Notes
+                    </h6>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <i class="ti ti-point me-2"></i>
+                            Main building must have YPR set to 0,0,0 in original SpawnObject calls
+                        </li>
+                        <li class="list-group-item">
+                            <i class="ti ti-point me-2"></i>
+                            Objects will maintain their relative positions to the main building
+                        </li>
+                        <li class="list-group-item">
+                            <i class="ti ti-point me-2"></i>
+                            Yaw rotation will be applied to the entire group
+                        </li>
+                        <li class="list-group-item">
+                            <i class="ti ti-point me-2"></i>
+                            Use either XML input OR manual coordinates, not both
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Output Example -->
+                <div>
+                    <h6 class="fw-bold mb-3">
+                        <i class="ti ti-file-json me-2"></i>Output Example
+                    </h6>
+                    <div class="card">
+                        <div class="card-body">
+                            <pre class="text-success mb-0"><code>{
+    "Objects": [
+        {
+            "name": "Land_Village_Store",
+            "pos": [1167.294678, 152.374146, 6220.293945],
+            "ypr": [0.000000, 0.000000, -0.492173],
+            "scale": 1,
+            "enableCEPersistency": false
+        },
+        {
+            "name": "LootSpot",
+            "pos": [1168.405789, 153.374146, 6221.405056],
+            "ypr": [0.000000, 0.000000, -0.492173],
+            "scale": 1,
+            "enableCEPersistency": false
+        }
+    ]
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="ti ti-check me-1"></i>Got It
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+          
+
+			<!-- How To Use Modal -->
+			<div class="modal fade" id="howToModal" tabindex="-1" aria-labelledby="howToModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<!-- Modal Header -->
+						<div class="modal-header bg-primary text-white">
+							<h5 class="modal-title" id="howToModalLabel">
+								<i class="ti ti-book me-2"></i>Guide: Using the Spawn Object Mover
+							</h5>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+
+						<!-- Modal Body -->
+						<div class="modal-body p-4">
+							<!-- Quick Start Section -->
+							<div class="alert alert-primary d-flex align-items-center mb-4">
+								<i class="ti ti-rocket me-2 fs-3"></i>
+								<div>
+									<h6 class="alert-heading mb-1">Quick Start</h6>
+									<p class="mb-0">This tool helps you move groups of objects in DayZ to new locations while maintaining their relative positions.</p>
+								</div>
+							</div>
+
+							<!-- Step-by-Step Guide -->
+							<div class="steps">
+								<!-- Step 1 -->
+								<div class="step-item mb-4">
+									<div class="d-flex align-items-center mb-2">
+										<div class="avatar avatar-sm text-white me-3">1</div>
+										<h6 class="mb-0 fw-bold">Select Your Reference Building</h6>
+									</div>
+									<div class="ms-5">
+										<p class="mb-2">In DayZ Editor:</p>
+										<ul class="mb-0">
+											<li>Choose a building as your main reference point</li>
+											<li>This will be your "anchor" for positioning other objects</li>
+											<li class="text-danger">Important: Set building rotation (YPR) to 0,0,0</li>
+										</ul>
+									</div>
+								</div>
+
+								<!-- Step 2 -->
+								<div class="step-item mb-4">
+									<div class="d-flex align-items-center mb-2">
+										<div class="avatar avatar-sm text-white me-3">2</div>
+										<h6 class="mb-0 fw-bold">Export Your Objects</h6>
+									</div>
+									<div class="ms-5">
+										<p class="mb-2">From DayZ Editor:</p>
+										<ul class="mb-0">
+											<li>Export objects as a .C file</li>
+											<li>Reference building should be first in the list</li>
+											<li>Include all objects you want to move together</li>
+										</ul>
+									</div>
+								</div>
+
+								<!-- Step 3 -->
+								<div class="step-item mb-4">
+									<div class="d-flex align-items-center mb-2">
+										<div class="avatar avatar-sm text-white me-3">3</div>
+										<h6 class="mb-0 fw-bold">Input Your Data</h6>
+									</div>
+									<div class="ms-5">
+										<div class="row g-3">
+											<div class="col-md-6">
+												<div class="card bg-light">
+													<div class="card-body">
+														<h6 class="fw-bold mb-2">Option 1: Use XML Data</h6>
+														<p class="small mb-0">Paste from mapgrouppos.xml for existing locations</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="card bg-light">
+													<div class="card-body">
+														<h6 class="fw-bold mb-2">Option 2: Manual Entry</h6>
+														<p class="small mb-0">Enter X, Y, Z coordinates manually</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Step 4 -->
+								<div class="step-item">
+									<div class="d-flex align-items-center mb-2">
+										<div class="avatar avatar-sm text-white me-3">4</div>
+										<h6 class="mb-0 fw-bold">Generate & Use</h6>
+									</div>
+									<div class="ms-5">
+										<ul class="mb-0">
+											<li>Click "Generate Output" to create new positions</li>
+											<li>Copy or download the results</li>
+											<li>Use the output in your server configuration</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<!-- Examples Section -->
+							<div class="mt-4">
+								<h6 class="fw-bold mb-3">
+									<i class="ti ti-code me-2"></i>Example Formats
+								</h6>
+								
+								<!-- SpawnObject Example -->
+								<div class="card text-white mb-3">
+									<div class="card-header py-2">
+										<small>SpawnObject Format:</small>
+									</div>
+									<div class="card-body">
+										<code>SpawnObject("Land_Village_store", "4418.120117 341.256989 10938.799805", "0.000000 0.000000 -0.000000", 1);</code>
+									</div>
+								</div>
+
+								<!-- XML Example -->
+								<div class="card  text-white">
+									<div class="card-header py-2">
+										<small>XML Format:</small>
+									</div>
+									<div class="card-body">
+										<code>&lt;group name="Land_Village_store" pos="1167.294678 152.374146 6220.293945" rpy="-0.000000 0.000000 -0.492173" a="90.492165" /&gt;</code>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Modal Footer -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+								<i class="ti ti-check me-1"></i>Got It
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			// Constants and Element Selectors
+			const ELEMENTS = {
+				spawnObjectInput: document.getElementById('spawnObjectInput'),
+				mapGroupPosInput: document.getElementById('mapGroupPosInput'),
+				positionsContainer: document.getElementById('positionsContainer'),
+				addMoreButton: document.getElementById('addMoreButton'),
+				output: document.getElementById('output'),
+				form: document.getElementById('spawnerForm'),
+				copyButton: document.getElementById('copyButton'),
+				downloadButton: document.getElementById('downloadButton'),
+				anchorObject: document.getElementById('anchorObjectToggle')
+			};
+
+			// Utility Functions
+			const Utils = {
+				createElementWithClasses(elementType, classes) {
+					const element = document.createElement(elementType);
+					element.classList.add(...classes);
+					return element;
+				},
+
+				showAlert(config) {
+					return Swal.fire(config);
+				},
+
+				validateCoordinates(x, y, z) {
+					return !isNaN(x) && !isNaN(y) && !isNaN(z);
+				}
+			};
+
+			// Position Card Manager
+			const PositionCardManager = {
+				createInputColumn(placeholder) {
+					const col = Utils.createElementWithClasses('div', ['col-md-4']);
+					const formFloating = Utils.createElementWithClasses('div', ['form-floating']);
+					const input = Utils.createElementWithClasses('input', ['position-input', 'form-control']);
+					input.type = 'text';
+					input.placeholder = placeholder;
+					
+					const label = document.createElement('label');
+					label.textContent = `${placeholder} Position`;
+					
+					formFloating.appendChild(input);
+					formFloating.appendChild(label);
+					col.appendChild(formFloating);
+					return col;
+				},
+
+				createPositionCard() {
+					const card = Utils.createElementWithClasses('div', ['card', 'mb-3', 'position-card']);
+					const cardBody = Utils.createElementWithClasses('div', ['card-body']);
+					const row = Utils.createElementWithClasses('div', ['row', 'g-3']);
+
+					// Position inputs (X, Y, Z)
+					['X', 'Y', 'Z'].forEach(pos => {
+						const col = Utils.createElementWithClasses('div', ['col-md-3']);
+						const formFloating = Utils.createElementWithClasses('div', ['form-floating']);
+						const input = Utils.createElementWithClasses('input', ['position-input', 'form-control']);
+						input.type = 'text';
+						input.placeholder = pos === 'X' ? '4418.120117' : pos === 'Y' ? '341.256989' : '10938.799805';
+						
+						const label = document.createElement('label');
+						label.textContent = `${pos} Position`;
+						
+						formFloating.appendChild(input);
+						formFloating.appendChild(label);
+						col.appendChild(formFloating);
+						row.appendChild(col);
+					});
+
+					// Add Yaw input
+					const yawCol = Utils.createElementWithClasses('div', ['col-md-3']);
+					const yawFormFloating = Utils.createElementWithClasses('div', ['form-floating']);
+					const yawInput = Utils.createElementWithClasses('input', ['yaw-input', 'form-control']);
+					yawInput.type = 'text';
+					yawInput.placeholder = '0';
+					
+					const yawLabel = document.createElement('label');
+					yawLabel.textContent = 'Yaw (Rotation)';
+					
+					yawFormFloating.appendChild(yawInput);
+					yawFormFloating.appendChild(yawLabel);
+					yawCol.appendChild(yawFormFloating);
+					row.appendChild(yawCol);
+
+					const deleteButton = Utils.createElementWithClasses('button', ['btn', 'btn-danger', 'btn-sm', 'deleteButton', 'mt-3']);
+					deleteButton.type = 'button';
+					deleteButton.innerHTML = '<i class="ti ti-trash me-1"></i>Remove';
+
+					cardBody.appendChild(row);
+					cardBody.appendChild(deleteButton);
+					card.appendChild(cardBody);
+
+					return card;
+				}
+			};
+
+			// Coordinate Processor
+			const CoordinateProcessor = {
+				extractCoordinatesFromXML(xmlString) {
+					const entries = xmlString.match(/<group[^>]*pos="[^"]*"[^>]*\/>/g);
+					if (!entries) return null;
+
+					return entries
+						.map(entry => {
+							const posMatch = entry.match(/pos="([0-9.\- ]+)"/);
+							const rpyMatch = entry.match(/rpy="([0-9.\- ]+)"/);
+							if (posMatch && posMatch[1]) {
+								const [x, y, z] = posMatch[1].split(' ').map(parseFloat);
+								let yaw = 0;
+								if (rpyMatch && rpyMatch[1]) {
+									const [_, __, yawValue] = rpyMatch[1].split(' ').map(parseFloat);
+									yaw = yawValue;
+								}
+								return { x, y, z, yaw };
+							}
+							return null;
+						})
+						.filter(Boolean);
+				},
+			};
+
+			// Form Validator
+			const FormValidator = {
+				areManualCoordinatesValid() {
+					return [...document.querySelectorAll('.position-card')].some(card => {
+						const inputs = card.querySelectorAll('.position-input');
+						return [...inputs].every(input => input.value.trim());
+					});
+				},
+
+				validateInputs(spawnInput, mapGroupPos, hasManualCoords) {
+					if (!spawnInput) {
+						Utils.showAlert({
+							icon: 'error',
+							title: 'Input Error',
+							text: 'Please provide valid SpawnObject input.'
+						});
+						return false;
+					}
+
+					const hasMapGroupPos = mapGroupPos.length > 0;
+					
+					if ((hasMapGroupPos && hasManualCoords) || (!hasMapGroupPos && !hasManualCoords)) {
+						Utils.showAlert({
+							icon: 'error',
+							title: 'Input Conflict',
+							text: 'Please provide either mapgrouppos XML entry or manual XYZ coordinates, but not both.'
+						});
+						return false;
+					}
+
+					return true;
+				}
+			};
+
+			// Output Manager
+			const OutputManager = {
+				generateOutput(objects) {
+					return JSON.stringify({ Objects: objects }, null, 4);
+				},
+
+				async copyToClipboard(text) {
+					if (!text) {
+						return Utils.showAlert({
+							icon: 'warning',
+							title: 'No Output',
+							text: 'There is no output to copy.'
+						});
+					}
+
+					try {
+						await navigator.clipboard.writeText(text);
+						Utils.showAlert({
+							icon: 'success',
+							title: 'Copied!',
+							text: 'JSON output copied to clipboard.'
+						});
+					} catch (error) {
+						Utils.showAlert({
+							icon: 'error',
+							title: 'Copy Failed',
+							text: 'Failed to copy to clipboard.'
+						});
+					}
+				},
+
+				downloadJSON(text) {
+					if (!text) {
+						return Utils.showAlert({
+							icon: 'warning',
+							title: 'No Output',
+							text: 'There is no output to download.'
+						});
+					}
+
+					const blob = new Blob([text], { type: 'application/json' });
+					const url = URL.createObjectURL(blob);
+					const a = document.createElement('a');
+					a.href = url;
+					a.download = 'SpawnObject_Moved.json';
+					document.body.appendChild(a);
+					a.click();
+					document.body.removeChild(a);
+					URL.revokeObjectURL(url);
+				}
+			};
+
+			// Event Handlers
+			const setupEventListeners = () => {
+				// Add Position Card
+				ELEMENTS.addMoreButton.addEventListener('click', () => {
+					ELEMENTS.positionsContainer.appendChild(PositionCardManager.createPositionCard());
+				});
+
+				// Delete Position Card
+				ELEMENTS.positionsContainer.addEventListener('click', (event) => {
+					if (event.target.closest('.deleteButton')) {
+						event.target.closest('.position-card').remove();
+					}
+				});
+
+				// Form Submit
+				ELEMENTS.form.addEventListener('submit', handleFormSubmit);
+
+				// Copy and Download
+				ELEMENTS.copyButton.addEventListener('click', () => 
+					OutputManager.copyToClipboard(ELEMENTS.output.value.trim())
+				);
+				
+				ELEMENTS.downloadButton.addEventListener('click', () => 
+					OutputManager.downloadJSON(ELEMENTS.output.value.trim())
+				);
+			};
+			
+			const processExtractedCoordinates = (extractedCoords, originalObjects, objects) => {
+				extractedCoords.forEach((coords) => {
+					originalObjects.forEach((obj, index) => {						
+						if (ELEMENTS.anchorObject.checked && index === 0) {
+							return;
+						}
+
+						// Calculate relative position from anchor
+						const offsetX = obj.cords[0] - originalObjects[0].cords[0];
+						const offsetY = obj.cords[1] - originalObjects[0].cords[1];
+						const offsetZ = obj.cords[2] - originalObjects[0].cords[2];
+
+						// Convert angle to radians
+						const yawRad = coords.yaw * Math.PI / 180;
+
+						// Rotate the offset coordinates
+						const rotatedX = offsetX * Math.cos(yawRad) + offsetZ * Math.sin(yawRad);
+						const rotatedZ = -offsetX * Math.sin(yawRad) + offsetZ * Math.cos(yawRad);
+
+						// Add rotated offsets to target position
+						const finalX = coords.x + rotatedX;
+						const finalY = coords.y + offsetY;
+						const finalZ = coords.z + rotatedZ;
+
+						// Calculate new rotation by adding target yaw to original rotation
+						const newYaw = obj.objectOri[0] + coords.yaw;
+						const newYPR = [newYaw, obj.objectOri[1], obj.objectOri[2]];
+
+						objects.push({
+							name: obj.objectName,
+							pos: [finalX, finalY, finalZ],
+							ypr: newYPR,
+							scale: obj.scaleValue,
+							enableCEPersistency: false
+						});
+					});
+				});
+			};
+
+			const processManualCoordinates = (originalObjects, objects) => {
+			const positionCards = document.querySelectorAll('.position-card');
+			positionCards.forEach((card) => {
+				const inputs = card.querySelectorAll('.position-input');
+				const yawInput = card.querySelector('.yaw-input');
+				
+				const newXValue = parseFloat(inputs[0].value.trim());
+				const newYValue = parseFloat(inputs[1].value.trim());
+				const newZValue = parseFloat(inputs[2].value.trim());
+				const yaw = parseFloat(yawInput?.value.trim() || '0');
+
+				if (!isNaN(newXValue) && !isNaN(newYValue) && !isNaN(newZValue)) {
+					originalObjects.forEach((obj, index) => {						
+						if (ELEMENTS.anchorObject.checked && index === 0) {
+							return;
+						}
+
+						const offsetX = obj.cords[0] - originalObjects[0].cords[0];
+						const offsetY = obj.cords[1] - originalObjects[0].cords[1];
+						const offsetZ = obj.cords[2] - originalObjects[0].cords[2];
+
+						// Convert angle to radians
+						const yawRad = yaw * Math.PI / 180;
+
+						// Rotate the offset coordinates
+						const rotatedX = offsetX * Math.cos(yawRad) + offsetZ * Math.sin(yawRad);
+						const rotatedZ = -offsetX * Math.sin(yawRad) + offsetZ * Math.cos(yawRad);
+
+						// Calculate final position
+						const finalX = newXValue + rotatedX;
+						const finalY = newYValue + offsetY;
+						const finalZ = newZValue + rotatedZ;
+
+						// Calculate new rotation by adding target yaw to original rotation
+						const newYaw = obj.objectOri[0] + yaw;
+						const newYPR = [newYaw, obj.objectOri[1], obj.objectOri[2]];
+
+						objects.push({
+							name: obj.objectName,
+							pos: [finalX, finalY, finalZ],
+							ypr: newYPR,
+							scale: obj.scaleValue,
+							enableCEPersistency: false
+						});
+					});
+				}
+			});
+		};
+
+			// Form Submit Handler
+			const handleFormSubmit = (event) => {
+				event.preventDefault();
+				
+				const spawnObjectInputValue = ELEMENTS.spawnObjectInput.value.trim();
+				const mapGroupPosInputValue = ELEMENTS.mapGroupPosInput.value.trim();
+				const hasManualCoords = FormValidator.areManualCoordinatesValid();
+
+				if (!spawnObjectInputValue) {
+					Utils.showAlert({
+						icon: 'warning',
+						title: 'Nothing to Generate',
+						text: 'Please provide SpawnObject input data before generating.'
+					});
+					return;
+				}
+
+				if (!FormValidator.validateInputs(spawnObjectInputValue, mapGroupPosInputValue, hasManualCoords)) {
+					return;
+				}
+
+				const originalObjects = [];
+				function SpawnObject(objectName, vec, orientation, scale) {
+					const cords = vec.split(" ").map(parseFloat);
+					const objectOri = orientation.split(" ").map(parseFloat);
+					originalObjects.push({ 
+						objectName, 
+						cords, 
+						objectOri, 
+						scaleValue: scale || 1 
+					});
+				}
+				
+				try {
+					eval(spawnObjectInputValue);
+				} catch (error) {
+					return Utils.showAlert({
+						icon: 'error',
+						title: 'Script Error',
+						text: 'Error in SpawnObject input: ' + error.message
+					});
+				}   
+				const objects = processCoordinates(originalObjects, mapGroupPosInputValue, hasManualCoords);
+				ELEMENTS.output.value = OutputManager.generateOutput(objects);
+			};
+
+			// Process Coordinates
+			const processCoordinates = (originalObjects, mapGroupPosValue, hasManualCoords) => {
+				const objects = [];
+
+				if (mapGroupPosValue) {
+					const extractedCoords = CoordinateProcessor.extractCoordinatesFromXML(mapGroupPosValue);
+					if (!extractedCoords?.length) {
+						Utils.showAlert({
+							icon: 'error',
+							title: 'Invalid XML',
+							text: 'Unable to extract coordinates from the mapgrouppos XML entry.'
+						});
+						return [];
+					}
+
+					processExtractedCoordinates(extractedCoords, originalObjects, objects);
+				}
+
+				if (hasManualCoords) {
+					processManualCoordinates(originalObjects, objects);
+				}
+
+				return objects;
+			};
+
+			// Initialize
+			setupEventListeners();
+		});
+	</script>
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/spawnobjectmover by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:28:03 GMT -->
+</html>
+

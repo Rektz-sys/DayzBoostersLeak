@@ -1,0 +1,1012 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/proxycalc by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Loot &amp; Proxy Calculator &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+	
+	<link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+	<link rel="stylesheet" href="../../assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
+	
+	<!-- CodeMirror CSS -->
+	<link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">	
+	<link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  
+	</style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>		
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+			<div class="content-wrapper">
+				<!-- Content -->
+				<div class="container-xxl flex-grow-1 container-p-y">
+					<!-- Header -->
+					<div class="row mb-4">
+						<div class="col-12">
+							<div class="card border-0">
+								<div class="card-body d-flex align-items-center p-4">
+									<div class="avatar avatar-lg rounded me-3">
+										<i class="ti ti-calculator fs-2"></i>
+									</div>
+									<div>
+										<h4 class="card-title mb-0">Loot & Proxy Calculator</h4>
+										<p class="card-text mb-0 text-muted">Generate and calculate SpawnObject code for DayZ items and objects</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<!-- Left Column -->
+						<div class="col-xl-8">
+							<!-- Input Card -->
+							<div class="card mb-4">
+								<div class="card-header d-flex justify-content-between align-items-center">
+									<h5 class="mb-0">SpawnObject Configuration</h5>
+									<small class="text-muted float-end">Input your code</small>
+								</div>
+								<div class="card-body">
+									<div class="alert alert-warning d-flex align-items-center" role="alert">
+										<i class="ti ti-alert-circle me-2"></i>
+										<div>
+											The anchor object must have a ypr value of 0,0,0
+										</div>
+									</div>
+
+									<div class="mb-4">
+										<label for="spawnObjectTextarea" class="form-label">SpawnObject Code</label>
+										<textarea id="spawnObjectTextarea" class="form-control" rows="8" 
+											placeholder="Paste your SpawnObject code here"></textarea>
+									</div>
+
+									<div class="text-center">
+										<button class="btn btn-primary d-flex mx-auto align-items-center" onclick="main()">
+											<i class="ti ti-wand me-2"></i>
+											Generate Code
+										</button>
+									</div>
+								</div>
+							</div>
+
+							<!-- Output Card -->
+							<div class="card">
+								<div class="card-header d-flex justify-content-between align-items-center">
+									<h5 class="mb-0">Generated Output</h5>
+									<button id="copyOutputButton" class="btn btn-primary btn-sm" onclick="copyToClipboard()">
+										<i class="ti ti-copy me-1"></i>Copy
+									</button>
+								</div>
+								<div class="card-body">
+									<textarea id="outputTextarea" class="form-control" rows="8" readonly></textarea>
+								</div>
+							</div>
+						</div>
+
+						<!-- Right Column -->
+						<div class="col-xl-4">
+							<div class="card mb-4">
+								<div class="card-header">
+									<h5 class="mb-0">Configuration Options</h5>
+								</div>
+								<div class="card-body">
+									<!-- Usage Select -->
+									<div class="mb-4">
+										<label for="usageTagsInput" class="form-label">Usage Type</label>
+										<select id="usageTagsInput" class="selectpicker w-100" data-style="btn-default" multiple>
+											<optgroup label="Military & Law Enforcement">
+												<option value="Military">Military</option>
+												<option value="Police">Police</option>
+												<option value="Prison">Prison</option>
+											</optgroup>
+											<optgroup label="Emergency Services">
+												<option value="Medic">Medic</option>
+												<option value="Firefighter">Firefighter</option>
+											</optgroup>
+											<optgroup label="Urban">
+												<option value="Town">Town</option>
+												<option value="Village">Village</option>
+												<option value="Office">Office</option>
+												<option value="School">School</option>
+											</optgroup>
+											<optgroup label="Rural & Industrial">
+												<option value="Industrial">Industrial</option>
+												<option value="Farm">Farm</option>
+												<option value="Coast">Coast</option>
+												<option value="Hunting">Hunting</option>
+											</optgroup>
+											<optgroup label="Special Areas">
+												<option value="Lunapark">Lunapark</option>
+												<option value="SeasonalEvent">Seasonal Event</option>
+												<option value="ContaminatedArea">Contaminated Area</option>
+												<option value="Historical">Historical</option>
+												<option value="Custom">Custom</option>
+											</optgroup>
+										</select>
+
+										<!-- Custom Usage Input -->
+										<div id="customUsageInputGroup" style="display: none;" class="mt-3">
+											<label for="customUsageInput" class="form-label">Custom Usage</label>
+											<input type="text" id="customUsageInput" class="form-control" 
+												placeholder="Enter custom usage tag">
+											<div class="alert alert-warning mt-2 py-2 px-3 small">
+												Custom values require updates in types.xml, cfglimitdefinition.xml, and mapgroupproto.xml
+											</div>
+										</div>
+									</div>
+
+									<!-- Categories Select -->
+									<div class="mb-4">
+										<label for="categoriesTagsInput" class="form-label">Categories</label>
+										<select id="categoriesTagsInput" class="selectpicker w-100" data-style="btn-default" multiple>
+											<optgroup label="Equipment">
+												<option value="tools">Tools</option>
+												<option value="containers">Containers</option>
+												<option value="weapons">Weapons</option>
+											</optgroup>
+											<optgroup label="Survival">
+												<option value="clothes">Clothes</option>
+												<option value="food">Food</option>
+											</optgroup>
+											<optgroup label="Special">
+												<option value="lootdispatch">Loot Dispatch</option>
+												<option value="books">Books</option>
+												<option value="explosives">Explosives</option>
+											</optgroup>
+										</select>
+									</div>
+
+									<!-- Tags Select -->
+									<div class="mb-4">
+										<label for="tagsSelect" class="form-label">Placement Tags</label>
+										<select id="tagsSelect" class="selectpicker w-100" data-style="btn-default" multiple>
+											<optgroup label="Locations">
+												<option value="floor">Floor</option>
+												<option value="shelves">Shelves</option>
+												<option value="ground">Ground</option>
+											</optgroup>
+										</select>
+									</div>
+
+									<!-- Value Flags Select -->
+									<div class="mb-4">
+										<label for="valueFlagsSelect" class="form-label">Value Flags</label>
+										<select id="valueFlagsSelect" class="selectpicker w-100" data-style="btn-default" multiple>
+											<optgroup label="Standard Tiers">
+												<option value="Tier1">Tier 1</option>
+												<option value="Tier2">Tier 2</option>
+												<option value="Tier3">Tier 3</option>
+												<option value="Tier4">Tier 4</option>
+											</optgroup>
+											<optgroup label="Special">
+												<option value="Unique">Unique</option>
+											</optgroup>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<!-- Credits Card -->
+							<div class="card bg-primary text-white">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<i class="ti ti-heart fs-3 me-2"></i>
+										<div>
+											<h6 class="mb-1">Credits</h6>
+											<p class="mb-0">Original script by 
+												<a href="https://discord.gg/ZaGzSJF3H5" class="text-white text-decoration-underline">
+													DonSibley
+												</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- / Content -->
+
+				<!-- Footer -->
+				<footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>				<!-- / Footer -->
+
+				<div class="content-backdrop fade"></div>
+			</div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+	
+	<script src="../../assets/vendor/libs/select2/select2.js"></script>
+	<script src="../../assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+	
+	<!-- CodeMirror JavaScript -->
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+	<!-- CodeMirror Modes -->
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/clike/clike.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/xml/xml.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.html"></script>
+	
+
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script>
+		let inputEditor, outputEditor;
+
+		document.addEventListener('DOMContentLoaded', function () {
+			// Initialize CodeMirror editors
+			inputEditor = CodeMirror.fromTextArea(document.getElementById('spawnObjectTextarea'), {
+				mode: 'text/x-csrc',
+				lineNumbers: true,
+				theme: 'dracula'
+			});
+			
+			outputEditor = CodeMirror.fromTextArea(document.getElementById('outputTextarea'), {
+				mode: 'application/xml',
+				lineNumbers: true,
+				readOnly: true,
+				theme: 'dracula'
+			});
+
+			// Initialize Bootstrap Select
+			$('.selectpicker').selectpicker({
+				liveSearch: true,
+				actionsBox: true,
+				width: '100%'
+			});
+
+			// Handle custom usage input visibility
+			$('#usageTagsInput').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+				const selectedValues = $(this).val() || [];
+				const hasCustom = selectedValues.includes('Custom');
+				$('#customUsageInputGroup').toggle(hasCustom);
+			});
+
+			// Handle custom usage input
+			$('#customUsageInput').on('keypress', function (e) {
+				if (e.key === 'Enter') {
+					e.preventDefault();
+					const customValue = $(this).val().trim();
+					if (customValue !== '') {
+						addCustomOption(customValue);
+						$(this).val('');
+						$('#customUsageInputGroup').hide();
+					}
+				}
+			});
+		});
+
+		function NormalizeAngle(a) {
+			a = a % 360.0;
+			if (a < 0) a += 360.0;
+			return a;
+		}
+
+		function rotate(x, y, xm, ym, a) {
+			let cos = Math.cos, sin = Math.sin, aRad = a * Math.PI / 180;
+			let xr = (x - xm) * cos(aRad) - (y - ym) * sin(aRad) + xm;
+			let yr = (x - xm) * sin(aRad) + (y - ym) * cos(aRad) + ym;
+			return [xr, yr];
+		}
+
+		function calculatePointPos(vec, OrigPos) {
+			let cords = vec.split(" ");
+			let cxyz = OrigPos;
+			let x = cords[0], y = cords[1], z = cords[2];
+			let cx = cxyz[0], cy = cxyz[1], cz = cxyz[2];
+			let a = -90;
+			let offset = rotate(x, z, cx, cz, a);
+			let rX = parseFloat(offset[0]), rY = parseFloat(y) - parseFloat(cy), rZ = parseFloat(offset[1]);
+			return `${rX.toFixed(6)} ${rY.toFixed(6)} ${rZ.toFixed(6)}`;
+		}
+
+		function SpawnObject(objectName, vec, orientation, OrigPos, OrigOri, groupName, outPut, outPut2, hasProxyData) {
+			if (!OrigPos && (objectName.startsWith("StaticObj_") || objectName.startsWith("Land_") || objectName.startsWith("Wreck_"))) {
+				OrigPos = vec.split(" ");
+				OrigOri = orientation.split(" ");
+				groupName = objectName;
+				
+				// Get selected values from Bootstrap Select
+				let usage = $('#usageTagsInput').val() || [];
+				const valueFlags = $('#valueFlagsSelect').val() || [];
+				const categories = $('#categoriesTagsInput').val() || [];
+				const tags = $('#tagsSelect').val() || [];
+
+				// Remove 'Custom' from usage if it exists
+				usage = usage.filter(value => value !== 'Custom');
+
+				outPut = `<group name="${groupName}" lootmax="2">\n`;
+
+				usage.forEach(usageValue => {
+					outPut += `  <usage name="${usageValue}" />\n`;
+				});
+
+				valueFlags.forEach(value => {
+					outPut += `  <value name="${value}" />\n`;
+				});
+
+				outPut += `  <container name="lootFloor" lootmax="2">\n`;
+
+				categories.forEach(category => {
+					outPut += `    <category name="${category}" />\n`;
+				});
+
+				tags.forEach(tag => {
+					outPut += `    <tag name="${tag}" />\n`;
+				});
+
+				return { OrigPos, OrigOri, groupName, outPut, outPut2, hasProxyData };
+			}
+
+			let pointPos = calculatePointPos(vec, OrigPos);
+			let objectOri = orientation.split(" ");
+			let ryaw = objectOri[0], rpitch = objectOri[1], rroll = objectOri[2];
+
+			outPut += `    <point pos="${pointPos}" range="0.4500" height="1.5000" />\n`;
+			outPut2 += `        <proxy type="${objectName}" pos="${pointPos}" rpy="${rpitch} ${ryaw} ${rroll}" />\n`;
+			hasProxyData = true;
+
+			return { OrigPos, OrigOri, groupName, outPut, outPut2, hasProxyData };
+		}
+		
+		function addCustomOption(customValue) {
+			const select = $('#usageTagsInput');
+			const currentValues = select.val() || [];
+			
+			// Remove any existing custom values (prevents duplicates)
+			select.find('option').each(function() {
+				if ($(this).val() !== 'Custom' && !$(this).parent('optgroup').length) {
+					$(this).remove();
+				}
+			});
+			
+			// Add new option
+			const newOption = `<option value="${customValue}">${customValue}</option>`;
+			select.append(newOption);
+			
+			// Update values (remove Custom, add new value)
+			const newValues = [...currentValues.filter(v => v !== 'Custom'), customValue];
+			
+			// Update selectpicker
+			select.val(newValues);
+			select.selectpicker('refresh');
+		}
+
+		function main() {
+			// Check for pending custom value
+			const customInput = $('#customUsageInput');
+			const customValue = customInput.val().trim();
+			
+			if (customValue && $('#customUsageInputGroup').is(':visible')) {
+				addCustomOption(customValue);
+				customInput.val('');
+				$('#customUsageInputGroup').hide();
+				// Force a refresh of the selectpicker
+				$('#usageTagsInput').selectpicker('destroy').selectpicker();
+			}
+
+			let spawnObjectCode = inputEditor.getValue();
+
+			if (!spawnObjectCode.trim()) {
+				Swal.fire({
+					icon: 'warning',
+					title: 'Input is empty!',
+					text: 'Please paste your SpawnObject code before submitting.'
+				});
+				return;
+			}
+
+			let outPut = '';
+			let outPut2 = '    <dispatch>\n';
+			let OrigPos = null, OrigOri = null, groupName = null;
+			let hasProxyData = false;
+
+			let lines = spawnObjectCode.split('\n');
+			lines.forEach(line => {
+				let match = line.match(/SpawnObject\(\s*"(StaticObj_[^"]+|Land_[^"]+|[^"]+)"\s*,\s*"([^"]+)"\s*,\s*"([^"]+)"\s*(?:,\s*[^)]*)?\)/);
+				if (match) {
+					const result = SpawnObject(
+						match[1], match[2], match[3],
+						OrigPos, OrigOri, groupName,
+						outPut, outPut2, hasProxyData
+					);
+					
+					// Update our variables with the results
+					OrigPos = result.OrigPos;
+					OrigOri = result.OrigOri;
+					groupName = result.groupName;
+					outPut = result.outPut;
+					outPut2 = result.outPut2;
+					hasProxyData = result.hasProxyData;
+				}
+			});
+
+			if (outPut) {
+				outPut += '  </container>\n';
+			}
+
+			if (hasProxyData) {
+				outPut2 += '    </dispatch>\n';
+				outPut += outPut2;
+			}
+
+			if (outPut) {
+				outPut += '</group>\n';
+			}
+
+			outputEditor.setValue(outPut);
+		}
+
+		function copyToClipboard() {
+			let outputText = outputEditor.getValue();
+
+			if (!outputText.trim()) {
+				Swal.fire({
+					icon: 'warning',
+					title: 'Output is empty!',
+					text: 'There is no output to copy.'
+				});
+				return;
+			}
+
+			navigator.clipboard.writeText(outputText).then(function() {
+				Swal.fire({
+					icon: 'success',
+					title: 'Copied!',
+					text: 'Output has been copied to clipboard.'
+				});
+			}, function() {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Failed to copy output.'
+				});
+			});
+		}
+	</script>
+
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/proxycalc by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:28:01 GMT -->
+</html>
+

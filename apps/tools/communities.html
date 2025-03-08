@@ -1,0 +1,982 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/communities by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:21:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>DayZ Discord Communities &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Browse and join other DayZ Related Discord servers" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  
+	  @keyframes pulse {
+		0% {
+			opacity: 0.6;
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0.6;
+		}
+	}
+
+	.skeleton-loader {
+		animation: pulse 1.5s infinite;
+	}
+	  
+	</style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item active">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>		
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+				<!-- Header -->
+				<div class="row mb-4">
+					<div class="col-12">
+						<div class="card border-0">
+							<div class="card-body p-4">
+								<div class="d-flex align-items-center">
+									<i class="ti ti-brand-discord fs-2 me-3"></i>
+									<div>
+										<h4 class="mb-0">DayZ Communities</h4>
+										<p class="mb-0 text-muted">Browse and join active DayZ Discord servers</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Featured Communities -->
+				
+				<h5 class="pb-1 mb-3">Featured Communities</h5>
+					<div id="featuredCommunitiesGrid">
+									<div class="row g-4 mb-4">
+													<div class="col-md-6 col-lg-4">
+								<div class="card h-100">
+																			<div class="position-relative">
+											<img class="card-img-top" style="height: 120px; object-fit: cover;" 
+												 src="../../assets/img/partners/servers/banners/banner_8.png" 
+												 alt="Chernarus | Survivors Finest | PVP/PVE | Fresh Wipe">
+											<span class="badge bg-warning position-absolute top-0 end-0 m-2">Featured</span>
+										</div>
+																		<div class="card-body p-3">
+										<div class="d-flex justify-content-between align-items-start mb-2">
+											<h5 class="card-title mb-0">Chernarus | Survivors Finest | PVP/PVE | Fresh Wipe</h5>
+										</div>
+										<p class="card-text small mb-3">Explore the challenging Black Forest with over 1,200 zombies and embark on the hardcore adventure of Survivors Island.</p>
+																					<div class="mb-3">
+																									<span class="badge bg-label-primary me-1">#PlayStation</span>
+																									<span class="badge bg-label-primary me-1">#FullCars</span>
+																									<span class="badge bg-label-primary me-1">#InGameTrader</span>
+																							</div>
+																			</div>
+									<div class="card-footer bg-transparent p-3 pt-0">
+										<div class="d-flex gap-2">
+											<button class="btn btn-sm btn-outline-primary flex-grow-1" 
+													data-bs-toggle="modal" 
+													data-bs-target="#communityModal8">
+												Details
+											</button>
+											<a href="https://discord.gg/survivors-finest" 
+											   target="_blank" 
+											   class="btn btn-sm btn-primary flex-grow-1">
+												Join Server
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+											</div>
+								</div>
+				
+				<!-- All Communities -->
+				<h5 class="pb-1 mb-3">All Communities</h5>
+				<div id="allCommunitiesGrid">
+									<div class="row g-4 mb-4">
+													<div class="col-md-6 col-lg-4">
+								<div class="card h-100">
+																			<img class="card-img-top" style="height: 120px; object-fit: cover;" 
+											 src="../../assets/img/partner-images/DZC.png" 
+											 alt="DayZ Companion">
+																		<div class="card-body p-3">
+										<div class="d-flex justify-content-between align-items-start mb-2">
+											<h5 class="card-title mb-0">DayZ Companion</h5>
+											
+										</div>
+										<p class="card-text small mb-3">DayZ Companion: Your Ultimate In-Game Guide</p>
+																			</div>
+									<div class="card-footer bg-transparent p-3 pt-0">
+										<div class="d-flex gap-2">
+											<button class="btn btn-sm btn-outline-primary flex-grow-1" 
+													data-bs-toggle="modal" 
+													data-bs-target="#communityModal9">
+												Details
+											</button>
+											<a href="https://discord.gg/ApzTeeCw8c" 
+											   target="_blank" 
+											   class="btn btn-sm btn-primary flex-grow-1">
+												Join Server
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+													<div class="col-md-6 col-lg-4">
+								<div class="card h-100">
+																			<img class="card-img-top" style="height: 120px; object-fit: cover;" 
+											 src="../../assets/img/partners/servers/banners/banner_7.png" 
+											 alt="DayZ Disco">
+																		<div class="card-body p-3">
+										<div class="d-flex justify-content-between align-items-start mb-2">
+											<h5 class="card-title mb-0">DayZ Disco</h5>
+											
+										</div>
+										<p class="card-text small mb-3">At the DayZ Disco you can grab FREE JSON builds and more to spice up your console servers.</p>
+																					<div class="mb-3">
+																									<span class="badge bg-label-primary me-1">#dayz</span>
+																									<span class="badge bg-label-primary me-1">#dayzconsole</span>
+																									<span class="badge bg-label-primary me-1">#dayzconsolemodding</span>
+																							</div>
+																			</div>
+									<div class="card-footer bg-transparent p-3 pt-0">
+										<div class="d-flex gap-2">
+											<button class="btn btn-sm btn-outline-primary flex-grow-1" 
+													data-bs-toggle="modal" 
+													data-bs-target="#communityModal7">
+												Details
+											</button>
+											<a href="https://discord.gg/DayZDisco" 
+											   target="_blank" 
+											   class="btn btn-sm btn-primary flex-grow-1">
+												Join Server
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+													<div class="col-md-6 col-lg-4">
+								<div class="card h-100">
+																			<img class="card-img-top" style="height: 120px; object-fit: cover;" 
+											 src="../../assets/img/partner-images/Eggs.png" 
+											 alt="Eggs ModZ">
+																		<div class="card-body p-3">
+										<div class="d-flex justify-content-between align-items-start mb-2">
+											<h5 class="card-title mb-0">Eggs ModZ</h5>
+											
+										</div>
+										<p class="card-text small mb-3">Join Eggs Modz for free json files, member shared files and become apart of a great community</p>
+																			</div>
+									<div class="card-footer bg-transparent p-3 pt-0">
+										<div class="d-flex gap-2">
+											<button class="btn btn-sm btn-outline-primary flex-grow-1" 
+													data-bs-toggle="modal" 
+													data-bs-target="#communityModal10">
+												Details
+											</button>
+											<a href="https://discord.gg/yJZPKbh5AG" 
+											   target="_blank" 
+											   class="btn btn-sm btn-primary flex-grow-1">
+												Join Server
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+											</div>
+				
+				<!-- Pagination -->
+								</div>
+				
+				<!-- Community Modals -->
+									<div class="modal fade" id="communityModal8" tabindex="-1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Chernarus | Survivors Finest | PVP/PVE | Fresh Wipe</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+								</div>
+								<div class="modal-body">
+																		<img src="../../assets/img/partners/servers/banners/banner_8.png" 
+										 class="img-fluid rounded mb-3" 
+										 alt="Chernarus | Survivors Finest | PVP/PVE | Fresh Wipe">
+																		<div class="mb-3">
+										Join Survivors Finest, a welcoming and non-toxic gaming community where both PVP and PVE enthusiasts thrive!<br />
+<br />
+Enjoy exciting weekly events, an extensive trading system, and get a free starter kit tailored to your preferences! The first 10 players will receive exclusive custom vehicle spawns.<br />
+<br />
+Explore the challenging Black Forest with over 1,200 zombies and embark on the hardcore adventure of Survivors Island.<br />
+<br />
+Your next adventure awaits—join us today!									</div>
+																		<div class="mb-3">
+																				<span class="badge bg-label-primary me-1">#PlayStation</span>
+																				<span class="badge bg-label-primary me-1">#FullCars</span>
+																				<span class="badge bg-label-primary me-1">#InGameTrader</span>
+																				<span class="badge bg-label-primary me-1">#PVP</span>
+																				<span class="badge bg-label-primary me-1">#PVE</span>
+																			</div>
+																	</div>
+								<div class="modal-footer">
+									<a href="https://discord.gg/survivors-finest" 
+									   target="_blank" 
+									   class="btn btn-primary">
+										Join Server
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+										<div class="modal fade" id="communityModal9" tabindex="-1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">DayZ Companion</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+								</div>
+								<div class="modal-body">
+																		<img src="../../assets/img/partner-images/DZC.png" 
+										 class="img-fluid rounded mb-3" 
+										 alt="DayZ Companion">
+																		<div class="mb-3">
+										Tired of fumbling through forums and scrambling for information? <br />
+Introducing DayZ Companion, your one-stop shop for all things DayZ.<br />
+<br />
+What DayZ Companion Offers<br />
+<br />
+🔥Real Item Information: Access detailed descriptions, item stats, and stunning visuals for every in-game item. Information obtained from the DayZ wiki to assist with your DayZ experience. <br />
+💻Class Names for Server Owners: Streamline server administration and modding with comprehensive class names for items, entities, and more.<br />
+😎Easy-to-Use Commands: Interact with the bot effortlessly through simple commands.<br />
+🌐Constant Updates: Stay ahead of the curve with regular updates to keep pace with game patches and new content.<br />
+💸Completely and absolutely 100% FREE: This bot is and always will be available at no cost to you!<br />
+✅ Bot is verified by Discord: Put your mind at rest knowing that this bot is trusted by 600+ servers and is verified by Discord!<br />
+<br />
+Level up your DayZ experience with DayZ Companion. Add the bot to your server now and unlock a world of in-game knowledge.									</div>
+																	</div>
+								<div class="modal-footer">
+									<a href="https://discord.gg/ApzTeeCw8c" 
+									   target="_blank" 
+									   class="btn btn-primary">
+										Join Server
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+										<div class="modal fade" id="communityModal7" tabindex="-1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">DayZ Disco</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+								</div>
+								<div class="modal-body">
+																		<img src="../../assets/img/partners/servers/banners/banner_7.png" 
+										 class="img-fluid rounded mb-3" 
+										 alt="DayZ Disco">
+																		<div class="mb-3">
+										The DayZ Disco is your go-to destination for a vast collection of high-quality, completely free JSON builds designed to enhance your DayZ servers. Whether you&#039;re looking for unique structures, immersive details, or creative extras, we offer a diverse selection to make your server stand out.<br />
+<br />
+Each build is meticulously crafted with attention to detail, ensuring a seamless and engaging experience for your players. Whether you want to introduce a touch of order in the chaos of DayZ or enhance gameplay with distinctive additions, our collection has something for everyone.<br />
+<br />
+Explore, customize, and elevate your DayZ server today! Join The DayZ Disco!									</div>
+																		<div class="mb-3">
+																				<span class="badge bg-label-primary me-1">#dayz</span>
+																				<span class="badge bg-label-primary me-1">#dayzconsole</span>
+																				<span class="badge bg-label-primary me-1">#dayzconsolemodding</span>
+																				<span class="badge bg-label-primary me-1">#dayzps5</span>
+																				<span class="badge bg-label-primary me-1">#dayzxbox</span>
+																			</div>
+																	</div>
+								<div class="modal-footer">
+									<a href="https://discord.gg/DayZDisco" 
+									   target="_blank" 
+									   class="btn btn-primary">
+										Join Server
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+										<div class="modal fade" id="communityModal10" tabindex="-1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Eggs ModZ</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+								</div>
+								<div class="modal-body">
+																		<img src="../../assets/img/partner-images/Eggs.png" 
+										 class="img-fluid rounded mb-3" 
+										 alt="Eggs ModZ">
+																		<div class="mb-3">
+										♡ Free Jsons.<br />
+♡ Member Shared Files.<br />
+♡ Share Your Own Dayz Creations.<br />
+♡ Find Other Dayz Resources Within The Community.<br />
+♡ Find Free Help &amp; Advice.<br />
+♡ Promote Your Server.<br />
+♡ Code/Dayz Related Help.									</div>
+																	</div>
+								<div class="modal-footer">
+									<a href="https://discord.gg/yJZPKbh5AG" 
+									   target="_blank" 
+									   class="btn btn-primary">
+										Join Server
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+								</div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script>
+// Function to show skeleton loading
+function showLoadingState() {
+    // Store original content
+    const originalFeaturedContent = document.getElementById('featuredCommunitiesGrid').innerHTML;
+    const originalAllContent = document.getElementById('allCommunitiesGrid').innerHTML;
+
+    // Featured Communities skeleton
+    const featuredSkeleton = `
+        <div class="row g-4 mb-4">
+            ${Array(3).fill(`
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="bg-secondary bg-opacity-25 skeleton-loader" style="height: 120px;"></div>
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded" style="height: 24px; width: 70%;"></div>
+                            </div>
+                            <div class="bg-secondary bg-opacity-25 skeleton-loader rounded mb-3" style="height: 40px; width: 100%;"></div>
+                            <div class="d-flex gap-2 mb-3">
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded" style="height: 20px; width: 60px;"></div>
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded" style="height: 20px; width: 60px;"></div>
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded" style="height: 20px; width: 60px;"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent p-3 pt-0">
+                            <div class="d-flex gap-2">
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded flex-grow-1" style="height: 31px;"></div>
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded flex-grow-1" style="height: 31px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    // All Communities skeleton
+    const allSkeleton = `
+        <div class="row g-4 mb-4">
+            ${Array(9).fill(`
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="bg-secondary bg-opacity-25 skeleton-loader" style="height: 120px;"></div>
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded" style="height: 24px; width: 70%;"></div>
+                            </div>
+                            <div class="bg-secondary bg-opacity-25 skeleton-loader rounded mb-3" style="height: 40px; width: 100%;"></div>
+                            <div class="d-flex gap-2 mb-3">
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded" style="height: 20px; width: 60px;"></div>
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded" style="height: 20px; width: 60px;"></div>
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded" style="height: 20px; width: 60px;"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent p-3 pt-0">
+                            <div class="d-flex gap-2">
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded flex-grow-1" style="height: 31px;"></div>
+                                <div class="bg-secondary bg-opacity-25 skeleton-loader rounded flex-grow-1" style="height: 31px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    // Show skeletons
+    document.getElementById('featuredCommunitiesGrid').innerHTML = featuredSkeleton;
+    document.getElementById('allCommunitiesGrid').innerHTML = allSkeleton;
+
+    // Return the original content after a delay
+    setTimeout(() => {
+        document.getElementById('featuredCommunitiesGrid').innerHTML = originalFeaturedContent;
+        document.getElementById('allCommunitiesGrid').innerHTML = originalAllContent;
+    }, 1000);
+}
+
+// Add event listeners for page navigation
+document.addEventListener('DOMContentLoaded', function() {
+    showLoadingState();
+
+    // Handle pagination clicks
+    document.querySelectorAll('.pagination .page-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (!this.parentElement.classList.contains('disabled')) {
+                showLoadingState();
+            }
+        });
+    });
+});
+</script>
+
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/communities by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:21:12 GMT -->
+</html>
+

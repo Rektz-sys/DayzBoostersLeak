@@ -1,0 +1,18 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "../terms.html";
+        });
+    });
+    </script>{"status":"error","message":"Permission denied"}

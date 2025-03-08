@@ -1,0 +1,1359 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/splitter by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:28:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>JSON Splitter &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Split large JSON files into multiple smaller files with customizable size and structure" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+	
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+	<link href="../../../cdnjs.cloudflare.com/ajax/libs/prismjs/1.24.1/themes/prism.min.html" rel="stylesheet" />
+	<link href="../../../cdn.jsdelivr.net/npm/sweetalert2%4011/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  
+	  .drop-zone {
+			transition: all 0.3s ease;
+			background-color: var(--bs-body-bg);
+			border: 2px dashed var(--bs-border-color);
+		}
+
+		.drop-zone.drag-over {
+			background-color: var(--bs-primary-bg-subtle);
+			border-color: var(--bs-primary);
+		}
+
+		.bg-lighter {
+			background-color: var(--bs-body-bg);
+		}
+
+		.cursor-pointer {
+			cursor: pointer;
+		}
+
+		.btn, .form-control, .input-group-text {
+			transition: all 0.2s ease;
+		}
+		.form-control:focus, .btn:focus {
+			box-shadow: 0 0 0 0.25rem var(--bs-primary-bg-subtle);
+		}
+	  
+	</style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>		
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+				<!-- Header Card -->
+				<div class="row mb-4">
+					<div class="col-12">
+						<div class="card border-0 text-white">
+							<div class="card-body d-flex align-items-center p-4">
+								<div class="avatar avatar-lg bg-opacity-10 rounded me-3">
+									<i class="ti ti-file-code fs-2"></i>
+								</div>
+								<div>
+									<h4 class="card-title mb-0">JSON Splitter</h4>
+									<p class="card-text mb-0 opacity-75">Split large JSON files into multiple smaller files for better management and performance</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<!-- File Upload Section -->
+					<div class="col-12 col-md-8 mb-4">
+						<div class="card">
+							<div class="card-header border-bottom">
+								<h5 class="card-title mb-0">File Upload</h5>
+							</div>
+							<div class="card-body p-3">
+								<form id="jsonSplitterForm">
+									<div class="mb-4">
+										<div class="drop-zone p-5 border-2 border-dashed rounded-3 text-center cursor-pointer">
+											<div class="mb-3">
+												<i class="ti ti-upload fs-2"></i>
+											</div>
+											<p class="mb-2">Drag and drop your JSON file here</p>
+											<p class="text-muted mb-3">or</p>
+											<label class="btn btn-primary mb-0">
+												<span>Browse Files</span>
+												<input type="file" id="jsonFile" accept=".json" class="d-none" required>
+											</label>
+											<div id="selectedFile" class="mt-3 text-muted" style="display: none;">
+												<i class="ti ti-file-json me-2"></i>
+												<span id="fileName"></span>
+												<button type="button" id="removeFile" class="btn btn-text-secondary btn-sm ms-2">
+													<i class="ti ti-x"></i>
+												</button>
+											</div>
+										</div>
+										
+										<div id="fileInfo" class="mt-3" style="display: none;">
+											<div class="card bg-lighter border-0">
+												<div class="card-body">
+													<h6 class="mb-3">File Information</h6>
+													<div class="d-flex flex-column gap-2">
+														<div class="d-flex align-items-center">
+															<i class="ti ti-file-info me-2 text-primary"></i>
+															<span>File Size: <span id="uploadedFileSize">-</span></span>
+														</div>
+														<div class="d-flex align-items-center">
+															<i class="ti ti-list-numbers me-2 text-primary"></i>
+															<span>Total Objects: <span id="objectCount">-</span></span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row g-4">
+										<div class="col-md-6">
+											<div class="card bg-lighter border-0">
+												<div class="card-body">													
+													<div class="d-flex gap-3">
+														<div class="form-check">
+															<input class="form-check-input" type="radio" name="splitMethod" id="splitByFiles" value="files" checked>
+															<label class="form-check-label" for="splitByFiles">
+																By File Count
+																<i class="ti ti-help-circle ms-1" 
+																   data-bs-toggle="tooltip" 
+																   data-bs-placement="top" 
+																   title="Split the JSON file into a specific number of equal-sized files">
+																</i>
+															</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="card bg-lighter border-0">
+												<div class="card-body">
+													<div class="d-flex align-items-center mb-2">
+														<label class="form-label mb-0" id="splitValueLabel">Split Size</label>
+														<i class="ti ti-help-circle ms-2" 
+														   data-bs-toggle="tooltip" 
+														   data-bs-placement="top" 
+														   title="Enter the number of files you wish to split your input file into. Minimum 2">
+														</i>
+													</div>
+													<div class="input-group">
+														<input type="number" 
+															   class="form-control" 
+															   id="splitValue" 
+															   min="2"
+															   value="2"
+															   required>
+														<span class="input-group-text" id="splitUnit">files</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="mt-4">
+										<label class="form-label">Output Settings</label>
+										<div class="input-group">
+											<span class="input-group-text">Filename Prefix</span>
+											<input type="text" class="form-control" id="filenamePrefix" placeholder="split_file" required>
+											<span class="input-group-text">.json</span>
+										</div>
+									</div>
+
+									<div class="mt-4">
+										<button type="submit" class="btn btn-primary waves-effect d-flex align-items-center">
+											<i class="ti ti-file-split me-2"></i>
+											Split JSON
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<!-- Info Section -->
+					<div class="col-12 col-md-4 mb-4">
+    <div class="card border-0">
+        <div class="card-body">
+            <h6 class="card-title mb-3">About JSON Splitter</h6>
+            
+            <!-- Tool Description -->
+            <div class="mb-4">
+                <p class="mb-2">The JSON Splitter tool helps you break down large JSON files into smaller, more manageable pieces while preserving data structure and integrity. Perfect for handling large datasets or when you need to work with size-limited file uploads.</p>
+            </div>
+
+            <!-- Split Method -->
+            <h6 class="mb-3">Split Method</h6>
+            <div class="mb-4">
+                <div class="split-method mb-3">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="ti ti-files text-primary me-2"></i>
+                        <strong>By File Count</strong>
+                    </div>
+                    <p class="text-muted ms-4 mb-0">Specify exactly how many files you want (minimum 2). The tool will automatically distribute the data evenly across the specified number of files, maintaining data integrity across all output files.</p>
+                </div>
+            </div>
+
+            <!-- Key Features -->
+            <h6 class="mb-3">Key Features</h6>
+            <div class="mb-4">
+                <div class="d-flex mb-2">
+                    <i class="ti ti-check-circle text-success me-2 mt-1"></i>
+                    <span>Even distribution of objects across files</span>
+                </div>
+                <div class="d-flex mb-2">
+                    <i class="ti ti-check-circle text-success me-2 mt-1"></i>
+                    <span>Preserves original JSON structure and formatting</span>
+                </div>
+                <div class="d-flex mb-2">
+                    <i class="ti ti-check-circle text-success me-2 mt-1"></i>
+                    <span>Preview files before downloading</span>
+                </div>
+                <div class="d-flex">
+                    <i class="ti ti-check-circle text-success me-2 mt-1"></i>
+                    <span>Download individual files or all at once</span>
+                </div>
+            </div>
+
+            <!-- Best Practices -->
+            <div class="card border-0">
+                <div class="card-body">
+                    <h6 class="mb-3">Best Practices</h6>
+                    
+                    <div class="best-practice mb-2">
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="ti ti-code text-primary me-2"></i>
+                            <strong>JSON Format</strong>
+                        </div>
+                        <p class="text-muted ms-4 mb-2">Ensure your input file is valid DayZ JSON format with an "Objects" array</p>
+                    </div>
+                    
+                    <div class="best-practice">
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="ti ti-file-text text-primary me-2"></i>
+                            <strong>File Names</strong>
+                        </div>
+                        <p class="text-muted ms-4 mb-0">Use descriptive filename prefixes for better organization</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+				</div>
+
+				<!-- Results Section -->
+				<div class="row mt-4" id="resultSection" style="display: none;">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header border-bottom d-flex justify-content-between align-items-center">
+								<h5 class="card-title mb-0">Split Results</h5>
+								<div class="d-flex gap-2">
+									<button type="button" class="btn btn-primary btn-sm" id="downloadAll">
+										<i class="ti ti-download me-2"></i>Download All
+									</button>
+								</div>
+							</div>
+							<div class="card-body p-3">
+								<div class="alert alert-success d-flex align-items-center mb-4" role="alert">
+									<i class="ti ti-check-circle me-2"></i>
+									<div>
+										<h6 class="alert-heading mb-1">Processing Complete</h6>
+										<p class="mb-0" id="resultMessage"></p>
+									</div>
+								</div>
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>Filename</th>
+												<th>Size</th>
+												<th>Status</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody id="downloadLinks"></tbody>
+									</table>
+								</div>
+								<div class="d-flex justify-content-between align-items-center mt-3">
+									<div class="text-muted">
+										Showing <span id="showingRange">0-0</span> of <span id="totalItems">0</span> files
+									</div>
+									<div class="pagination-container">
+										<ul class="pagination pagination-sm mb-0"></ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+	
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/prismjs/1.24.1/prism.min.html"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/prismjs/1.24.1/components/prism-json.min.html"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script>
+		// Utility function to format file size
+		// TODO: Change drag n drop at some point
+		function formatFileSize(bytes) {
+			if (bytes === 0) return '0 KB';
+			const kb = bytes / 1024;
+			return kb.toFixed(2) + ' KB';
+		}
+
+		// Drag and drop handling
+		const dropZone = document.querySelector('.drop-zone');
+		const fileInput = document.getElementById('jsonFile');
+		const selectedFile = document.getElementById('selectedFile');
+		const fileName = document.getElementById('fileName');
+		const removeFile = document.getElementById('removeFile');
+		const downloadAllBtn = document.getElementById('downloadAll');
+
+		// Prevent default drag behaviors
+		['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+			dropZone.addEventListener(eventName, preventDefaults, false);
+		});
+
+		function preventDefaults(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		}
+
+		// Highlight drop zone when item is dragged over it
+		['dragenter', 'dragover'].forEach(eventName => {
+			dropZone.addEventListener(eventName, highlight, false);
+		});
+
+		['dragleave', 'drop'].forEach(eventName => {
+			dropZone.addEventListener(eventName, unhighlight, false);
+		});
+
+		function highlight(e) {
+			dropZone.classList.add('drag-over');
+		}
+
+		function unhighlight(e) {
+			dropZone.classList.remove('drag-over');
+		}
+
+		// Handle dropped files
+		dropZone.addEventListener('drop', handleDrop, false);
+
+		function handleDrop(e) {
+			const dt = e.dataTransfer;
+			const files = dt.files;
+			fileInput.files = files;
+			updateFileDisplay();
+		}
+
+		fileInput.addEventListener('change', updateFileDisplay);
+
+		function updateFileDisplay() {
+			const fileInfo = document.getElementById('fileInfo');
+			const uploadedFileSize = document.getElementById('uploadedFileSize');
+			const objectCount = document.getElementById('objectCount');
+
+			if (fileInput.files.length > 0) {
+				const file = fileInput.files[0];
+				fileName.textContent = file.name;
+				selectedFile.style.display = 'block';
+				fileInfo.style.display = 'block';
+				
+				// Display file size
+				uploadedFileSize.textContent = formatFileSize(file.size);
+				
+				// Read and parse file to count objects
+				const reader = new FileReader();
+				reader.onload = function(e) {
+					try {
+						const jsonData = JSON.parse(e.target.result);
+						if (jsonData && jsonData.Objects && Array.isArray(jsonData.Objects)) {
+							objectCount.textContent = jsonData.Objects.length.toLocaleString();
+						} else {
+							objectCount.textContent = 'Invalid format';
+						}
+					} catch (error) {
+						objectCount.textContent = 'Invalid JSON';
+					}
+				};
+				reader.readAsText(file);
+			} else {
+				selectedFile.style.display = 'none';
+				fileInfo.style.display = 'none';
+				uploadedFileSize.textContent = '-';
+				objectCount.textContent = '-';
+			}
+		}
+
+		removeFile.addEventListener('click', () => {
+			fileInput.value = '';
+			updateFileDisplay();
+			document.getElementById('fileInfo').style.display = 'none';
+		});
+
+		// Update split method labels
+		document.getElementsByName('splitMethod').forEach(radio => {
+			radio.addEventListener('change', function() {
+				const label = document.getElementById('splitValueLabel');
+				const unit = document.getElementById('splitUnit');
+				label.textContent = 'Number of Files';
+				unit.textContent = 'files';
+			});
+		});
+
+		// Main form submission handler
+		document.getElementById('jsonSplitterForm').addEventListener('submit', async function(e) {
+			e.preventDefault();
+			
+			const file = fileInput.files[0];
+			const splitMethod = document.querySelector('input[name="splitMethod"]:checked').value;
+			const splitValue = parseInt(document.getElementById('splitValue').value);
+			const filenamePrefix = document.getElementById('filenamePrefix').value || 'split_file';
+			
+			if (!file) {
+				showAlert('Please select a JSON file', 'error');
+				return;
+			}
+
+			// Method-specific validation
+			if (splitValue < 2) {
+				showAlert('Please specify at least 2 files for splitting', 'warning');
+				return;
+			}
+			
+			setLoading(true);
+			
+			try {
+				const jsonContent = await readFileAsText(file);
+				let jsonData;
+				
+				try {
+					jsonData = JSON.parse(jsonContent);
+				} catch (error) {
+					showAlert('Invalid JSON file. Please check the file format.', 'error');
+					setLoading(false);
+					return;
+				}
+				
+				if (splitMethod === 'files') {
+					const dataLength = Array.isArray(jsonData) ? 
+									 jsonData.length : 
+									 (Array.isArray(Object.values(jsonData)[0]) ? 
+									  Object.values(jsonData)[0].length : 
+									  Object.keys(jsonData).length);
+									  
+					if (splitValue > dataLength) {
+						showAlert(`Cannot split into ${splitValue} files. Maximum possible files based on data: ${dataLength}`, 'warning');
+						setLoading(false);
+						return;
+					}
+				}
+
+				// Validate data is not empty
+				if (Array.isArray(jsonData) && jsonData.length === 0) {
+					showAlert('The JSON file contains an empty array', 'error');
+					setLoading(false);
+					return;
+				}
+				
+				if (typeof jsonData === 'object' && Object.keys(jsonData).length === 0) {
+					showAlert('The JSON file contains an empty object', 'error');
+					setLoading(false);
+					return;
+				}
+				
+				// Process the split
+				const splitFiles = splitJSON(jsonData, splitMethod, splitValue, filenamePrefix);
+				
+				if (splitFiles.length <= 1) {
+					showAlert(`Unable to split the file with current settings. ` +
+							 `Please try a ${splitMethod === 'size' ? 'smaller size' : 
+											splitMethod === 'count' ? 'smaller entry count' : 
+											'different number of files'}.`, 'warning');
+				} else {
+					showResults(splitFiles);
+					showAlert(`Successfully split into ${splitFiles.length} files!`, 'success');
+				}
+				
+			} catch (error) {
+				console.error('Error processing file:', error);
+				showAlert('Error processing file: ' + error.message, 'error');
+			} finally {
+				setLoading(false);
+			}
+		});
+
+		// Function to read file content
+		function readFileAsText(file) {
+			return new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.onload = event => resolve(event.target.result);
+				reader.onerror = error => reject(error);
+				reader.readAsText(file);
+			});
+		}
+
+		// Function to split JSON
+		function splitJSON(jsonData, method, value, prefix) {
+			let chunks = [];
+
+			// Validate DayZ JSON structure
+			if (!jsonData.Objects || !Array.isArray(jsonData.Objects)) {
+				throw new Error('Invalid DayZ JSON format. File must contain an "Objects" array.');
+			}
+
+			const objectsArray = jsonData.Objects;
+			console.log('Total Objects:', objectsArray.length);
+
+			// If the array is empty, throw an error
+			if (objectsArray.length === 0) {
+				throw new Error('The Objects array is empty.');
+			}
+
+			// Split into X number of files (where X is the value entered by user)
+			const totalItems = objectsArray.length;
+			const itemsPerFile = Math.ceil(totalItems / value);
+			
+			for (let i = 0; i < totalItems; i += itemsPerFile) {
+				const chunkData = objectsArray.slice(i, Math.min(i + itemsPerFile, totalItems));
+				chunks.push({
+					data: {
+						"Objects": chunkData
+					},
+					filename: `${prefix}_${chunks.length + 1}.json`
+				});
+				console.log(`Created chunk ${chunks.length} with ${chunkData.length} objects`);
+			}
+
+			// Verify that all chunks maintain proper DayZ JSON structure
+			chunks.forEach((chunk, index) => {
+				if (!chunk.data.Objects || !Array.isArray(chunk.data.Objects)) {
+					throw new Error(`Invalid chunk structure in file ${index + 1}`);
+				}
+			});
+			
+			return chunks;
+		}
+		
+		const ITEMS_PER_PAGE = 10;
+		let currentPage = 1;
+		let allSplitFiles = [];
+
+
+		// Function to display results and create download links
+		function showResults(splitFiles) {
+			const resultSection = document.getElementById('resultSection');
+			allSplitFiles = splitFiles; // Store all files
+			
+			// Update result message
+			const resultMessage = document.getElementById('resultMessage');
+			resultMessage.textContent = `Successfully split into ${splitFiles.length} files`;
+			
+			// Reset pagination
+			currentPage = 1;
+			
+			// Show the results section
+			resultSection.style.display = 'block';
+			
+			// Update pagination and display first page
+			updatePagination();
+			displayCurrentPage();
+			
+			// Enable download all functionality
+			const downloadAllBtn = document.getElementById('downloadAll');
+			downloadAllBtn.onclick = () => downloadAllFiles(splitFiles);
+		}
+		
+		function displayCurrentPage() {
+			const downloadLinks = document.getElementById('downloadLinks');
+			const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+			const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, allSplitFiles.length);
+			
+			// Clear current content
+			downloadLinks.innerHTML = '';
+			
+			// Update showing range
+			document.getElementById('showingRange').textContent = `${startIndex + 1}-${endIndex}`;
+			document.getElementById('totalItems').textContent = allSplitFiles.length;
+			
+			// Display current page items
+			for (let i = startIndex; i < endIndex; i++) {
+				const file = allSplitFiles[i];
+				const blob = new Blob([JSON.stringify(file.data, null, 2)], { type: 'application/json' });
+				const url = URL.createObjectURL(blob);
+				
+				const tr = document.createElement('tr');
+				tr.innerHTML = `
+					<td>
+						<i class="ti ti-file-json me-2"></i>
+						${file.filename}
+					</td>
+					<td>${formatFileSize(blob.size)}</td>
+					<td><span class="badge bg-success">Ready</span></td>
+					<td>
+						<div class="d-flex gap-2">
+							<a href="${url}" download="${file.filename}" 
+							   class="btn btn-icon btn-sm btn-primary"
+							   title="Download">
+								<i class="ti ti-download"></i>
+							</a>
+							<button type="button" 
+									class="btn btn-icon btn-sm btn-outline-primary preview-btn"
+									title="Preview">
+								<i class="ti ti-eye"></i>
+							</button>
+						</div>
+					</td>
+				`;
+				
+				// Add preview functionality
+				const previewBtn = tr.querySelector('.preview-btn');
+				previewBtn.addEventListener('click', () => {
+					showPreviewModal(file.filename, file.data);
+				});
+				
+				downloadLinks.appendChild(tr);
+			}
+		}
+		
+		function updatePagination() {
+			const paginationContainer = document.querySelector('.pagination');
+			const totalPages = Math.ceil(allSplitFiles.length / ITEMS_PER_PAGE);
+			
+			paginationContainer.innerHTML = '';
+			
+			// Previous button
+			addPaginationButton('‹', currentPage > 1, () => {
+				if (currentPage > 1) {
+					currentPage--;
+					updatePagination();
+					displayCurrentPage();
+				}
+			});
+			
+			// Page numbers
+			let startPage = Math.max(1, currentPage - 2);
+			let endPage = Math.min(totalPages, startPage + 4);
+			
+			if (endPage - startPage < 4) {
+				startPage = Math.max(1, endPage - 4);
+			}
+			
+			if (startPage > 1) {
+				addPaginationButton('1', true, () => {
+					currentPage = 1;
+					updatePagination();
+					displayCurrentPage();
+				});
+				if (startPage > 2) {
+					addPaginationButton('...', false);
+				}
+			}
+			
+			for (let i = startPage; i <= endPage; i++) {
+				addPaginationButton(i.toString(), true, () => {
+					currentPage = i;
+					updatePagination();
+					displayCurrentPage();
+				}, i === currentPage);
+			}
+			
+			if (endPage < totalPages) {
+				if (endPage < totalPages - 1) {
+					addPaginationButton('...', false);
+				}
+				addPaginationButton(totalPages.toString(), true, () => {
+					currentPage = totalPages;
+					updatePagination();
+					displayCurrentPage();
+				});
+			}
+			
+			// Next button
+			addPaginationButton('›', currentPage < totalPages, () => {
+				if (currentPage < totalPages) {
+					currentPage++;
+					updatePagination();
+					displayCurrentPage();
+				}
+			});
+		}
+		
+		function addPaginationButton(text, enabled, onClick, isActive = false) {
+			const paginationContainer = document.querySelector('.pagination');
+			const li = document.createElement('li');
+			li.className = `page-item ${!enabled ? 'disabled' : ''} ${isActive ? 'active' : ''}`;
+			
+			const button = document.createElement('button');
+			button.className = 'page-link';
+			button.innerHTML = text;
+			if (enabled && onClick) {
+				button.onclick = onClick;
+			}
+			
+			li.appendChild(button);
+			paginationContainer.appendChild(li);
+		}
+
+		// Function to download all files as zip
+		function downloadAllFiles(files) {
+			// Create a zip file
+			const zip = new JSZip();
+			
+			files.forEach(file => {
+				zip.file(file.filename, JSON.stringify(file.data, null, 2));
+			});
+			
+			zip.generateAsync({type: 'blob'}).then(content => {
+				const url = URL.createObjectURL(content);
+				const link = document.createElement('a');
+				link.href = url;
+				link.download = 'split_files.html';
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+				URL.revokeObjectURL(url);
+			});
+		}
+
+		// Function to show preview modal
+		function showPreviewModal(filename, data) {
+			const modal = document.createElement('div');
+			modal.className = 'modal fade';
+			modal.innerHTML = `
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Preview: ${filename}</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+						<div class="modal-body">
+							<pre class="language-json"><code>${JSON.stringify(data, null, 2)}</code></pre>
+						</div>
+					</div>
+				</div>
+			`;
+			
+			document.body.appendChild(modal);
+			const modalInstance = new bootstrap.Modal(modal);
+			modalInstance.show();
+			
+			modal.addEventListener('hidden.bs.modal', function () {
+				document.body.removeChild(modal);
+			});
+		}
+
+		// Loading state handlers
+		function setLoading(isLoading) {
+			const submitButton = document.querySelector('button[type="submit"]');
+			const spinner = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>';
+			
+			if (isLoading) {
+				submitButton.disabled = true;
+				submitButton.innerHTML = `${spinner}Processing...`;
+			} else {
+				submitButton.disabled = false;
+				submitButton.innerHTML = '<i class="ti ti-file-split me-2"></i>Split JSON';
+			}
+		}
+
+		// Toast notification function
+		function showAlert(message, type = 'info') {
+			const iconMap = {
+				'success': 'success',
+				'error': 'error',
+				'info': 'info',
+				'warning': 'warning'
+			};
+			
+			Swal.fire({
+				title: type.charAt(0).toUpperCase() + type.slice(1),
+				text: message,
+				icon: iconMap[type] || 'info',
+				customClass: {
+					confirmButton: 'btn btn-primary'
+				},
+				buttonsStyling: false
+			});
+		}
+
+		function createToastContainer() {
+			const container = document.createElement('div');
+			container.id = 'toast-container';
+			container.className = 'position-fixed top-0 end-0 p-3';
+			container.style.zIndex = '1050';
+			document.body.appendChild(container);
+			return container;
+		}
+
+		// Initialize tooltips and other Bootstrap components
+		document.addEventListener('DOMContentLoaded', function() {
+			var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+			var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+				return new bootstrap.Tooltip(tooltipTriggerEl);
+			});
+		});
+	</script>
+
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/splitter by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:28:10 GMT -->
+</html>
+

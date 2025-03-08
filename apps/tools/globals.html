@@ -1,0 +1,1311 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script>
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/globals by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Globals Configurator &mdash; DayZ BoosterZ</title>
+    <meta name="description" content="Easily customize DayZ server global settings with our interactive tool. Adjust animal count, zombie limits, loot damage, and more, then export configurations as XML for streamlined server management." />
+    <meta name="keywords" content="DayZ server management, DayZ boosting loot, DayZ loadout generator, console loadouts, loadouts dayz, DayZ loot customization, gaming, DayZ server settings, DayZ night cycle calculator, DayZ loot accelerator">
+    <meta name="author" content="OzzieHouso & KingAlobar">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link href="../../../fonts.googleapis.com/css28ebe.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    
+    <!-- Additional CSS from original template -->
+    <link rel="stylesheet" href="../../../cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="../../../cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="../../../cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/darcula.min.css">
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+		.icon {
+			width: 32px;
+			height: 32px;
+		  }
+	</style>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item active">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+          </nav>
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <!-- Header Section -->
+			<div class="row mb-4">
+			  <div class="col-12">
+				<div class="card  border-0">
+				  <div class="card-body d-flex align-items-center p-4">
+					<div class="avatar avatar-lg rounded me-3">
+					  <i class="ti ti-file-code fs-2"></i>
+					</div>
+					<div>
+					  <h4 class="card-title mb-0">DayZ Globals Configurator</h4>
+					  <p class="card-text mb-0 text-muted">Configure your server's global settings with our interactive tool</p>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+
+              <!-- Main Content Area -->
+              <!-- Main Content Area -->
+		<div class="row">
+			<!-- Left Column - Configuration Options -->
+			<div class="col-md-6 col-sm-12 order-md-1">
+				<div class="card mb-4">
+					<div class="card-header d-flex align-items-center justify-content-between">
+						<h5 class="card-title mb-0">Configuration Settings</h5>
+						<button id="export-xml" class="btn btn-primary btn-sm">
+							<i class="ti ti-download me-1"></i>Export XML
+						</button>
+					</div>
+					<div class="card-body">
+						<div class="alert alert-warning mb-4">
+							<div class="d-flex">
+								<i class="ti ti-alert-triangle ti-md me-2"></i>
+								<div>
+									Notice: cfgspawnabletypes will override the LootDamage values.
+								</div>
+							</div>
+						</div>
+
+						<div class="mb-4">
+							<label for="config-select" class="form-label">Select Configuration Option:</label>
+							<select class="select2 form-select" id="config-select">
+								<option value="" selected disabled>Select a setting to configure</option>
+								<option value="addAll">➕ Add All Settings</option>
+								<option value="removeAll">➖ Remove All Settings</option>
+							</select>
+						</div>
+
+						<!-- Configuration Cards Container -->
+						<div id="config-cards" class="row g-3">
+							<!-- Cards will be dynamically added here -->
+						</div>
+
+						<!-- Empty State -->
+						<div id="empty-state" class="text-center py-5">
+							<i class="ti ti-settings ti-3x mb-3 text-muted"></i>
+							<h6 class="mb-2">No Configurations Added</h6>
+							<p class="text-muted mb-0">Select settings from the dropdown menu to start configuring</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+    <!-- Right Column - Documentation -->
+    <div class="col-md-6 col-sm-12 order-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0"><i class="ti ti-book me-2"></i>What does each section mean?</h5>
+            </div>
+            <div class="card-body">
+                <!-- Settings Documentation -->
+                <div class="accordion" id="settingsAccordion">
+					<div class="accordion" id="settingsAccordion">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#animalMaxCount">
+									AnimalMaxCount
+								</button>
+							</h2>
+							<div id="animalMaxCount" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									Maximum limit of spawned animals across all zones in map. Doesn't include chickens. The Default is 200. Increasing too much without reducing other events can cause lag.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cleanupAvoidance">
+									CleanupAvoidance
+								</button>
+							</h2>
+							<div id="cleanupAvoidance" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									Distance from player required before item/loot deletion in meters. Default is 100.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cleanupLifetimeDeadAnimal">
+									CleanupLifetimeDeadAnimal
+								</button>
+							</h2>
+							<div id="cleanupLifetimeDeadAnimal" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									The lifetime for dead animals; how long until they despawn in seconds Default is 1200. Tied to 'CleanupAvoidance'.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cleanupLifetimeDeadInfected">
+									CleanupLifetimeDeadInfected
+								</button>
+							</h2>
+							<div id="cleanupLifetimeDeadInfected" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									The lifetime for dead infected; how long until they despawn in seconds Default is 330. Tied to 'CleanupAvoidance'.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cleanupLifetimeDeadPlayer">
+									CleanupLifetimeDeadPlayer
+								</button>
+							</h2>
+							<div id="cleanupLifetimeDeadPlayer" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									The lifetime for dead player; how long until the body despawns in seconds. Default is 3600. Tied to 'CleanupAvoidance'.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cleanupLifetimeDefault">
+									CleanupLifetimeDefault
+								</button>
+							</h2>
+							<div id="cleanupLifetimeDefault" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									The lifetime for things not in types.xml or unrecognized but item is ruined. In seconds default is 45.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cleanupLifetimeLimit">
+									CleanupLifetimeLimit
+								</button>
+							</h2>
+							<div id="cleanupLifetimeLimit" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									How many items can be deleted at once during standard cleanup. Default is 50.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cleanupLifetimeRuined">
+									CleanupLifetimeRuined
+								</button>
+							</h2>
+							<div id="cleanupLifetimeRuined" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									Default lifetime for ruined loot in seconds Default is 330.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flagRefreshFrequency">
+									FlagRefreshFrequency
+								</button>
+							</h2>
+							<div id="flagRefreshFrequency" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									The Lifetimes of items near a Raised Flag will be refreshed with this frequency in seconds default is 432000 (5 days).
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flagRefreshMaxDuration">
+									FlagRefreshMaxDuration
+								</button>
+							</h2>
+							<div id="flagRefreshMaxDuration" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									How long the raised flag will be refreshing items default is 3456000 seconds (40 days).
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#foodDecay">
+									FoodDecay
+								</button>
+							</h2>
+							<div id="foodDecay" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									Allows decay on food. To turn off rotting food, change this AND WorldWetTempUpdate to 0.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#idleModeCountdown">
+									IdleModeCountdown
+								</button>
+							</h2>
+							<div id="idleModeCountdown" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									Activate economy idle mode on empty server after given time. To keep running set this and IdleModeStartup to 0.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#idleModeStartup">
+									IdleModeStartup
+								</button>
+							</h2>
+							<div id="idleModeStartup" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									Zero '0' to disable idle mode on server startup; it will still switch on later if IdleModeCountdown is not 0.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#initialSpawn">
+									InitialSpawn
+								</button>
+							</h2>
+							<div id="initialSpawn" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									How much loot will be spawned on server initial start without storage Default 100.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lootDamageMax">
+									LootDamageMax
+								</button>
+							</h2>
+							<div id="lootDamageMax" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									Maximum loot damage. 0 on min, max is pristine; 0.82 is badly damaged; 1 is ruined.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lootDamageMin">
+									LootDamageMin
+								</button>
+							</h2>
+							<div id="lootDamageMin" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									Minimum loot damage. 0 on min, max is pristine; 1 is ruined.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lootProxyPlacement">
+									LootProxyPlacement
+								</button>
+							</h2>
+							<div id="lootProxyPlacement" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									Allow dispatch containers to receive the loot like car parts and proxies in underground bunker in vanilla.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lootSpawnAvoidance">
+									LootSpawnAvoidance
+								</button>
+							</h2>
+							<div id="lootSpawnAvoidance" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									How far away a player should be from a loot group for loot to spawn inside of it default is 100 meters.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#respawnAttempt">
+									RespawnAttempt
+								</button>
+							</h2>
+							<div id="respawnAttempt" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									How many attempts are performed during single item respawn the default is 2 it will not attempt to respawn that item again until the next server restart or a new loot refresh cycle.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#respawnLimit">
+									RespawnLimit
+								</button>
+							</h2>
+							<div id="respawnLimit" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									How many items of ONE type can be spawned at once. The default is 20 meaning a maximum of 20 can exist in the game world simultaneously.
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#respawnTypes">
+									RespawnTypes
+								</button>
+							</h2>
+							<div id="respawnTypes" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+								<div class="accordion-body">
+									How many DIFFERENT types can be respawned at once.
+								</div>
+							</div>
+						</div>
+								
+								<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#restartSpawn">
+													RestartSpawn
+												</button>
+											</h2>
+											<div id="restartSpawn" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+												<div class="accordion-body">
+													How much loot should be respawned during restart to nominal the default is 0. Changing to 100 the server will attempt to respawn all loot to the nominal amounts in the types.xml unless the nominal is already present on the map.
+												</div>
+											</div>
+										</div>
+
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spawnInitial">
+													SpawnInitial
+												</button>
+											</h2>
+											<div id="spawnInitial" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+												<div class="accordion-body">
+													How many initial tests are allowed for item spawn. Example: If an item has "SpawnInitial" set to 5, the server will try five times to spawn it in its designated location. If all five attempts fail, the item won't appear in that specific spot during that server session.
+												</div>
+											</div>
+										</div>
+
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#timeHopping">
+													TimeHopping
+												</button>
+											</h2>
+											<div id="timeHopping" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+												<div class="accordion-body">
+													Penalty time for server hoppers, official only.
+												</div>
+											</div>
+										</div>
+
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#timeLogin">
+													TimeLogin
+												</button>
+											</h2>
+											<div id="timeLogin" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+												<div class="accordion-body">
+													Default login time in seconds.
+												</div>
+											</div>
+										</div>
+
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#timeLogout">
+													TimeLogout
+												</button>
+											</h2>
+											<div id="timeLogout" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+												<div class="accordion-body">
+													Default logout time in seconds.
+												</div>
+											</div>
+										</div>
+
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#timePenalty">
+													TimePenalty
+												</button>
+											</h2>
+											<div id="timePenalty" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+												<div class="accordion-body">
+													Waiting time penalty for players who switch or disconnect from a server quickly.
+												</div>
+											</div>
+										</div>
+
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#worldWetTempUpdate">
+													WorldWetTempUpdate
+												</button>
+											</h2>
+											<div id="worldWetTempUpdate" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+												<div class="accordion-body">
+													Wetness and temperature on all items in the world. To turn off rotting food, change this AND FoodDecay to 0.
+												</div>
+											</div>
+										</div>
+
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#zombieMaxCount">
+													ZombieMaxCount
+												</button>
+											</h2>
+											<div id="zombieMaxCount" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+												<div class="accordion-body">
+													Maximum limit of spawned zombies across all zones in map. Increasing too much without reducing other events can cause lag.
+												</div>
+											</div>
+										</div>
+
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#zoneSpawnDist">
+													ZoneSpawnDist
+												</button>
+											</h2>
+											<div id="zoneSpawnDist" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+												<div class="accordion-body">
+													Distance a player needs to be away for dynamic infected to spawn in nearby zone. The default value is typically 300 meters. This means that when a player is within 300 meters of a zone that does not currently have infected, the server will attempt to spawn infected in that zone to populate it and provide a challenge for players.
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>		
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!-- / Content -->
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+
+      <!-- Donation Button -->
+      		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+    <script src="../../assets/vendor/libs/select2/select2.js"></script>
+
+    <!-- Additional JS from original template -->
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script src="../../assets/vendor/libs/select2/select2.js"></script>
+	<script src="../../assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+	<script src="../../assets/js/forms-selects.js"></script>
+
+    <!-- Page JS -->
+    <script>
+		$(document).ready(function() {
+    
+
+    // Define default values for all configuration options
+    const defaultValues = {
+        "AnimalMaxCount": { type: 0, value: 200, comment: "Maximum number of animals in the world." },
+        "CleanupAvoidance": { type: 0, value: 100, comment: "Recommended: 100" },
+        "CleanupLifetimeDeadAnimal": { type: 0, value: 1200, comment: "Recommended: 1200" },
+        "CleanupLifetimeDeadInfected": { type: 0, value: 330, comment: "Recommended: 330" },
+        "CleanupLifetimeDeadPlayer": { type: 0, value: 3600, comment: "Recommended: 3600" },
+        "CleanupLifetimeDefault": { type: 0, value: 45, comment: "Recommended: 45" },
+        "CleanupLifetimeLimit": { type: 0, value: 50, comment: "Recommended: 50" },
+        "CleanupLifetimeRuined": { type: 0, value: 330, comment: "Recommended: 330" },
+        "FlagRefreshFrequency": { type: 0, value: 432000, comment: "" },
+        "FlagRefreshMaxDuration": { type: 0, value: 3456000, comment: "" },
+        "FoodDecay": { type: 0, value: 1, comment: "Recommended: 1" },
+        "IdleModeCountdown": { type: 0, value: 60, comment: "Recommended: 60" },
+        "IdleModeStartup": { type: 0, value: 1, comment: "Recommended: 1" },
+        "InitialSpawn": { type: 0, value: 100, comment: "Recommended: 100" },
+        "LootDamageMax": { type: 1, value: 0.82, comment: "Set this to 0.0 for pristine loot" },
+        "LootDamageMin": { type: 1, value: 0.0, comment: "Set this to 0.0 for pristine loot" },
+        "LootProxyPlacement": { type: 0, value: 1, comment: "Recommended: 1" },
+        "LootSpawnAvoidance": { type: 0, value: 100, comment: "Recommended: 100" },
+        "RespawnAttempt": { type: 0, value: 2, comment: "Recommended: 2" },
+        "RespawnLimit": { type: 0, value: 20, comment: "Recommended: 20" },
+        "RespawnTypes": { type: 0, value: 12, comment: "Recommended: 12" },
+        "RestartSpawn": { type: 0, value: 0 },
+        "SpawnInitial": { type: 0, value: 1200, comment: "Recommended: 1200" },
+        "TimeHopping": { type: 0, value: 60, comment: "Not used on Community servers" },
+        "TimeLogin": { type: 0, value: 15 },
+        "TimeLogout": { type: 0, value: 15 },
+        "TimePenalty": { type: 0, value: 20 },
+        "WorldWetTempUpdate": { type: 0, value: 1, comment: "Recommended: 1" },
+        "ZombieMaxCount": { type: 0, value: 1000, comment: "Maximum number of zombies in the world." },
+        "ZoneSpawnDist": { type: 0, value: 300, comment: "Recommended: 300" }
+    };
+
+    // Populate select options
+    Object.keys(defaultValues).forEach(key => {
+        $('#config-select').append(new Option(key, key));
+    });
+
+    // Helper function to convert seconds to days
+    function secondsToDays(seconds) {
+        return (seconds / (60 * 60 * 24)).toFixed(1);
+    }
+
+    // Helper function to update comments
+    function updateComment(cardIndex, value) {
+        const days = secondsToDays(value);
+        $(`#comment-${cardIndex}`).html(`<i class="ti ti-clock me-1"></i>${value} seconds = ${days} days`);
+    }
+
+    // Template for loot damage info
+    const lootDamageAlert = `
+        <div class="alert alert-info p-3 mb-3">
+            <h6 class="alert-heading mb-2"><i class="ti ti-info-circle me-2"></i>Condition Values</h6>
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Condition</th>
+                            <th class="text-end">Value Range</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Pristine</td><td class="text-end">0.00 - 0.29</td></tr>
+                        <tr><td>Worn</td><td class="text-end">0.30 - 0.59</td></tr>
+                        <tr><td>Damaged</td><td class="text-end">0.60 - 0.79</td></tr>
+                        <tr><td>Badly Damaged</td><td class="text-end">0.80 - 0.99</td></tr>
+                        <tr><td>Ruined</td><td class="text-end">1.00</td></tr>
+                        <tr><td>Ruined</td><td class="text-end">1.00</td></tr>
+                    </tbody>
+					
+                </table>
+            </div>
+			<div class="text-muted">To set pristine loot, please make LootMin & LootMax values 0.0</div>
+        </div>
+    `;
+	
+	// Helper function to update empty state
+    function updateEmptyState() {
+        const hasCards = $('#config-cards').children().length > 0;
+        $('#empty-state').toggle(!hasCards);
+    }
+
+    // Function to add a configuration card
+    function addCard(optionValue, optionText, cardIndex) {
+        if (!(optionValue in defaultValues)) {
+            console.error(`Error: ${optionValue} not found in defaultValues`);
+            return;
+        }
+
+        const value = defaultValues[optionValue].value;
+        let comment = defaultValues[optionValue].comment || '';
+
+        // Update comment with days for time-based values
+        if (optionValue === "FlagRefreshFrequency" || optionValue === "FlagRefreshMaxDuration") {
+            const days = secondsToDays(value);
+            comment += ` (${value} seconds = ${days} days)`;
+        }
+
+        const maxAttribute = ["TimeLogin", "TimeLogout"].includes(optionValue) ? 'max="65536"' : '';
+        const icon = getIconForOption(optionValue);
+
+        const cardHtml = `
+            <div class="col-12">
+                <div class="card shadow-none border">
+                    <div class="card-header bg-transparent d-flex justify-content-between align-items-center py-2">
+                        <div class="d-flex align-items-center">
+                            <i class="${icon} me-2"></i>
+                            <h6 class="mb-0">${optionValue}</h6>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-icon btn-text-secondary rounded-pill btn-sm toggle-card" 
+                                    data-target="#card-body-${cardIndex}">
+                                <i class="ti ti-chevron-down"></i>
+                            </button>
+                            <button class="btn btn-icon btn-text-danger rounded-pill btn-sm remove-card ms-1" 
+                                    data-index="${cardIndex}" 
+                                    data-option-value="${optionValue}">
+                                <i class="ti ti-x"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body" id="card-body-${cardIndex}">
+                        ${["LootDamageMin", "LootDamageMax"].includes(optionValue) ? lootDamageAlert : ''}
+                        <div class="mb-3">
+                            <label for="config-text-${cardIndex}" class="form-label small text-muted">Value</label>
+                            <div class="input-group">
+                                <input type="number" 
+                                       class="form-control" 
+                                       id="config-text-${cardIndex}" 
+                                       value="${value}" 
+                                       ${maxAttribute}
+                                       step="${["LootDamageMin", "LootDamageMax"].includes(optionValue) ? '0.01' : '1'}">
+                                <button class="btn btn-outline-secondary" type="button" 
+                                        onclick="document.getElementById('config-text-${cardIndex}').value = '${value}'">
+                                    <i class="ti ti-refresh me-1"></i>Reset
+                                </button>
+                            </div>
+                            ${comment ? `<div class="form-text mt-1"><i class="ti ti-info-circle me-1"></i>${comment}</div>` : ''}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        $('#config-cards').append(cardHtml);
+        updateEmptyState();
+
+        // Add event listeners
+        $(`[data-index="${cardIndex}"]`).on('click', function() {
+            const optionValue = $(this).data('option-value');
+            const optionElement = $(`#config-select option[value="${optionValue}"]`);
+            optionElement.text(optionElement.text().replace(" - currently selected", "")).prop('disabled', false);
+            $(this).closest('.col-12').remove();
+            updateEmptyState();
+        });
+
+        $(`[data-target="#card-body-${cardIndex}"]`).on('click', function() {
+            const target = $(this).data('target');
+            $(target).collapse('toggle');
+            $(this).find('i').toggleClass('ti-chevron-down ti-chevron-up');
+        });
+
+        $(`#config-text-${cardIndex}`).on('input', function() {
+            const newValue = parseInt(this.value);
+            if (optionValue === "FlagRefreshFrequency" || optionValue === "FlagRefreshMaxDuration") {
+                updateComment(cardIndex, newValue);
+            }
+        });
+    }
+
+    // Helper function to get appropriate icon for option
+    function getIconForOption(optionValue) {
+        const iconMap = {
+            'AnimalMaxCount': 'ti ti-deer',
+            'ZombieMaxCount': 'ti ti-skull',
+            'TimeLogin': 'ti ti-login',
+            'TimeLogout': 'ti ti-logout',
+            'TimePenalty': 'ti ti-clock',
+            'TimeHopping': 'ti ti-jump-rope',
+            'LootDamageMin': 'ti ti-box',
+            'LootDamageMax': 'ti ti-box',
+            'FoodDecay': 'ti ti-meat',
+            'WorldWetTempUpdate': 'ti ti-temperature'
+        };
+        return iconMap[optionValue] || 'ti ti-settings';
+    }
+
+    // Function to remove all cards
+    function removeAllCards() {
+        $('#config-cards').empty();
+        $('#config-select option').each(function() {
+            if ($(this).val()) {
+                const optionText = $(this).text();
+                $(this).text(optionText.replace(" - currently selected", "")).prop('disabled', false);
+            }
+        });
+        updateEmptyState();
+    }
+
+    // Handle select change event
+    $('#config-select').on('change', function() {
+        const selectedOption = this.value;
+        if (selectedOption === 'addAll') {
+            const optionsToAdd = [];
+            $('#config-select option:not(:disabled):not([value="addAll"]):not([value="removeAll"])').each(function() {
+                if ($(this).val()) {
+                    optionsToAdd.push({ value: $(this).val(), text: $(this).text() });
+                }
+            });
+
+            optionsToAdd.forEach(function(option) {
+                const cardIndex = $('#config-cards .card').length + 1;
+                addCard(option.value, option.text, cardIndex);
+                $(`#config-select option[value="${option.value}"]`)
+                    .text(option.text + " - currently selected")
+                    .prop('disabled', true);
+            });
+
+        } else if (selectedOption === 'removeAll') {
+            removeAllCards();
+        } else if (selectedOption) {
+            const selectedOptionElement = $('#config-select option:selected');
+            const selectedOptionText = selectedOptionElement.text();
+            const cardIndex = $('#config-cards .card').length + 1;
+            addCard(selectedOption, selectedOptionText, cardIndex);
+            selectedOptionElement
+                .text(selectedOptionText + " - currently selected")
+                .prop('disabled', true);
+        }
+
+        $(this).val('').trigger('change.select2');
+    });
+
+    // Export XML functionality
+    function exportToXml() {
+        const xmlHeader = '<' + '?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<variables>\n';
+        const xmlFooter = '</variables>';
+        let xmlContent = '';
+
+        for (const [key, value] of Object.entries(defaultValues)) {
+            let card = $(`#config-cards .card-header:contains(${key})`).closest('.card');
+            if (card.length) {
+                let inputValue = card.find('input').val();
+                xmlContent += `    <var name="${key}" type="${value.type}" value="${formatValue(key, inputValue)}"/>\n`;
+            } else {
+                xmlContent += `    <var name="${key}" type="${value.type}" value="${formatValue(key, value.value)}"/>\n`;
+            }
+        }
+
+        const completeXml = xmlHeader + xmlContent + xmlFooter;
+        downloadXml(completeXml);
+    }
+
+    // Helper function to format values
+    function formatValue(key, value) {
+        if (key === "LootDamageMin") {
+            return parseFloat(value).toFixed(1);
+        }
+        return value.toString();
+    }
+
+    // Helper function to download XML
+    function downloadXml(xmlContent) {
+        const blob = new Blob([xmlContent], { type: 'application/xml' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'globals-2.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Show success toast
+        const toast = `
+            <div class="bs-toast toast toast-ex" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <i class="ti ti-check me-2"></i>
+                    <div class="me-auto">Success</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    globals.xml has been successfully exported.
+                </div>
+            </div>
+        `;
+        
+        $(toast).appendTo('body').toast({
+            delay: 3000,
+            autohide: true
+        }).toast('show');
+    }
+
+    // Bind export button click event
+    $('#export-xml').on('click', exportToXml);
+
+    // Initialize empty state
+    updateEmptyState();
+});
+    </script>
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/globals by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:57 GMT -->
+</html>

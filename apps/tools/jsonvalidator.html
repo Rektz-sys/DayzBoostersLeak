@@ -1,0 +1,1689 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script>
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/jsonvalidator by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>JSON Validator &mdash; DayZ BoosterZ</title>
+    <meta name="description" content="Easily validate and beautify JSON files for DayZ configurations. Upload or paste JSON, detect errors by line, and copy formatted output for streamlined server setup." />
+    <meta name="keywords" content="DayZ JSON validator, JSON checker, JSON validation tool, server JSON check, DayZ tools">
+    <meta name="author" content="OzzieHouso & KingAlobar">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link href="../../../fonts.googleapis.com/css28ebe.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.css">
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/darcula.min.css">
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <script src="../../assets/js/config.js"></script>
+	<script src="../../assets/vendor/libs/shepherd/shepherd.js"></script>
+	
+	
+	
+	<link rel="stylesheet" href="../../assets/vendor/libs/shepherd/shepherd.css" />
+
+    <style>
+    .editor-container {
+        border: 1px solid var(--bs-border-color);
+        border-radius: 0.375rem;
+        overflow: hidden;
+    }
+    
+    .CodeMirror {
+        height: 400px !important;
+        font-family: var(--bs-font-monospace);
+        font-size: 0.875rem;
+    }
+    
+    .error-line {
+        background-color: rgba(var(--bs-danger-rgb), 0.1);
+    }
+    
+    .error-highlight {
+        background-color: rgba(var(--bs-danger-rgb), 0.2);
+        border-bottom: 1px wavy var(--bs-danger);
+    }
+    
+    .validation-result {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border-radius: 0.375rem;
+    }
+    
+    .validation-success {
+        background-color: rgba(var(--bs-success-rgb), 0.1);
+        border: 1px solid var(--bs-success);
+    }
+    
+    .validation-error {
+        background-color: rgba(var(--bs-danger-rgb), 0.1);
+        border: 1px solid var(--bs-danger);
+    }
+	.comparison-results .diff-item code {
+		display: block;
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		background: var(--bs-body-bg);
+		padding: 0.5rem;
+		border-radius: 0.375rem;
+		max-height: 200px;
+		overflow-y: auto;
+	}
+
+	.diff-value {
+		background: rgba(var(--bs-secondary-rgb), 0.05);
+		border: 1px solid rgba(var(--bs-secondary-rgb), 0.1);
+	}
+	.icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  .tree-node {
+		padding: 2px 0;
+	}
+
+	.node-key {
+		color: var(--bs-primary);
+		font-weight: 500;
+	}
+
+	.node-content {
+		border-left: 1px solid var(--bs-border-color);
+		margin-left: 10px;
+		padding-left: 10px;
+	}
+
+	.validation-error-list {
+		max-height: 300px;
+		overflow-y: auto;
+	}
+
+	.validation-error-item {
+		padding: 8px 0;
+	}
+
+	.validation-error-item:first-child {
+		padding-top: 0;
+	}
+
+	.validation-error-item:last-child {
+		padding-bottom: 0;
+	}
+
+	.error-line {
+		background-color: rgba(var(--bs-danger-rgb), 0.1) !important;
+	}
+
+	.error-highlight {
+		border-bottom: 2px wavy var(--bs-danger) !important;
+		background-color: rgba(var(--bs-danger-rgb), 0.05) !important;
+	}
+
+	.error-marker {
+		color: var(--bs-danger);
+		margin-left: 5px;
+		cursor: help;
+	}
+
+	.CodeMirror-lint-markers {
+		width: 16px;
+	}
+
+	.CodeMirror-lint-marker-error {
+		color: var(--bs-danger);
+	}
+
+	.tree-node {
+		padding: 4px 0;
+	}
+
+	.node-key {
+		color: var(--bs-primary);
+		font-weight: 500;
+	}
+
+	.node-content {
+		border-left: 2px solid var(--bs-border-color);
+		margin-left: 10px;
+		padding-left: 15px;
+		margin-top: 4px;
+	}
+
+	.badge {
+		font-size: 0.75rem;
+		font-weight: normal;
+	}
+
+	.comparison-results {
+		max-height: 70vh;
+		overflow-y: auto;
+		padding: 1rem;
+	}
+
+	.comparison-scroll {
+		max-height: 100%;
+	}
+
+	.diff-section {
+		margin-bottom: 2rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid var(--bs-border-color);
+	}
+
+	.diff-section:last-child {
+		border-bottom: none;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	.diff-item {
+		background: var(--bs-body-bg);
+		border-radius: 0.375rem;
+		overflow: hidden;
+	}
+
+	.path {
+		font-weight: 500;
+		color: var(--bs-primary);
+		margin-bottom: 0.5rem;
+	}
+
+	.diff-value {
+		display: block;
+		padding: 0.75rem;
+		background: var(--bs-dark);
+		border-radius: 0.375rem;
+		white-space: pre;
+		overflow-x: auto;
+	}
+
+	.diff-changes {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.old-value,
+	.new-value {
+		flex: 1;
+	}
+
+	code {
+		max-width: 100%;
+		font-size: 0.875rem;
+	}
+    </style>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li><a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                      <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                    </a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                      <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                    </a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                      <span class="align-middle"><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span>
+                    </a></li>
+                  </ul>
+                </li>
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+          </nav>
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+			  <div class="row mb-4">
+				  <div class="col-12">
+					<div class="card  border-0">
+					  <div class="card-body d-flex align-items-center p-4">
+						<div class="avatar avatar-lg rounded me-3">
+						  <i class="ti ti-file-code fs-2"></i>
+						</div>
+						<div>
+						  <h4 class="card-title mb-0">JSON Validator</h4>
+						  <p class="card-text mb-0 text-muted">Validate your JSON files with ease and code tools.</p>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+				  <div class="row mb-6">
+					<!-- Main Editor Card -->
+					<div class="col-xl-8 col-lg-7">
+					  <div class="card mb-4">
+						<div class="card-header d-flex justify-content-between align-items-center">
+						  <h5 class="card-title mb-0">JSON Editor</h5>
+						  <div class="card-actions">
+							<div class="btn-group">
+							  <button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" type="button" data-bs-toggle="dropdown">
+								<i class="ti ti-dots-vertical"></i>
+							  </button>
+							  <ul class="dropdown-menu dropdown-menu-end">
+								<li><a class="dropdown-item" href="javascript:void(0);" id="formatJson"><i class="ti ti-separator-horizontal me-2"></i>Format JSON</a></li>
+								<li><a class="dropdown-item" href="javascript:void(0);" id="minifyJson"><i class="ti ti-separator me-2"></i>Minify JSON</a></li>
+								<li><a class="dropdown-item" href="javascript:void(0);" id="clearEditor"><i class="ti ti-eraser me-2"></i>Clear Editor</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="javascript:void(0);" id="downloadJson"><i class="ti ti-download me-2"></i>Download JSON</a></li>
+							  </ul>
+							</div>
+						  </div>
+						</div>
+						<div class="card-body">
+							<div id="jsonValidationResult"></div>
+							
+							<!-- Prevent form from submitting on reload -->
+							<form id="jsonValidatorForm" action="#" method="post" enctype="multipart/form-data" onsubmit="return false;">
+
+								<div class="editor-container mb-3" id="dropZone">
+									<textarea id="code_json"></textarea>
+									<div class="upload-overlay d-none"></div>
+								</div>
+
+								<div class="row g-3 mb-3">
+									<div class="col-sm-6">
+										<label for="jsonFile" class="form-label">Upload JSON File</label>
+										<input class="form-control" type="file" id="jsonFile" accept=".json">
+									</div>
+								</div>
+
+								<div class="row g-3">
+									<div class="col">
+										<div class="d-flex gap-2">
+											<button type="submit" class="btn btn-primary waves-effect">
+												<i class="ti ti-check me-1"></i> Validate JSON
+											</button>
+											<button type="button" id="copyButton" class="btn btn-secondary waves-effect">
+												<i class="ti ti-copy me-1"></i> Copy to Clipboard
+											</button>
+											<div class="dropdown">
+												<button type="button" class="btn btn-outline-primary dropdown-toggle waves-effect" data-bs-toggle="dropdown">
+													<i class="ti ti-tool me-1"></i> Tools
+												</button>
+												<ul class="dropdown-menu">
+													<li><a class="dropdown-item" href="javascript:void(0);" id="compareJson">Compare with Another JSON</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					  </div>
+					</div>
+
+					<!-- Analysis Panel -->
+					<div class="col-xl-4 col-lg-5">
+					  <div class="row">
+						<!-- Statistics Card -->
+						<div class="col-12">
+						  <div class="card mb-4">
+							<div class="card-header">
+							  <h5 class="card-title mb-0">JSON Statistics</h5>
+							</div>
+							<div class="card-body">
+							  <div class="stats-container">
+								<div class="row g-3">
+								  <div class="col-sm-6">
+									<div class="d-flex align-items-center gap-2 mb-3">
+									  <div class="badge bg-label-primary rounded p-2">
+										<i class="ti ti-json ti-sm"></i>
+									  </div>
+									  <div>
+										<h6 class="mb-0" id="statFileSize">0 KB</h6>
+										<small>File Size</small>
+									  </div>
+									</div>
+								  </div>
+								  <div class="col-sm-6">
+									<div class="d-flex align-items-center gap-2 mb-3">
+									  <div class="badge bg-label-success rounded p-2">
+										<i class="ti ti-brackets ti-sm"></i>
+									  </div>
+									  <div>
+										<h6 class="mb-0" id="statDepth">0</h6>
+										<small>Nesting Depth</small>
+									  </div>
+									</div>
+								  </div>
+								  <div class="col-sm-6">
+									<div class="d-flex align-items-center gap-2">
+									  <div class="badge bg-label-info rounded p-2">
+										<i class="ti ti-key ti-sm"></i>
+									  </div>
+									  <div>
+										<h6 class="mb-0" id="statKeys">0</h6>
+										<small>Total Keys</small>
+									  </div>
+									</div>
+								  </div>
+								  <div class="col-sm-6">
+									<div class="d-flex align-items-center gap-2">
+									  <div class="badge bg-label-warning rounded p-2">
+										<i class="ti ti-stack ti-sm"></i>
+									  </div>
+									  <div>
+										<h6 class="mb-0" id="statComplexity">0%</h6>
+										<small>Complexity Score</small>
+									  </div>
+									</div>
+								  </div>
+								</div>
+							  </div>
+							</div>
+						  </div>
+						</div>
+
+						<!-- Structure Analysis -->
+
+						<!-- Data Types -->
+						<div class="col-12">
+						  <div class="card">
+							<div class="card-header">
+							  <h5 class="card-title mb-0">Data Types</h5>
+							</div>
+							<div class="card-body">
+							  <div id="typeChart">
+								<!-- Chart will be populated by JS -->
+							  </div>
+							  <div id="typeList" class="mt-3">
+								<!-- Type list will be populated by JS -->
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+
+				  <!-- Modals -->
+				  <div class="modal fade" id="compareModal" tabindex="-1">
+					  <div class="modal-dialog modal-lg">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h5 class="modal-title">Compare JSON</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						  </div>
+						  <div class="modal-body">
+							<div class="alert alert-info">
+							  <div class="alert-body">
+								Compare your current JSON with another JSON to find differences.
+							  </div>
+							</div>
+							<div class="mb-3">
+							  <label class="form-label">Second JSON Content</label>
+							  <div id="compareEditor"></div>
+							</div>
+							<div class="mb-3">
+							  <label class="form-label">Or upload JSON file</label>
+							  <input type="file" class="form-control" id="compareJsonFile" accept=".json">
+							</div>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="runCompare">Compare</button>
+						  </div>
+						</div>
+					  </div>
+					</div>
+
+					<!-- Schema Validation Modal -->
+					<div class="modal fade" id="schemaModal" tabindex="-1">
+					  <div class="modal-dialog modal-lg">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h5 class="modal-title">Validate Against Schema</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						  </div>
+						  <div class="modal-body">
+							<div class="alert alert-info">
+							  <div class="alert-body">
+								Validate your JSON against a schema to ensure it matches the expected structure.
+							  </div>
+							</div>
+							<div class="mb-3">
+							  <label class="form-label">JSON Schema</label>
+							  <div id="schemaEditor"></div>
+							</div>
+							<div class="mb-3">
+							  <label class="form-label">Or upload schema file</label>
+							  <input type="file" class="form-control" id="schemaFile" accept=".json">
+							</div>
+							<div class="mb-3">
+							  <label class="form-label">Or select a predefined schema</label>
+							  <select class="form-select" id="predefinedSchema">
+								<option value="">Select a schema...</option>
+								<option value="types">DayZ Types Schema</option>
+								<option value="traders">DayZ Traders Schema</option>
+								<option value="spawns">DayZ Spawns Schema</option>
+							  </select>
+							</div>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="runValidation">Validate</button>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				</div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+
+      <!-- Support Button -->
+      		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+	
+	<!-- Core CodeMirror -->
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+
+	<!-- Modes -->
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/json.min.html"></script>
+
+	<!-- Addons -->
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/json-lint.js"></script> 
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
+
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="../../assets/js/tour/tour-json5e1f.js?v=2"></script>
+	
+	<script>
+	
+	document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM fully loaded. Initializing JSON Editor...");
+
+    // Ensure JSONLint is available before using it
+    if (typeof jsonlint !== "undefined") {
+        window.jsonlint = jsonlint;
+    } else {
+        console.error("JSONLint is missing! JSON linting may not work.");
+    }
+
+    if (typeof CodeMirror === "undefined") {
+        console.error("CodeMirror is not loaded! The editor will not function properly.");
+        return;
+    }
+
+    const jsonTextArea = document.getElementById("code_json");
+
+    if (jsonTextArea) {
+        if (!jsonTextArea.value || jsonTextArea.value.trim() === "") {
+			jsonTextArea.value = `
+{
+	"Objects": []
+}`;
+		}
+
+
+        console.log("Initializing CodeMirror for #code_json...");
+        window.editor = CodeMirror.fromTextArea(document.getElementById("code_json"), {
+			mode: { name: "javascript", json: true },
+			theme: "darcula",
+			lineNumbers: true,
+			matchBrackets: true,
+			autoCloseBrackets: true,
+			lint: true,
+			gutters: ["CodeMirror-lint-markers"],
+			viewportMargin: Infinity,
+			lineWrapping: true
+		});
+    } else {
+        console.error("Textarea #code_json not found!");
+    }
+	
+	editor.on("lint", (annotationsNotSorted, annotations, severity) => {
+		if (annotations.length > 0) {
+			const firstError = annotations[0];
+			const errorLine = firstError.from.line + 1;
+			
+			const errorHtml = `
+				<div class="text-start">
+					<p><strong>${firstError.message}</strong></p>
+					<p class="text-danger">Error on line ${errorLine}</p>
+					<p class="text-muted">Line content: <code>${editor.getLine(firstError.from.line)?.trim() || ''}</code></p>
+				</div>
+			`;
+
+			// Only show alert if it's a new error
+			if (!window.lastLintError || 
+				window.lastLintError.line !== errorLine || 
+				window.lastLintError.message !== firstError.message) {
+				
+				window.lastLintError = {
+					line: errorLine,
+					message: firstError.message
+				};
+
+				Swal.fire({
+					icon: 'error',
+					title: 'Invalid JSON',
+					html: errorHtml,
+					width: '600px'
+				});
+			}
+		}
+	});
+
+    // Get the textarea element for the JSON compare editor
+    const compareTextArea = document.getElementById("compareEditor");
+    if (compareTextArea) {
+        if (!compareTextArea.value || compareTextArea.value.trim() === "") {
+            compareTextArea.value = "{}"; // Prevents undefined issue
+        }
+
+        console.log("Initializing CodeMirror for #compareEditor...");
+        window.compareEditor = CodeMirror.fromTextArea(compareTextArea, {
+            mode: { name: "javascript", json: true },
+            theme: "darcula",
+            lineNumbers: true,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            lint: true,
+            gutters: ["CodeMirror-lint-markers"]
+        });
+    } else {
+        console.warn("Textarea #compareEditor not found. Comparison tool will not be available.");
+    }
+    // JSON Validation Form Submission
+    document.getElementById('jsonValidatorForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const jsonInput = editor.getValue().trim();
+    if (!jsonInput) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Empty Input',
+            text: 'Please enter JSON content to validate'
+        });
+        return;
+    }
+
+    // Get current lint markers from CodeMirror
+    const lintMarks = editor.getAllMarks().filter(mark => 
+        mark.className && mark.className.includes('CodeMirror-lint-mark')
+    );
+
+    // If there are lint errors, show the first one
+    if (lintMarks.length > 0) {
+        const firstMark = lintMarks[0];
+        const pos = firstMark.find();
+        const errorLine = pos.from.line + 1;
+        
+        // Get lint state information
+        const state = editor.getStateAfter(pos.from.line);
+        const lintInfo = state.lint && state.lint.errors ? state.lint.errors[0] : null;
+        
+        let errorMessage = 'JSON Syntax Error';
+        let errorDetail = 'Check syntax at the indicated position';
+        
+        if (lintInfo) {
+            errorMessage = lintInfo.message;
+            // Extract more specific details if available
+            if (lintInfo.type) errorDetail = lintInfo.type;
+        }
+
+        const errorHtml = `
+            <div class="text-start">
+                <p><strong>${errorMessage}</strong></p>
+                <p class="text-danger">Error on line ${errorLine}</p>
+                <p class="text-muted">Line content: <code>${editor.getLine(pos.from.line)?.trim() || ''}</code></p>
+                <hr>
+                <p class="text-muted">${errorDetail}</p>
+            </div>
+        `;
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid JSON',
+            html: errorHtml,
+            width: '600px'
+        });
+
+        // Scroll to the error
+        editor.scrollIntoView({
+            line: pos.from.line,
+            ch: pos.from.ch
+        }, 200);
+
+        return;
+    }
+
+    // If no lint errors, proceed with server validation
+    try {
+        const response = await fetch('engine/jsonvalidator.json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ jsonInput })
+        });
+        
+        const data = await response.json();
+        
+        if (data.valid) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Valid JSON',
+                text: 'Your JSON is valid and properly formatted!'
+            });
+            
+            editor.setValue(data.formatted);
+            updateStats(data.stats);
+            updateTypeChart(data.types);
+        }
+    } catch (err) {
+        console.error('Validation error:', err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Failed',
+            text: 'An error occurred while validating the JSON: ' + err.message
+        });
+    }
+});
+
+// Stats Update Functions
+function updateStats(stats) {
+    if (!stats) return;
+
+    try {
+        document.getElementById('statFileSize').textContent = formatFileSize(stats.fileSize || 0);
+        document.getElementById('statDepth').textContent = stats.depth || 0;
+        document.getElementById('statKeys').textContent = stats.totalKeys || 0;
+        document.getElementById('statComplexity').textContent = `${stats.complexity || 0}%`;
+    } catch (err) {
+        console.error('Error updating stats:', err);
+    }
+}
+
+function formatFileSize(bytes) {
+    if (!bytes || bytes === 0) return '0 B';
+    
+    const units = ['B', 'KB', 'MB', 'GB'];
+    let size = bytes;
+    let unitIndex = 0;
+
+    while (size >= 1024 && unitIndex < units.length - 1) {
+        size /= 1024;
+        unitIndex++;
+    }
+
+    return `${size.toFixed(1)} ${units[unitIndex]}`;
+}
+
+function updateTypeChart(types) {
+    if (!types) return;
+
+    const typeList = document.getElementById('typeList');
+    if (!typeList) return;
+
+    typeList.innerHTML = '';
+    
+    Object.entries(types).forEach(([type, count]) => {
+        typeList.innerHTML += `
+            <div class="d-flex justify-content-between mb-2">
+                <span>${type}</span>
+                <span class="badge bg-primary">${count}</span>
+            </div>
+        `;
+    });
+}
+
+
+
+    // Compare JSON handler
+    document.getElementById('compareJson')?.addEventListener('click', () => {
+		// Reset any previous content
+		compareEditor.setValue('');
+		
+		// Show modal without ARIA conflicts
+		const modal = new bootstrap.Modal(document.getElementById('compareModal'));
+		modal.show();
+	});
+
+    document.getElementById('runCompare')?.addEventListener('click', async () => {
+    const json1 = editor.getValue().trim();
+    const json2 = compareEditor.getValue().trim();
+
+    // Validate both JSONs first
+    try {
+        JSON.parse(json1);
+        JSON.parse(json2);
+    } catch (e) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid JSON',
+            text: 'Please ensure both JSONs are valid before comparing'
+        });
+        return;
+    }
+
+    try {
+        bootstrap.Modal.getInstance(document.getElementById('compareModal')).hide();
+
+        const response = await fetch('engine/jsonvalidator.json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                jsonInput: json1,
+                compareWith: json2 
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.comparison) {
+            const diffHtml = `
+                <div class="comparison-results">
+                    <div class="comparison-scroll">
+                        ${Object.keys(data.comparison.added).length ? `
+                            <div class="diff-section">
+                                <h6 class="text-success fw-bold mb-2">Added Properties</h6>
+                                <div class="diff-content">
+                                    ${Object.entries(data.comparison.added).map(([path, value]) => `
+                                        <div class="diff-item mb-2">
+                                            <div class="path">${path}</div>
+                                            <code class="diff-value text-success">${JSON.stringify(value, null, 2)}</code>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        ${Object.keys(data.comparison.removed).length ? `
+                            <div class="diff-section">
+                                <h6 class="text-danger fw-bold mb-2">Removed Properties</h6>
+                                <div class="diff-content">
+                                    ${Object.entries(data.comparison.removed).map(([path, value]) => `
+                                        <div class="diff-item mb-2">
+                                            <div class="path">${path}</div>
+                                            <code class="diff-value text-danger">${JSON.stringify(value, null, 2)}</code>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        ${Object.keys(data.comparison.modified).length ? `
+                            <div class="diff-section">
+                                <h6 class="text-warning fw-bold mb-2">Modified Properties</h6>
+                                <div class="diff-content">
+                                    ${Object.entries(data.comparison.modified).map(([path, values]) => `
+                                        <div class="diff-item mb-3">
+                                            <div class="path mb-1">${path}</div>
+                                            <div class="diff-changes d-flex gap-3">
+                                                <div class="old-value flex-grow-1">
+                                                    <small class="text-muted d-block mb-1">Original:</small>
+                                                    <code class="diff-value text-danger">${JSON.stringify(values.old, null, 2)}</code>
+                                                </div>
+                                                <div class="new-value flex-grow-1">
+                                                    <small class="text-muted d-block mb-1">Modified:</small>
+                                                    <code class="diff-value text-success">${JSON.stringify(values.new, null, 2)}</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+
+            Swal.fire({
+                title: 'Comparison Results',
+                html: diffHtml || '<p>No differences found</p>',
+                width: '900px',
+                customClass: {
+                    popup: 'comparison-popup'
+                },
+                showConfirmButton: true,
+                confirmButtonText: 'Close',
+                heightAuto: false
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Comparison Failed',
+                text: data.error || 'Failed to compare JSON files'
+            });
+        }
+    } catch (err) {
+        console.error("Comparison failed:", err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to compare JSON: ' + err.message
+        });
+    }
+});
+
+    // File Upload Handling
+    document.getElementById('jsonFile')?.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => editor.setValue(e.target.result);
+            reader.readAsText(file);
+        }
+    });
+
+    document.getElementById('compareJsonFile')?.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => compareEditor.setValue(e.target.result);
+            reader.readAsText(file);
+        }
+    });
+
+    // Additional Utility Functions
+    document.getElementById('copyButton')?.addEventListener('click', () => {
+		try {
+			// Parse and re-stringify the JSON to ensure proper formatting
+			const jsonData = JSON.parse(editor.getValue());
+			const formattedJson = JSON.stringify(jsonData, null, 2);
+			
+			navigator.clipboard.writeText(formattedJson).then(() => {
+				Swal.fire({
+					icon: 'success',
+					title: 'Copied!',
+					text: 'JSON copied to clipboard',
+					timer: 1500,
+					showConfirmButton: false
+				});
+			});
+		} catch (e) {
+			Swal.fire({
+				icon: 'error',
+				title: 'Copy Failed',
+				text: 'Invalid JSON: ' + e.message
+			});
+		}
+	});
+
+    document.getElementById('clearEditor')?.addEventListener('click', () => {
+        Swal.fire({
+            title: 'Clear Editor?',
+            text: 'This will remove all content from the editor',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, clear it'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                editor.setValue('');
+            }
+        });
+    });
+
+    document.getElementById('formatJson')?.addEventListener('click', () => {
+        try {
+            const value = editor.getValue();
+            const formatted = JSON.stringify(JSON.parse(value), null, 2);
+            editor.setValue(formatted);
+        } catch (e) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Format Failed',
+                text: e.message
+            });
+        }
+    });
+
+    document.getElementById('minifyJson')?.addEventListener('click', () => {
+    try {
+        const value = editor.getValue();
+        
+        // Parse the JSON first to validate it
+        let jsonData = JSON.parse(value);
+
+        Swal.fire({
+            title: 'Minify Options',
+            html: `
+                <div class="text-start" style="color: #333;">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="singleLine" checked>
+                        <label class="form-check-label" for="singleLine" style="color: #333;">
+                            Single line (most compact)
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="removeSpaces" checked>
+                        <label class="form-check-label" for="removeSpaces" style="color: #333;">
+                            Remove all whitespace
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="shortenNumbers">
+                        <label class="form-check-label" for="shortenNumbers" style="color: #333;">
+                            Shorten numbers (remove trailing zeros)
+                        </label>
+                    </div>
+                </div>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'Minify',
+            cancelButtonText: 'Cancel',
+            customClass: {
+                container: 'minify-options-modal'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const singleLine = document.getElementById('singleLine').checked;
+                const removeSpaces = document.getElementById('removeSpaces').checked;
+                const shortenNumbers = document.getElementById('shortenNumbers').checked;
+                
+                // Process numbers if needed
+                if (shortenNumbers) {
+                    const shortenNumbersInJson = (obj) => {
+                        if (typeof obj === 'number') {
+                            return Number(obj.toString());
+                        }
+                        if (Array.isArray(obj)) {
+                            return obj.map(shortenNumbersInJson);
+                        }
+                        if (typeof obj === 'object' && obj !== null) {
+                            const result = {};
+                            for (const key in obj) {
+                                result[key] = shortenNumbersInJson(obj[key]);
+                            }
+                            return result;
+                        }
+                        return obj;
+                    };
+                    jsonData = shortenNumbersInJson(jsonData);
+                }
+                
+                // Always use JSON.stringify directly - never manipulate the string afterward
+                // This ensures proper JSON structure is maintained
+                let minified = JSON.stringify(jsonData);
+                
+                // Only format it if not single line
+                if (!singleLine && !removeSpaces) {
+                    minified = JSON.stringify(jsonData, null, 1);
+                }
+                
+                editor.setValue(minified);
+                
+                // Calculate size reduction
+                const originalSize = value.length;
+                const minifiedSize = minified.length;
+                const reduction = ((originalSize - minifiedSize) / originalSize * 100).toFixed(1);
+
+                // Update statistics
+                const stats = {
+                    fileSize: minifiedSize,
+                    depth: calculateDepth(jsonData),
+                    totalKeys: countKeys(jsonData),
+                    complexity: calculateComplexity(jsonData)
+                };
+
+                // Update type count
+                const types = countTypes(jsonData);
+                
+                // Update UI
+                updateStats(stats);
+                updateTypeChart(types);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'JSON Minified',
+                    html: `
+                        <div class="text-start">
+                            <p>Original size: ${formatBytes(originalSize)}</p>
+                            <p>Minified size: ${formatBytes(minifiedSize)}</p>
+                            <p>Reduction: ${reduction}%</p>
+                        </div>
+                    `,
+                    timer: 10000,
+                    timerProgressBar: true
+                });
+            }
+        });
+    } catch (e) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Minify Failed',
+            text: e.message
+        });
+    }
+});
+
+// Helper functions for stats calculation
+function calculateDepth(obj, currentDepth = 0) {
+    if (!obj || typeof obj !== 'object') return currentDepth;
+    return 1 + Math.max(0, ...Object.values(obj).map(v => calculateDepth(v, currentDepth)));
+}
+
+function countKeys(obj) {
+    if (!obj || typeof obj !== 'object') return 0;
+    return Object.keys(obj).length + Object.values(obj).reduce((acc, val) => 
+        acc + (typeof val === 'object' ? countKeys(val) : 0), 0);
+}
+
+function calculateComplexity(obj) {
+    const depth = calculateDepth(obj);
+    const keys = countKeys(obj);
+    const nestedArrays = countNestedArrays(obj);
+    
+    const factors = {
+        depth: depth * 10,
+        keys: keys * 5,
+        nestedArrays: nestedArrays * 15
+    };
+    
+    return Math.min(100, Math.round(Object.values(factors).reduce((a, b) => a + b, 0)));
+}
+
+function countNestedArrays(obj) {
+    if (!obj) return 0;
+    if (Array.isArray(obj)) {
+        return 1 + obj.reduce((acc, val) => acc + countNestedArrays(val), 0);
+    }
+    if (typeof obj === 'object') {
+        return Object.values(obj).reduce((acc, val) => acc + countNestedArrays(val), 0);
+    }
+    return 0;
+}
+
+function countTypes(obj) {
+    const types = {};
+    
+    function count(value) {
+        const type = Array.isArray(value) ? 'array' : typeof value;
+        types[type] = (types[type] || 0) + 1;
+        
+        if (type === 'object' && value !== null) {
+            Object.values(value).forEach(count);
+        } else if (type === 'array') {
+            value.forEach(count);
+        }
+    }
+    
+    count(obj);
+    return types;
+}
+
+	function formatBytes(bytes, decimals = 2) {
+		if (bytes === 0) return '0 Bytes';
+
+		const k = 1024;
+		const dm = decimals < 0 ? 0 : decimals;
+		const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+
+		const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+		return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+	}
+	
+	document.getElementById('downloadJson')?.addEventListener('click', () => {
+    try {
+        const currentValue = editor.getValue();
+        // Validate JSON first
+        JSON.parse(currentValue);
+        
+        Swal.fire({
+            title: 'Download Options',
+            html: `
+                <div class="text-start">
+                    <div class="mb-3">
+                        <label for="fileName" class="form-label">File Name</label>
+                        <input type="text" class="form-control" id="fileName" value="download.json">
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="keepCurrentFormat" checked>
+                        <label class="form-check-label" for="keepCurrentFormat">
+                            Keep current format
+                        </label>
+                    </div>
+                    <div class="form-check mb-2" id="prettyPrintOption" style="display: none;">
+                        <input class="form-check-input" type="checkbox" id="prettyPrint">
+                        <label class="form-check-label" for="prettyPrint">
+                            Pretty print (formatted)
+                        </label>
+                    </div>
+                </div>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'Download',
+            cancelButtonText: 'Cancel',
+            focusConfirm: false,
+            didOpen: () => {
+                // Toggle pretty print option visibility
+                const keepCurrentFormat = document.getElementById('keepCurrentFormat');
+                const prettyPrintOption = document.getElementById('prettyPrintOption');
+                
+                keepCurrentFormat.addEventListener('change', (e) => {
+                    prettyPrintOption.style.display = e.target.checked ? 'none' : 'block';
+                });
+            },
+            preConfirm: () => {
+                const fileName = document.getElementById('fileName').value;
+                const keepCurrentFormat = document.getElementById('keepCurrentFormat').checked;
+                const prettyPrint = document.getElementById('prettyPrint')?.checked;
+                
+                if (!fileName) {
+                    Swal.showValidationMessage('File name is required');
+                    return false;
+                }
+                
+                return { fileName, keepCurrentFormat, prettyPrint };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { fileName, keepCurrentFormat, prettyPrint } = result.value;
+                let content;
+                
+                if (keepCurrentFormat) {
+                    // Use the current editor content as-is
+                    content = currentValue;
+                } else {
+                    // Format based on user selection
+                    const jsonData = JSON.parse(currentValue);
+                    content = prettyPrint ? 
+                        JSON.stringify(jsonData, null, 2) : 
+                        JSON.stringify(jsonData);
+                }
+                
+                const blob = new Blob([content], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName.endsWith('.json') ? fileName : `${fileName}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Download Started',
+                    text: `Your JSON file is being downloaded as "${a.download}"`,
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }
+        });
+    } catch (e) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Download Failed',
+            text: `Invalid JSON: ${e.message}`
+        });
+    }
+});
+});
+
+	
+	</script>
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/jsonvalidator by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:52 GMT -->
+</html>

@@ -1,0 +1,1130 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+
+<html
+  lang="en"
+  class="layout-navbar-fixed layout-compact dark-style layout-menu-fixed layout-menu-collapsed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/typesorganise by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Types Organiser &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Organize and categorize your DayZ types.xml file effortlessly. Upload, process, and download an optimized version with structured categories and comments." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+
+    <link rel="stylesheet" href="../../../cdn.jsdelivr.net/npm/sweetalert2%4011/dist/sweetalert2.min.css">
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+
+        .timeline {
+            position: relative;
+            padding: 1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-point {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timeline-point i {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .timeline-point-primary {
+            background-color: rgba(var(--bs-primary-rgb), 0.2);
+        }
+
+        .timeline-point-success {
+            background-color: rgba(var(--bs-success-rgb), 0.2);
+        }
+
+        .timeline-point-info {
+            background-color: rgba(var(--bs-info-rgb), 0.2);
+        }
+
+        .timeline-event {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .timeline-event:after {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 2rem;
+            bottom: -1rem;
+            width: 2px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .timeline-item:last-child .timeline-event:after {
+            display: none;
+        }
+
+        .timeline-header {
+            color: var(--bs-primary);
+        }
+
+        .timeline-body {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.875rem;
+        }
+
+        .category-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .category-items {
+            max-height: 200px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.2) rgba(0,0,0,0.2);
+        }
+
+        .category-items::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .category-items::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+        }
+
+        .category-items::-webkit-scrollbar-thumb {
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 3px;
+        }
+
+        .upload-zone {
+            border: 2px dashed rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #2b2c40 0%, #373752 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-zone.border-primary {
+            border-color: var(--bs-primary);
+            background: rgba(var(--bs-primary-rgb), 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .upload-zone:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+		
+		
+	  
+	</style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>		
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <div class="content-wrapper">
+            <div class="container-xxl flex-grow-1 container-p-y">
+						
+                <!-- Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card border-0">
+                            <div class="card-body d-flex align-items-center p-4">
+                                <div class="avatar avatar-lg rounded me-3">
+                                    <i class="ti ti-file-code fs-2"></i>
+                                </div>
+                                <div>
+                                    <h4 class="card-title mb-0">Types Organiser</h4>
+                                    <p class="card-text mb-0 text-muted">Organize and categorize your DayZ types.xml file</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="row">
+                    <!-- Upload Section -->
+                    <div class="col-12 col-xl-8 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Upload your types.xml</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="typesOrganiserForm" method="POST" enctype="multipart/form-data">
+                                    <!-- Upload Zone -->
+                                    <div class="upload-zone p-4 border-2 border-dashed rounded-3 text-center mb-4">
+                                        <input type="file" class="form-control opacity-0 position-absolute" id="typesFile" name="typesFile" accept=".xml" required>
+                                        <div id="uploadPrompt">
+                                            <label for="typesFile" class="cursor-pointer mb-0">
+                                                <i class="ti ti-file-upload fs-2"></i>
+                                                <p class="mt-2">Drop your types.xml here or click to browse</p>
+                                                <p class="text-muted small">Only types.xml files are accepted</p>
+                                            </label>
+                                        </div>
+                                        <div id="fileInfo" class="d-none">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <i class="ti ti-file-check fs-2 me-2 text-success"></i>
+                                                <span id="fileName" class="text-truncate"></span>
+                                                <button type="button" class="btn btn-icon btn-sm btn-text-secondary ms-2" id="removeFile">
+                                                    <i class="ti ti-x"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Organization Options -->
+                                    <div class="mb-4">
+                                        <h6 class="mb-3">Organization Options</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="addComments" name="addComments" checked>
+                                                    <label class="form-check-label" for="addComments">Add category comments</label>
+													<small class="d-block text-muted">Show or hide the comments in the output types.</small>
+                                                </div>
+                                            </div>
+											<div class="col-md-6">
+												<div class="form-check form-switch">
+													<input class="form-check-input" type="checkbox" id="fixScientist" name="fixScientist" checked>
+													<label class="form-check-label" for="fixScientist">Fix Frozen Scientist spelling?</label>
+													<small class="d-block text-muted">Changes Static_FrozenScientist_DE to StaticObj_FrozenScientist_DE</small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-check form-switch">
+													<input class="form-check-input" type="checkbox" id="fixVanillaErrors" name="fixVanillaErrors" checked>
+													<label class="form-check-label" for="fixVanillaErrors">Fix vanilla type errors</label>
+													<small class="d-block text-muted">Fixes errors and removes duplicates in types.xml</small>
+												</div>
+											</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-primary" id="organiseBtn" disabled>
+                                            <i class="ti ti-wand me-2"></i>Organize File
+                                        </button>
+                                    </div>
+                                </form>
+								
+								<div id="resultsSection" class="mt-4 d-none">
+									<div class="card">
+										<div class="card-header d-flex justify-content-between align-items-center">
+											<h5 class="mb-0">Processing Results</h5>
+											<button type="button" class="btn btn-primary" id="downloadBtn">
+												<i class="ti ti-download me-2"></i>Download File
+											</button>
+										</div>
+										<div class="card-body">
+											<textarea id="resultsLog" class="form-control text-white" style="height: 300px; font-family: monospace;" readonly></textarea>
+										</div>
+									</div>
+								</div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info Panel -->
+                    <div class="col-12 col-xl-4">
+
+                        <!-- Quick Actions -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="avatar avatar-sm me-3 bg-opacity-10">
+                                        <i class="ti ti-bulb text-warning"></i>
+                                    </div>
+                                    <h6 class="mb-0">Quick Tips</h6>
+                                </div>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-3 d-flex">
+                                        <i class="ti ti-check text-success me-2"></i>
+                                        <span>Your file will be automatically organized into categories</span>
+                                    </li>
+                                    <li class="mb-3 d-flex">
+                                        <i class="ti ti-check text-success me-2"></i>
+                                        <span>Categories are added as XML comments for easy reference, turn this option off to remove all comments from your file</span>
+                                    </li>
+									<li class="mb-3 d-flex">
+										<i class="ti ti-check text-success me-2"></i>
+										<span>Item names are matched regardless of case (e.g., "M14" will match "m14")</span>
+									</li>
+                                </ul>
+								<small>Shoutout to SHOTSX3 to this tool idea</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>            <div class="content-backdrop fade"></div>
+        </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+
+    <script>
+	// Define global function for showing fix details
+function showFixDetails(fixName, items) {
+    Swal.fire({
+        title: `${fixName} Details`,
+        html: `
+            <div class="text-start">
+                <p>The following items were fixed:</p>
+                <div class="alert alert-success" style="max-height: 200px; overflow-y: auto;">
+                    <ul class="mb-0">
+                        ${items.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+        `,
+        confirmButtonText: 'Close'
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Elements
+    const dropZone = document.querySelector('.upload-zone');
+    const fileInput = document.getElementById('typesFile');
+    const uploadPrompt = document.getElementById('uploadPrompt');
+    const fileInfo = document.getElementById('fileInfo');
+    const fileName = document.getElementById('fileName');
+    const removeFile = document.getElementById('removeFile');
+    const organiseBtn = document.getElementById('organiseBtn');
+    const typesOrganiserForm = document.getElementById('typesOrganiserForm');
+    const resultsSection = document.getElementById('resultsSection');
+    const resultsLog = document.getElementById('resultsLog');
+
+    // File handling functions
+    function updateFileDisplay() {
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            
+            if (file.name !== 'types.html') {
+                Swal.fire({
+                    title: 'Invalid File',
+                    text: 'Please upload a file named "types.xml"',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                fileInput.value = '';
+                return;
+            }
+
+            fileName.textContent = file.name;
+            uploadPrompt.classList.add('d-none');
+            fileInfo.classList.remove('d-none');
+            organiseBtn.disabled = false;
+            validateXMLFile(file);
+        } else {
+            uploadPrompt.classList.remove('d-none');
+            fileInfo.classList.add('d-none');
+            organiseBtn.disabled = true;
+        }
+    }
+
+    // Validate XML file structure
+    async function validateXMLFile(file) {
+        try {
+            const content = await readFile(file);
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(content, "text/xml");
+
+            if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
+                throw new Error("Invalid XML structure");
+            }
+
+            const typesElement = xmlDoc.getElementsByTagName('types')[0];
+            if (!typesElement) {
+                throw new Error("Missing root <types> element");
+            }
+
+            const typeElements = xmlDoc.getElementsByTagName('type');
+            if (typeElements.length === 0) {
+                throw new Error("No <type> elements found");
+            }
+
+        } catch (error) {
+            Swal.fire({
+                title: 'Invalid File Structure',
+                html: `
+                    <div class="text-start">
+                        <p>The file appears to be invalid:</p>
+                        <div class="alert alert-danger">
+                            ${error.message}
+                        </div>
+                        <p class="small text-muted mb-0">Please ensure your file:</p>
+                        <ul class="small text-muted">
+                            <li>Is a valid XML file</li>
+                            <li>Contains the correct DayZ types structure</li>
+                            <li>Is not corrupted</li>
+                        </ul>
+                    </div>
+                `,
+                icon: 'error'
+            });
+            resetForm();
+        }
+    }
+
+    // Helper function to read file contents
+    function readFile(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = e => resolve(e.target.result);
+            reader.onerror = e => reject(e);
+            reader.readAsText(file);
+        });
+    }
+
+    // Reset form state
+    function resetForm() {
+        fileInput.value = '';
+        uploadPrompt.classList.remove('d-none');
+        fileInfo.classList.add('d-none');
+        organiseBtn.disabled = true;
+    }
+
+    // Form submission handler
+    typesOrganiserForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const addComments = document.getElementById('addComments').checked;
+        const fixScientist = document.getElementById('fixScientist').checked;
+        const fixVanillaErrors = document.getElementById('fixVanillaErrors').checked;
+        formData.append('addComments', addComments);
+        formData.append('fixScientist', fixScientist.toString());
+        formData.append('fixVanillaErrors', fixVanillaErrors.toString());
+
+        // Show processing state
+        const loadingModal = Swal.fire({
+            title: 'Processing File',
+            html: `
+                <div class="text-center">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="visually-hidden">Organizing...</span>
+                    </div>
+                    <p class="mb-0">Organizing your types.xml file...</p>
+                </div>
+            `,
+            showConfirmButton: false,
+            allowOutsideClick: false
+        });
+
+        try {        
+            const response = await fetch('config/processOrganizer.json', {
+                method: 'POST',
+                body: formData
+            });
+
+            console.log('Response status:', response.status);
+
+            if (!response.ok) {
+                console.error('Server response:', response.statusText);
+                throw new Error(`Server error: ${response.status} - ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            
+            // Create download URL from the file content
+            const blob = new Blob([result.fileContent], { type: 'application/xml' });
+            const url = window.URL.createObjectURL(blob);
+
+            // Store download URL and blob for later use
+            window._currentDownload = {
+                url: url,
+                blob: blob
+            };
+
+            // Prepare fixes summary text
+            let logText = 'Processing Complete!\n';
+            logText += '====================\n\n';
+
+            if (result.fixes && Object.keys(result.fixes).length > 0) {
+                logText += 'Applied Fixes:\n';
+                logText += '-------------\n\n';
+                
+                for (const [fixType, items] of Object.entries(result.fixes)) {
+                    const fixName = fixType.replace('fix_', '').replace(/_/g, ' ');
+                    let actionText = fixType === 'fix_duplicates' ? 'Removed' : 'Fixed';
+                    
+                    logText += `${fixName.charAt(0).toUpperCase() + fixName.slice(1)}:\n`;
+                    logText += `${actionText} ${items.length} item${items.length > 1 ? 's' : ''}\n`;
+                    logText += 'Items affected:\n';
+                    items.forEach(item => {
+                        logText += `- ${item}\n`;
+                    });
+                    logText += '\n';
+                }
+            } else {
+                logText += 'No fixes were needed.\n';
+            }
+
+            // Show results section and update log
+            resultsSection.classList.remove('d-none');
+            resultsLog.value = logText;
+            resultsLog.scrollTop = 0;
+
+            // Reset form but keep results visible
+            resetForm();
+            document.getElementById('addComments').checked = true;
+            document.getElementById('fixScientist').checked = true;
+            document.getElementById('fixVanillaErrors').checked = true;
+
+            // Close the loading modal
+            loadingModal.close();
+
+        } catch (error) {
+            console.error('Processing error:', error);
+            Swal.fire({
+                title: 'Error',
+                html: `
+                    <div class="text-start">
+                        <p>Failed to process the file:</p>
+                        <div class="alert alert-danger">
+                            ${error.message}
+                        </div>
+                        <p class="small text-muted">Please try again or contact support if the issue persists.</p>
+                    </div>
+                `,
+                icon: 'error'
+            });
+        }
+    });
+
+    // Download button handler
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        if (window._currentDownload) {
+            const a = document.createElement('a');
+            a.href = window._currentDownload.url;
+            a.download = 'organized_types.html';
+            a.click();
+        }
+    });
+
+    // File input change handler
+    fileInput.addEventListener('change', updateFileDisplay);
+
+    // Remove file button handler
+    removeFile.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        resetForm();
+    });
+
+    // Drag and drop handlers
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+    });
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, unhighlight, false);
+    });
+
+    dropZone.addEventListener('drop', handleDrop, false);
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function highlight(e) {
+        dropZone.classList.add('border-primary');
+    }
+
+    function unhighlight(e) {
+        dropZone.classList.remove('border-primary');
+    }
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        if (files.length > 0) {
+            fileInput.files = files;
+            updateFileDisplay();
+        }
+    }
+});	
+    </script>
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/typesorganise by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:31 GMT -->
+</html>
+

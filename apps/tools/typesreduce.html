@@ -1,0 +1,2583 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/typesreduce by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Types Reducer &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Reduce your DayZ types.xml file with percentage-based adjustment. Configure reductions from 1-99%." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+	<link rel="stylesheet" href="../../../cdn.jsdelivr.net/npm/sweetalert2%4011/dist/sweetalert2.min.css">
+	<link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/diff2html/3.4.17/diff2html.min.html">
+
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  
+	  #warningLabel.text-danger {
+			animation: pulse 1.5s infinite;
+		}
+	  @keyframes pulse {
+		   0% { opacity: 1; }
+		   50% { opacity: 0.5; }
+		   100% { opacity: 1; }
+		}
+		
+		.upload-zone {
+			border: 2px dashed rgba(255,255,255,0.2);
+			transition: all 0.3s ease;
+			background: linear-gradient(45deg, #2b2c40 0%, #373752 100%);
+			position: relative;
+			overflow: hidden;
+		}
+		
+		.upload-zone.border-primary {
+			border-color: var(--bs-primary);
+			background: rgba(var(--bs-primary-rgb), 0.1);
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+		}
+
+		.upload-zone:before {
+		   content: '';
+		   position: absolute;
+		   top: -50%;
+		   left: -50%;
+		   width: 200%;
+		   height: 200%;
+		   background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+		   transform: rotate(45deg);
+		   animation: shine 3s infinite;
+		}
+
+		.upload-zone:hover {
+		   border-color: var(--bs-primary);
+		   transform: translateY(-2px);
+		   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+		}
+
+		.upload-zone label {
+		   position: relative;
+		   z-index: 2;
+		}
+
+		.upload-zone i {
+		   transition: transform 0.3s ease;
+		}
+
+		.upload-zone:hover i {
+		   transform: translateY(-5px);
+		}
+
+		@keyframes shine {
+		   0% {
+			   left: -50%;
+		   }
+		   100% {
+			   left: 150%;
+		   }
+		}
+		
+		.chart-container {
+			background: rgba(0, 0, 0, 0.2);
+			border-radius: 8px;
+			padding: 16px;
+		}
+
+		.swal2-popup {
+			background: #2b2c40 !important;
+			color: #fff !important;
+		}
+
+		.swal2-title {
+			color: #fff !important;
+		}
+		
+		.d2h-file-header {
+			display: none;
+		}
+
+		.d2h-diff-table {
+			font-size: 12px;
+		}
+
+		.comparison-section .card {
+			margin-bottom: 2rem;
+		}
+
+		#diffContent {
+			background: rgba(0, 0, 0, 0.05);
+			border-radius: 4px;
+		}
+
+		.d2h-code-line {
+			padding: 0 8px;
+		}
+
+		.d2h-code-side-line {
+			padding: 0 8px;
+		}
+
+		.help-guide-content {
+			padding: 20px;
+			color: #fff;
+		}
+
+		.guide-section {
+			margin-bottom: 2rem;
+			background: rgba(43, 44, 64, 0.5);
+			border-radius: 8px;
+			padding: 20px;
+		}
+
+		.guide-header {
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			margin-bottom: 20px;
+			padding-bottom: 10px;
+		}
+
+		.guide-header h5 {
+			margin: 0;
+			color: #fff;
+			font-size: 1.25rem;
+		}
+
+		.guide-content h6 {
+			color: var(--bs-primary);
+			margin-bottom: 15px;
+			font-size: 1.1rem;
+		}
+
+		.guide-content > div {
+			margin-bottom: 30px;
+			padding: 15px;
+			background: rgba(0, 0, 0, 0.2);
+			border-radius: 6px;
+		}
+
+		.guide-content > div:last-child {
+			margin-bottom: 0;
+		}
+
+		.guide-content ul {
+			list-style: none;
+			padding-left: 0;
+			margin-bottom: 15px;
+		}
+
+		.guide-content ul li {
+			position: relative;
+			padding-left: 20px;
+			margin-bottom: 10px;
+			line-height: 1.5;
+		}
+
+		.guide-content ul li:before {
+			content: "→";
+			position: absolute;
+			left: 0;
+			color: var(--bs-primary);
+		}
+
+		.guide-content p {
+			margin-bottom: 15px;
+			line-height: 1.6;
+		}
+
+		.alert {
+			border: none;
+			background: rgba(var(--bs-primary-rgb), 0.1);
+			border-left: 4px solid var(--bs-primary);
+			margin: 15px 0;
+		}
+
+		.alert-info {
+			background: rgba(13, 202, 240, 0.1);
+			border-left-color: var(--bs-info);
+		}
+
+		strong {
+			color: var(--bs-primary);
+		}
+
+		/* Scrollbar Styling */
+		.swal2-html-container {
+			scrollbar-width: thin;
+			scrollbar-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.2);
+		}
+
+		.swal2-html-container::-webkit-scrollbar {
+			width: 8px;
+		}
+
+		.swal2-html-container::-webkit-scrollbar-track {
+			background: rgba(0, 0, 0, 0.2);
+		}
+
+		.swal2-html-container::-webkit-scrollbar-thumb {
+			background-color: rgba(255, 255, 255, 0.2);
+			border-radius: 4px;
+		}
+
+		/* Section-specific styling */
+		.upload-section, 
+		.multiplier-section,
+		.min-values-section,
+		.map-section,
+		.targeting-section,
+		.processing-section,
+		.comparison-section,
+		.stats-section,
+		.error-section {
+			transition: all 0.3s ease;
+		}
+
+		.guide-content > div:hover {
+			background: rgba(0, 0, 0, 0.3);
+		}
+		.guide-info .point {
+			padding: 12px;
+			background: rgba(0, 0, 0, 0.2);
+			border-radius: 6px;
+			transition: all 0.3s ease;
+		}
+
+		.guide-info .point:hover {
+			background: rgba(0, 0, 0, 0.3);
+			transform: translateX(5px);
+		}
+
+		.guide-info .alert {
+			padding: 1rem;
+			line-height: 1.6;
+		}
+
+		.guide-info .alert-light {
+			background: rgba(255, 255, 255, 0.05);
+		}
+
+		.practice-card {
+			background: rgba(0, 0, 0, 0.2);
+			border-radius: 8px;
+			padding: 15px;
+			transition: all 0.3s ease;
+		}
+
+		.practice-card:hover {
+			background: rgba(0, 0, 0, 0.3);
+		}
+
+		.practice-header {
+			display: flex;
+			align-items: center;
+			margin-bottom: 10px;
+			padding-bottom: 8px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		}
+
+		.practice-list {
+			list-style: none;
+			padding-left: 0;
+			margin-bottom: 0;
+		}
+
+		.practice-list li {
+			position: relative;
+			padding-left: 20px;
+			margin-bottom: 8px;
+		}
+
+		.practice-list li:before {
+			content: "•";
+			position: absolute;
+			left: 0;
+			color: var(--bs-primary);
+		}
+
+		.practice-list li:last-child {
+			margin-bottom: 0;
+		}
+
+		.recommendations-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .grid-section {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .point {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            border-radius: 6px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .practice-card {
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+        .practice-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .practice-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        .practice-list li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 8px;
+        }
+
+        .practice-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--bs-primary);
+        }
+
+        .recommendations-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .recommendations-grid::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .recommendations-grid::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .alert {
+            margin-bottom: 15px;
+        }
+
+        .alert:last-child {
+            margin-bottom: 0;
+        }
+		
+		.upload-zone {
+			transition: transform 0.2s ease, border-color 0.2s ease;
+		}
+
+		.upload-zone.dragover {
+			border-color: var(--bs-primary);
+			background: rgba(var(--bs-primary-rgb), 0.1);
+			transform: scale(1.02);
+		}
+
+		.upload-zone.border-primary {
+			border-style: solid;
+		}
+		
+		.selected-categories-section {
+			min-height: 100px;
+		}
+
+		.categories-container {
+			background: rgba(0, 0, 0, 0.2);
+			border-radius: 6px;
+			padding: 8px;
+			margin-bottom: 8px;
+		}
+
+		.category-item {
+			background: rgba(0, 0, 0, 0.2);
+			border: none;
+			margin-bottom: 4px;
+			border-radius: 4px;
+			padding: 8px 12px;
+			display: flex;
+			align-items: center;
+			transition: all 0.2s ease;
+		}
+
+		.category-item:last-child {
+			margin-bottom: 0;
+		}
+
+		.category-item:hover {
+			background: rgba(0, 0, 0, 0.3);
+			transform: translateX(4px);
+		}
+
+		.category-item .category-count {
+			margin-left: auto;
+			background: rgba(255, 255, 255, 0.1);
+			padding: 2px 8px;
+			border-radius: 12px;
+			font-size: 0.8rem;
+		}
+
+		#noCategoriesMessage {
+			opacity: 0.6;
+		}
+
+		#noCategoriesMessage i {
+			display: block;
+			margin-bottom: 1rem;
+		}
+		 
+	</style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>		
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+			   <div class="container-xxl flex-grow-1 container-p-y">
+			   
+			   				   <!-- Header -->
+				   <div class="row mb-4">
+					   <div class="col-12">
+						   <div class="card border-0 text-white">
+							   <div class="card-body p-4">
+								   <div class="d-flex align-items-center">
+									   <div class="avatar avatar-lg rounded bg-opacity-10 me-3">
+                                            <i class="ti ti-arrow-down fs-2"></i>
+									   </div>
+									   <div>
+										   <h4 class="mb-1 text-white">Types Reducer</h4>
+										   <p class="mb-0 text-white text-opacity-75">Reduce your DayZ types.xml file with percentage-based adjustment</p>
+									   </div>
+								   </div>
+							   </div>
+						   </div>
+					   </div>
+				   </div>
+
+				   <!-- Main Content -->
+				   <div class="row g-4">
+					   <!-- File Upload & Settings -->
+					   <div class="col-md-4">
+						   <div class="card shadow-lg">
+							   <div class="card-body">
+							   <div class="alert alert-warning">
+										Notice: Types reducing tool does not fix broken types. Please check your types before reducing.
+									</div>
+								   <form id="typesBoostForm" method="POST" enctype="multipart/form-data">
+									   <div class="upload-zone p-4 border-2 border-dashed rounded-3 text-center mb-4">
+											<input type="file" class="form-control opacity-0 position-absolute" id="typesFile" name="typesFile" accept=".xml" required>
+											<div id="uploadPrompt">
+												<label for="typesFile" class="cursor-pointer mb-0">
+													<i class="ti ti-file-upload fs-2"></i>
+													<p>Drop types.xml here or click</p>
+												</label>
+											</div>
+											<div id="fileInfo" class="d-none">
+												<div class="d-flex align-items-center justify-content-center">
+													<i class="ti ti-file-code fs-2 me-2"></i>
+													<span id="fileName" class="text-truncate"></span>
+													<button type="button" class="btn btn-icon btn-sm btn-text-secondary ms-2" id="removeFile">
+														<i class="ti ti-x"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+
+									   <div class="boost-config bg-light rounded-3 p-3 mb-4">
+                                       <label class="form-label d-flex justify-content-between">
+                                            Reduction Percentage
+                                            <span class="badge bg-primary"><span id="multiplierValue">0</span></span>
+                                        </label>
+										<select class="form-select" id="multiplier" name="multiplier">
+                                        <optgroup label="Recommended Values">
+                                            <option value="100">0% (No Reduction)</option>
+                                            <option value="90">10% Reduction</option>
+                                            <option value="75">25% Reduction</option>
+                                            <option value="50">50% Reduction</option>
+                                            <option value="25">75% Reduction</option>
+                                            <option value="10">90% Reduction</option>
+                                        </optgroup>
+                                        <optgroup label="Expert Values">
+                                            <option value="custom">Custom Reduction (1-99%)</option>
+                                        </optgroup>
+                                    </select>
+										<div id="warningLabel" class="text-danger small d-none mt-2"></div>
+									</div>
+
+									   <div class="form-check form-switch mb-4">
+										   <input class="form-check-input" type="checkbox" id="adjustMin" name="adjustMin" checked>
+										   <label class="form-check-label">Auto-adjust minimum values</label>
+									   </div>
+									   
+									   <div class="mb-4">
+										<label class="form-label">Map Options</label>
+											<div class="select2-info">
+												<div class="position-relative">
+													<select id="mapOptions" class="form-select" name="mapOption" required>
+														<option value="">Select a map...</option>
+														<option value="chernarus">Chernarus</option>
+														<option value="livonia">Livonia</option>
+														<option value="sakhal">Sakhal</option>
+														<option value="custom">Custom Map</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+									   <div class="d-grid gap-2">
+										   <button type="submit" class="btn btn-primary" id="processButton" disabled>
+											   <i class="ti ti-wand me-2"></i>Process
+										   </button>
+										   <button type="button" class="btn btn-warning mt-2" id="compareButton" disabled>
+												<i class="ti ti-diff me-2"></i>Compare with Original
+											</button>
+											<button type="button" class="btn btn-info mt-2" id="helpGuideButton">
+												<i class="ti ti-help me-2"></i>Help Guide
+											</button>
+
+									   </div>
+								   </form>
+							   </div>
+						   </div>
+					   </div>
+
+					   <!-- Filters -->
+					   <div class="col-md-4">
+						   <div class="card shadow-lg">
+							   <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+								   <h6 class="mb-0">Targeting Options</h6>
+							   </div>
+							   <div class="card-body">
+								   <div class="mb-4">
+									   <label class="form-label">Target Categories</label>
+									   <div class="select2-success">
+											<div class="position-relative">
+												<select id="targetCategories" class="select2 form-select" multiple name="targets">
+																											<option value="target1">Target 1</option>
+																											<option value="target2">Target 2</option>
+																											<option value="target3">Target 3</option>
+																											<option value="target4">Target 4</option>
+																											<option value="target5">Target 5</option>
+																											<option value="target6">Target 6</option>
+																											<option value="target7">Target 7</option>
+																											<option value="target8">Target 8</option>
+																											<option value="target9">Target 9</option>
+																											<option value="target10">Target 10</option>
+																											<option value="target11">Target 11</option>
+																											<option value="target12">Target 12</option>
+																											<option value="target13">Target 13</option>
+																											<option value="target14">Target 14</option>
+																									</select>
+											</div>
+										</div>
+								   </div>
+
+								   <div>
+									   <label class="form-label">Exclusions</label>
+									   <div class="select2-danger">
+											<div class="position-relative">
+												<select id="exclusionCategories" class="select2 form-select" multiple name="exclusions">
+																											<option value="exclusion1">Exclusion 1</option>
+																											<option value="exclusion2">Exclusion 2</option>
+																											<option value="exclusion3">Exclusion 3</option>
+																											<option value="exclusion4">Exclusion 4</option>
+																											<option value="exclusion5">Exclusion 5</option>
+																											<option value="exclusion6">Exclusion 6</option>
+																											<option value="exclusion7">Exclusion 7</option>
+																											<option value="exclusion8">Exclusion 8</option>
+																											<option value="exclusion9">Exclusion 9</option>
+																											<option value="exclusion10">Exclusion 10</option>
+																											<option value="exclusion11">Exclusion 11</option>
+																											<option value="exclusion12">Exclusion 12</option>
+																											<option value="exclusion13">Exclusion 13</option>
+																											<option value="exclusion14">Exclusion 14</option>
+																											<option value="exclusion15">Exclusion 15</option>
+																									</select>
+											</div>
+										</div>
+								   </div>
+							   </div>
+						   </div>
+
+					   </div>
+
+					   <!-- Preview & Stats -->
+					   <div class="col-md-4">
+						   <div class="card shadow-lg mb-4">
+							   <div class="card-body">
+									<div class="selected-categories-section">
+										<!-- Target Categories -->
+										<div id="targetCategoriesPreview" class="mb-3 d-none">
+											<h6 class="text-success mb-2">
+												<i class="ti ti-target me-2"></i>Targeted Categories
+											</h6>
+											<div class="categories-container" style="max-height: 200px; overflow-y: auto;">
+												<div id="targetCategoriesList" class="list-group list-group-flush">
+													<!-- Categories will be populated here -->
+												</div>
+											</div>
+										</div>
+
+										<!-- Exclusion Categories -->
+										<div id="exclusionCategoriesPreview" class="mb-3 d-none">
+											<h6 class="text-danger mb-2">
+												<i class="ti ti-ban me-2"></i>Excluded Categories
+											</h6>
+											<div class="categories-container" style="max-height: 200px; overflow-y: auto;">
+												<div id="exclusionCategoriesList" class="list-group list-group-flush">
+													<!-- Categories will be populated here -->
+												</div>
+											</div>
+										</div>
+
+										<!-- No Categories Selected Message -->
+										<div id="noCategoriesMessage" class="text-center py-4">
+											<i class="ti ti-category-2 text-muted mb-2" style="font-size: 3rem;"></i>
+											<p class="text-muted mb-0">No categories selected</p>
+											<small class="text-muted">Select target or exclusion categories to see them here</small>
+										</div>
+									</div>
+								</div>
+							   
+							   <div class="row mb-4 comparison-section d-none p-3">
+									<div class="col-12">
+										<div class="card">
+											<div class="card-header d-flex justify-content-between align-items-center">
+												<h5 class="mb-0">File Comparison</h5>
+												<button type="button" class="btn btn-icon btn-secondary" id="closeComparison">
+													<i class="ti ti-x"></i>
+												</button>
+											</div>
+											<div class="card-body">
+												<div class="comparison-container">
+													<div class="diff-viewer">
+														<div id="diffContent" style="height: 500px; overflow: auto;"></div>
+													</div>
+													<div class="mt-3 text-center comparison-stats">
+														<span class="badge bg-primary me-2">Changes: <span id="changeCount">0</span></span>
+														<span class="badge bg-secondary">Lines: <span id="loadedLines">0</span></span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+						   </div>
+
+					   </div>
+				   </div>			   
+			   </div>
+			   
+			   <!-- Footer -->
+			   <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>			   
+			   <div class="content-backdrop fade"></div>
+			</div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+		
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<script src="../../assets/vendor/libs/select2/select2.js"></script>
+	<script src="../../assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+	<script src="../../assets/vendor/libs/tagify/tagify.js"></script>
+	<script src="../../assets/js/forms-selects.js"></script>
+	
+	<script src="../../../cdn.jsdelivr.net/npm/chart.js"></script>
+	
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/diff2html/3.4.17/diff2html.min-2.html"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/diff/5.1.0/diff.min.html"></script>
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script>
+	/*
+	*
+	*	TODO:
+	*		Implement a better way to show the Comparison, since the same tool is used for other type tools. Make it modular, once complete remove reference comments :facepalm:
+	*
+	*/
+		let currentXmlDoc = null;
+		let originalXmlContent = null;
+		let modifiedXmlContent = null;
+
+		$(document).ready(function() {
+			const PLACEHOLDERS = {
+				target: {
+					default: 'Select categories to target',
+					disabled: 'Cannot target while excluding categories'
+				},
+				exclusion: {
+					default: 'Select categories to exclude',
+					disabled: 'Cannot exclude while targeting categories'
+				}
+			};
+
+			function initializeSelect2(elementId, type) {
+				$(elementId).select2({
+					dropdownParent: $('body'),
+					placeholder: PLACEHOLDERS[type].default,
+					allowClear: true,
+					theme: type === 'target' ? 'default select2-success' : 'default select2-danger',
+					ajax: {
+						url: 'config/SelectAPI.php',
+						dataType: 'json',
+						delay: 250,
+						data: function(params) {
+							return {
+								type: type,
+								search: params.term,
+								page: params.page || 1
+							};
+						},
+						processResults: function(data) {
+							return data;
+						},
+						cache: true
+					},
+					minimumInputLength: 0,
+					width: '100%'
+				});
+			}
+
+			// Initialize both select2 dropdowns
+			initializeSelect2('#targetCategories', 'target');
+			initializeSelect2('#exclusionCategories', 'exclusion');
+			
+			function updateCategoriesPreview() {
+				const targetCategories = $('#targetCategories').select2('data');
+				const exclusionCategories = $('#exclusionCategories').select2('data');
+				
+				const targetPreview = $('#targetCategoriesPreview');
+				const exclusionPreview = $('#exclusionCategoriesPreview');
+				const noCategories = $('#noCategoriesMessage');
+				
+				if (targetCategories.length === 0 && exclusionCategories.length === 0) {
+					targetPreview.addClass('d-none');
+					exclusionPreview.addClass('d-none');
+					noCategories.removeClass('d-none');
+					return;
+				}
+				
+				noCategories.addClass('d-none');
+				
+				// Update target categories
+				if (targetCategories.length > 0) {
+					const targetList = targetCategories.map(cat => `
+						<div class="category-item">
+							<span>${cat.text}</span>
+							<span class="category-count">${cat.count || '0'} items</span>
+						</div>
+					`).join('');
+					
+					$('#targetCategoriesList').html(targetList);
+					targetPreview.removeClass('d-none');
+				} else {
+					targetPreview.addClass('d-none');
+				}
+				
+				// Update exclusion categories
+				if (exclusionCategories.length > 0) {
+					const exclusionList = exclusionCategories.map(cat => `
+						<div class="category-item">
+							<span>${cat.text}</span>
+							<span class="category-count">${cat.count || '0'} items</span>
+						</div>
+					`).join('');
+					
+					$('#exclusionCategoriesList').html(exclusionList);
+					exclusionPreview.removeClass('d-none');
+				} else {
+					exclusionPreview.addClass('d-none');
+				}
+			}
+
+			// Add these event listeners
+			$('#targetCategories, #exclusionCategories').on('change', function() {
+				updateCategoriesPreview();
+			});
+
+			// Initial call to set up the preview
+			updateCategoriesPreview();
+
+			function updateDisabledSelect(selectId, placeholder) {
+				$(selectId).select2('destroy');
+				$(selectId).empty();
+				$(selectId).prop('disabled', true);
+				$(selectId).select2({
+					placeholder: placeholder,
+					allowClear: true,
+					theme: selectId === '#targetCategories' ? 'default select2-success' : 'default select2-danger',
+					width: '100%'
+				});
+			}
+
+			function updateEnabledSelect(selectId, type) {
+				$(selectId).prop('disabled', false);
+				initializeSelect2(selectId, type);
+			}
+
+			// Handle changes to target categories
+			$('#targetCategories').on('change', function() {
+				if ($(this).val() && $(this).val().length > 0) {
+					updateDisabledSelect('#exclusionCategories', PLACEHOLDERS.exclusion.disabled);
+				} else {
+					updateEnabledSelect('#exclusionCategories', 'exclusion');
+				}
+			});
+
+			// Handle changes to exclusion categories
+			$('#exclusionCategories').on('change', function() {
+				if ($(this).val() && $(this).val().length > 0) {
+					updateDisabledSelect('#targetCategories', PLACEHOLDERS.target.disabled);
+				} else {
+					updateEnabledSelect('#targetCategories', 'target');
+				}
+			});
+			
+			// Update styles for disabled selects
+			function updateSelectStyles() {
+				$('.select2-container--disabled').css('opacity', '0.6');
+			}
+
+			// Update styles whenever selections change
+			$('#targetCategories, #exclusionCategories').on('change', function() {
+				setTimeout(updateSelectStyles, 0);
+			});
+			
+			$('#mapOptions').select2({
+				dropdownParent: $('body'),
+				placeholder: 'Select a map',
+				allowClear: true,
+				minimumResultsForSearch: Infinity
+			});
+			
+			$('#mapOptions').on('change', async function(e) {
+				const selectedValue = $(this).val();
+				
+				if (selectedValue === 'custom') {
+					// Destroy Select2 temporarily
+					const select = $('#mapOptions');
+					select.select2('destroy');
+
+					const { value: customMap } = await Swal.fire({
+						title: 'Enter Custom Map Name',
+						input: 'text',
+						inputLabel: 'Map Name',
+						inputPlaceholder: 'Enter your custom map name',
+						showCancelButton: true,
+						allowOutsideClick: false,
+						inputValidator: (value) => {
+							if (!value) {
+								return 'You need to enter a map name!';
+							}
+						}
+					});
+
+					// Reinitialize Select2
+					select.select2({
+						dropdownParent: $('body'),
+						placeholder: 'Select a map',
+						allowClear: true,
+						minimumResultsForSearch: Infinity
+					});
+
+					if (customMap) {
+						const newOption = new Option(customMap, `custom_${customMap}`, true, true);
+						select.append(newOption).trigger('change');
+					} else {
+						select.val('').trigger('change');
+					}
+				}
+			});
+
+			const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+			tooltipTriggerList.map(function (tooltipTriggerEl) {
+				return new bootstrap.Tooltip(tooltipTriggerEl);
+			});
+			
+			// Initialize multiplier dropdown
+			$('#multiplier').select2({
+                dropdownParent: $('body'),
+                minimumResultsForSearch: Infinity,
+                width: '100%',
+                templateResult: function(data) {
+                    if (!data.id) return data.text;
+                    return $(`<span>${data.text}</span>`);
+                }
+            }).on('change', async function() {
+                const value = $(this).val();
+
+                const compareButton = document.getElementById('compareButton');
+                if (parseInt(value) === 100) {
+                    compareButton.disabled = true;
+                    compareButton.title = "Comparison not available for 0% reduction";
+                } else {
+                    compareButton.title = "Compare with original file";
+                }
+                
+                if (value === 'custom') {
+                    const select = $('#multiplier');
+                    select.select2('destroy');
+
+                    const { value: customValue } = await Swal.fire({
+                        title: 'Enter Custom Reduction',
+                        input: 'number',
+                        inputLabel: 'Reduction Percentage',
+                        inputPlaceholder: 'Enter a value between 1-99',
+                        footer: '<strong class="text-warning">Note: Higher percentages will significantly decrease loot availability</strong>',
+                        showCancelButton: true,
+                        inputAttributes: {
+                            min: 1,
+                            max: 99,
+                            step: 1
+                        },
+                        confirmButtonText: 'Apply',
+                        allowOutsideClick: false,
+                        inputValidator: (value) => {
+                            const num = parseInt(value);
+                            if (!value) return 'Please enter a value';
+                            if (isNaN(num) || num < 1 || num > 99) return 'Value must be between 1 and 99';
+                        }
+                    });
+                    
+                    select.select2({
+                        dropdownParent: $('body'),
+                        minimumResultsForSearch: Infinity,
+                        width: '100%',
+                        templateResult: function(data) {
+                            if (!data.id) return data.text;
+                            return $(`<span>${data.text}</span>`);
+                        }
+                    });                
+
+                    if (customValue) {
+                        select.find('option[value!="custom"]').each(function() {
+                            if (parseInt($(this).val()) < 100) $(this).remove();
+                        });
+                        
+                        const newOption = new Option(`${customValue}% Reduction`, 100-customValue, true, true);
+                        select.find('option[value="custom"]').after(newOption);
+                        select.val(100-customValue).trigger('change');
+                        $('#multiplierValue').text(`${customValue}%`);
+                        
+                        const warningLabel = $('#warningLabel');
+                        if (parseInt(customValue) > 75) {
+                            warningLabel.removeClass('d-none');
+                            warningLabel.html(`<i class="ti ti-alert-triangle me-1"></i>Warning: ${customValue}% reduction will significantly decrease loot availability. Some items may be reduced to a ratio of 1 nominal / 1 min`);
+                        } else {
+                            warningLabel.addClass('d-none');
+                        }
+                    } else {
+                        select.val('100').trigger('change');
+                        $('#multiplierValue').text('0%');
+                        $('#warningLabel').addClass('d-none');
+                    }
+                } else {
+                    const reductionPercent = 100 - parseInt(value);
+                    $('#multiplierValue').text(`${reductionPercent}%`);
+                    
+                    const warningLabel = $('#warningLabel');
+                    if (reductionPercent > 75) {
+                        warningLabel.removeClass('d-none');
+                        warningLabel.html(`<i class="ti ti-alert-triangle me-1"></i>Warning: ${reductionPercent}% reduction will significantly decrease loot availability. Some items may be reduced to a ratio of 1 nominal / 1 min`);
+                    } else {
+                        warningLabel.addClass('d-none');
+                    }
+                }
+            });
+		}); // End of document.ready
+
+		// Handle multiplier changes
+		document.getElementById('multiplier').addEventListener('input', function(e) {
+            const value = parseInt(e.target.value);
+            document.getElementById('multiplierValue').textContent = value;
+            
+            const warningLabel = document.getElementById('warningLabel');
+            if (value > 75) {
+                warningLabel.classList.remove('d-none');
+                warningLabel.innerHTML = `<i class="ti ti-alert-triangle me-1"></i>Warning: ${value}% reduction. This could cause nominal & min values to be 1/1 ratio`;
+                warningLabel.classList.add('text-danger');
+            } else {
+                warningLabel.classList.add('d-none');
+                warningLabel.classList.remove('text-danger');
+            }
+        });
+
+		function formatFileSize(bytes) {
+			if (bytes === 0) return '0 Bytes';
+			const k = 1024;
+			const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+			const i = Math.floor(Math.log(bytes) / Math.log(k));
+			return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+		}
+
+		// Form submission handler 
+		document.getElementById('typesBoostForm').addEventListener('submit', async function(e) {
+			e.preventDefault();
+			
+			// Initial file validation
+			const file = document.getElementById('typesFile').files[0];
+			if (!file) {
+				Swal.fire({
+					title: 'Error',
+					text: 'Please upload a types.xml file first',
+					icon: 'error'
+				});
+				return;
+			}
+
+			// Show processing modal
+			let processingModal;
+			try {
+				processingModal = Swal.fire({
+					title: 'Processing Your File',
+					html: `
+						<div class="progress" style="height: 20px;">
+							<div class="progress-bar progress-bar-striped progress-bar-animated" 
+								 role="progressbar" 
+								 style="width: 0%" 
+								 id="processingProgress">
+							</div>
+						</div>
+						<div class="mt-3" id="processingStatus">Initializing...</div>
+					`,
+					allowOutsideClick: false,
+					allowEscapeKey: false,
+					showConfirmButton: false
+				});
+
+				// Get form values
+				let multiplierValue = $('#multiplier').val();
+				const multiplier = multiplierValue === 'custom' ? null : parseInt(multiplierValue);
+				const adjustMin = document.getElementById('adjustMin').checked;
+				const targetCategories = $('#targetCategories').val() || [];
+				const exclusionCategories = $('#exclusionCategories').val() || [];
+
+				// Simulate progress
+				const progress = document.getElementById('processingProgress');
+				const status = document.getElementById('processingStatus');
+				let width = 0;
+				
+				const progressInterval = setInterval(() => {
+					if (width >= 90) {
+						clearInterval(progressInterval);
+					}
+					width += 5;
+					if (progress) progress.style.width = width + '%';
+					
+					if (status) {
+						if (width < 30) status.textContent = 'Reading XML file...';
+						else if (width < 60) status.textContent = 'Applying reduction values...';
+						else if (width < 90) status.textContent = 'Finalizing changes...';
+					}
+				}, 100);
+				
+				// Get items to filter
+				let itemsToFilter = [];
+				if (targetCategories.length > 0 || exclusionCategories.length > 0) {
+					const response = await fetch('config/SelectAPI.html', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							targetCategories: targetCategories.map(id => parseInt(id)),
+							exclusionCategories: exclusionCategories.map(id => parseInt(id))
+						})
+					});
+
+					if (!response.ok) throw new Error('Failed to fetch category items');
+					const data = await response.json();
+					itemsToFilter = data.items || [];
+				}
+
+				// Process file
+				const formData = new FormData();
+				
+				formData.append('typesFile', file);
+				formData.append('multiplier', multiplier);
+				formData.append('adjustMin', adjustMin ? '1' : '0');
+				formData.append('itemsToFilter', JSON.stringify(itemsToFilter));
+				formData.append('mode', targetCategories.length > 0 ? 'target' : (exclusionCategories.length > 0 ? 'exclusion' : 'all'));
+				formData.append('mapOption', $('#mapOptions').val());
+				formData.append('targetCategories', JSON.stringify(targetCategories));
+				formData.append('exclusionCategories', JSON.stringify(exclusionCategories));
+
+				const response = await fetch(this.action, {
+					method: 'POST',
+					body: formData
+				});
+
+				if (!response.ok) throw new Error('Failed to process file');
+
+				// Read the XML content
+				const xmlText = await response.text();
+				const parser = new DOMParser();
+				const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+
+				// Store modified content for comparison
+				modifiedXmlContent = xmlText;
+				document.getElementById('compareButton').disabled = false;
+
+				// Update counts
+				const totalTypes = countValidTypes(xmlDoc);
+
+				// Count modified items
+				let modifiedCount = 0;
+				if (currentXmlDoc) {
+					const originalTypes = currentXmlDoc.getElementsByTagName('type');
+					const newTypes = xmlDoc.getElementsByTagName('type');
+
+					for (let i = 0; i < originalTypes.length; i++) {
+						const originalNominal = originalTypes[i].getElementsByTagName('nominal')[0]?.textContent;
+						const newNominal = newTypes[i].getElementsByTagName('nominal')[0]?.textContent;
+						
+						if (originalNominal !== newNominal) {
+							modifiedCount++;
+						}
+					}
+				} else {
+					const multiplierValue = parseInt($('#multiplier').val()) || 1;
+					if (multiplierValue > 1) {
+						modifiedCount = totalTypes;
+					}
+				}
+
+				
+				// Calculate and show changes distribution
+				if (currentXmlDoc) {
+					const changes = calculateChangesDistribution(currentXmlDoc, xmlDoc);
+					
+					// Show the changes graph in a modal
+					Swal.fire({
+						title: 'Changes Distribution',
+						html: `
+							<div class="chart-container" style="position: relative; height:300px; width:100%">
+								<canvas id="changesChart"></canvas>
+							</div>
+							<div class="mt-3 text-muted">
+								<small>Shows how many items were modified and by what factor</small>
+							</div>
+						`,
+						width: '600px',
+						showConfirmButton: true,
+						confirmButtonText: 'Download File',
+						showCancelButton: true,
+						cancelButtonText: 'Close',
+						didRender: () => {
+							initializeChart('changesChart', changes);
+						}
+					}).then((result) => {
+						if (result.isConfirmed) {
+							// Convert text back to blob for download
+							const blob = new Blob([xmlText], { type: 'application/xml' });
+							const url = window.URL.createObjectURL(blob);
+
+							// Trigger download
+							const a = document.createElement('a');
+							a.href = url;
+							a.download = "types_reduced.html";
+							document.body.appendChild(a);
+							a.click();
+							
+							// Cleanup
+							window.URL.revokeObjectURL(url);
+							document.body.removeChild(a);
+						}
+					});
+				} else {
+					// Handle direct download if no comparison available
+					const blob = new Blob([xmlText], { type: 'application/xml' });
+					const url = window.URL.createObjectURL(blob);
+
+					const a = document.createElement('a');
+					a.href = url;
+					a.download = "types_reduced.html";
+					document.body.appendChild(a);
+					a.click();
+					
+					window.URL.revokeObjectURL(url);
+					document.body.removeChild(a);
+
+					Swal.fire({
+                        title: 'Success!',
+                        text: 'Your types.xml file has been reduced successfully.',
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+				}
+
+			} catch (error) {
+				console.error('Error:', error);
+				
+				// Determine the type of error and provide specific message
+				let errorMessage = 'An unexpected error occurred.';
+				
+				if (error.message.includes('Invalid XML')) {
+					errorMessage = 'The XML file appears to be invalid or corrupted.';
+				} else if (error.message.includes('Failed to fetch')) {
+					errorMessage = 'There was a problem communicating with the server. Please check your connection and try again.';
+				} else if (error.message.includes('Failed to process')) {
+					errorMessage = 'The file could not be processed. Please ensure it\'s a valid types.xml file.';
+				}
+
+				Swal.fire({
+					title: 'Error',
+					html: `
+						<div class="text-start">
+							<p class="mb-2">${errorMessage}</p>
+							<p class="small text-muted mb-0">Error details:</p>
+							<pre class="small text-danger mt-2">${error.message}</pre>
+						</div>
+					`,
+					icon: 'error'
+				});
+			}
+		});
+
+		function countValidTypes(xmlDoc) {
+			const types = xmlDoc.getElementsByTagName('type');
+			let validCount = 0;
+			
+			for (let i = 0; i < types.length; i++) {
+				const type = types[i];
+				const nominal = type.getElementsByTagName('nominal')[0]?.textContent;
+				
+				// Only count if nominal exists and is greater than 0
+				if (nominal && parseInt(nominal) > 0) {
+					validCount++;
+				}
+			}
+			return validCount;
+		}
+
+		// Handle file upload
+		document.getElementById('typesFile').addEventListener('change', async function(e) {
+    if (!this.files[0]) return;
+    
+    const file = this.files[0];
+    const typesFile = document.getElementById('typesFile');
+    
+    try {
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+            try {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(e.target.result, "text/xml");
+                
+                // Validate basic XML structure
+                const parserErrors = xmlDoc.getElementsByTagName('parsererror');
+                if (parserErrors.length > 0) {
+                    throw new Error(`Invalid XML structure: ${parserErrors[0].textContent}`);
+                }
+
+                // Check for root element
+                const typesElement = xmlDoc.getElementsByTagName('types')[0];
+                if (!typesElement) {
+                    throw new Error('Missing root <types> element');
+                }
+
+                const typeElements = xmlDoc.getElementsByTagName('type');
+                if (typeElements.length === 0) {
+                    throw new Error('No <type> elements found');
+                }
+
+                // Count modded items and valid items
+                let moddedItemCount = 0;
+                let validItemCount = 0;
+                let totalItems = typeElements.length;
+
+                for (let i = 0; i < typeElements.length; i++) {
+                    const type = typeElements[i];
+                    const name = type.getAttribute('name');
+                    const nominal = type.getElementsByTagName('nominal')[0];
+                    const min = type.getElementsByTagName('min')[0];
+
+                    if (!nominal || !min) {
+                        moddedItemCount++;
+                    } else {
+                        validItemCount++;
+                    }
+                }
+
+                // Store the validated XML
+                currentXmlDoc = xmlDoc;
+                originalXmlContent = e.target.result;
+
+                // Enable/disable buttons
+                const compareButton = document.getElementById('compareButton');
+                const processButton = document.getElementById('processButton');
+                
+                if (compareButton) {
+                    compareButton.disabled = true;
+                }
+                if (processButton) {
+                    processButton.disabled = false;
+                }
+
+                // Show warning if modded items detected
+                if (moddedItemCount > 0) {
+                    Swal.fire({
+                        title: 'Modded Types Detected',
+                        html: `
+                            <div class="text-start">
+                                <p class="mb-2">This types.xml file contains modded items:</p>
+                                <ul class="mb-3">
+                                    <li>Total Items: ${totalItems}</li>
+                                    <li>Valid Items: ${validItemCount}</li>
+                                    <li>Modded Items: ${moddedItemCount}</li>
+                                </ul>
+                                <div class="alert alert-warning">
+                                    <i class="ti ti-alert-triangle me-2"></i>
+                                    Modded items will be ignored during the boost process. Only items with valid nominal/min values will be processed.
+                                </div>
+                            </div>
+                        `,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Proceed Anyway',
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (!result.isConfirmed) {
+                            // Reset file input if user cancels
+                            typesFile.value = '';
+                            processButton.disabled = true;
+                        }
+                    });
+                }
+
+            } catch (error) {
+                document.getElementById('processButton').disabled = true;
+                typesFile.value = '';
+
+                Swal.fire({
+                    title: 'Invalid types.xml File',
+                    html: `
+                        <div class="text-start">
+                            <p class="mb-2">The following error was detected:</p>
+                            <div class="alert alert-danger text-start p-3">
+                                <i class="ti ti-alert-triangle me-2"></i>
+                                ${error.message}
+                            </div>
+                            <p class="small text-muted mb-0">Please check:</p>
+                            <ul class="small text-muted ms-3">
+                                <li>The file has a valid XML structure</li>
+                                <li>All required elements are present</li>
+                                <li>All values are in the correct format</li>
+                                <li>There are no missing or invalid tags</li>
+                            </ul>
+                        </div>
+                    `,
+                    icon: 'error'
+                });
+            }
+        };
+        reader.readAsText(file);
+    } catch (error) {
+        console.error('Error reading file:', error);
+        document.getElementById('processButton').disabled = true;
+        typesFile.value = '';
+        Swal.fire({
+            title: 'File Read Error',
+            text: 'Unable to read the file. Please try again.',
+            icon: 'error'
+        });
+    }
+});
+
+		// Helper function to read chunks
+		function readChunk(chunk) {
+			return new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.onload = e => resolve(e.target.result);
+				reader.onerror = reject;
+				reader.readAsText(chunk);
+			});
+		}        
+
+		// Error handling
+		window.addEventListener('load', function() {
+			const urlParams = new URLSearchParams(window.location.search);
+			if (urlParams.has('error')) {
+				Swal.fire({
+					title: 'Error',
+					text: decodeURIComponent(urlParams.get('error')),
+					icon: 'error'
+				});
+			}
+			
+			// Initialize comparison functionality
+			initializeComparison();
+		});
+
+		// File handling and drag/drop
+		document.addEventListener('DOMContentLoaded', function() {
+			const dropZone = document.querySelector('.upload-zone');
+			const fileInput = document.getElementById('typesFile');
+			const uploadPrompt = document.getElementById('uploadPrompt');
+			const fileInfo = document.getElementById('fileInfo');
+			const fileName = document.getElementById('fileName');
+			const removeFile = document.getElementById('removeFile');
+
+			// File display functions
+			function updateFileDisplay() {
+				if (fileInput.files.length > 0) {
+					fileName.textContent = fileInput.files[0].name;
+					uploadPrompt.classList.add('d-none');
+					fileInfo.classList.remove('d-none');
+				} else {
+					uploadPrompt.classList.remove('d-none');
+					fileInfo.classList.add('d-none');
+					document.getElementById('compareButton').disabled = true;
+				}
+			}
+
+			// Handle file selection
+			fileInput.addEventListener('change', updateFileDisplay);
+
+			// Handle file removal
+			removeFile.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				fileInput.value = '';
+				updateFileDisplay();
+				currentXmlDoc = null;
+				document.getElementById('processButton').disabled = true;
+			});
+
+			// Prevent default drag behaviors
+			['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+				document.addEventListener(eventName, preventDefaults, false);
+				dropZone.addEventListener(eventName, preventDefaults, false);
+			});
+			
+			dropZone.addEventListener('drop', function(e) {
+				const dt = e.dataTransfer;
+				const files = dt.files;
+
+				if (files.length) {
+					const file = files[0];
+					const dataTransfer = new DataTransfer();
+					dataTransfer.items.add(file);
+					fileInput.files = dataTransfer.files;
+					
+					const event = new Event('change');
+					fileInput.dispatchEvent(event);
+				}
+			}, false);
+
+			// Highlight drop zone when dragging over it
+			['dragenter', 'dragover'].forEach(eventName => {
+				dropZone.addEventListener(eventName, function(e) {
+					dropZone.classList.add('border-primary');
+					dropZone.style.transform = 'scale(1.02)';
+					dropZone.style.transition = 'all 0.2s ease';
+				}, false);
+			});
+
+			['dragleave', 'drop'].forEach(eventName => {
+				dropZone.addEventListener(eventName, function(e) {
+					dropZone.classList.remove('border-primary');
+					dropZone.style.transform = 'scale(1)';
+				}, false);
+			});
+		});
+
+		function preventDefaults(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		}
+
+		function calculateChangesDistribution(originalXml, modifiedXml) {
+            const changes = {
+                labels: ['1-25%', '26-50%', '51-75%', '76-90%', '90%+'],
+                reduced: [0, 0, 0, 0, 0],
+                total: 0
+            };
+            
+            const originalTypes = originalXml.getElementsByTagName('type');
+            const modifiedTypes = modifiedXml.getElementsByTagName('type');
+            
+            for (let i = 0; i < originalTypes.length; i++) {
+                const originalNominal = parseInt(originalTypes[i].getElementsByTagName('nominal')[0]?.textContent) || 0;
+                const modifiedNominal = parseInt(modifiedTypes[i].getElementsByTagName('nominal')[0]?.textContent) || 0;
+                
+                if (originalNominal !== modifiedNominal) {
+                    changes.total++;
+                    const reductionPercent = ((originalNominal - modifiedNominal) / originalNominal) * 100;
+                    
+                    if (reductionPercent <= 25) changes.reduced[0]++;
+                    else if (reductionPercent <= 50) changes.reduced[1]++;
+                    else if (reductionPercent <= 75) changes.reduced[2]++;
+                    else if (reductionPercent <= 90) changes.reduced[3]++;
+                    else changes.reduced[4]++;
+                }
+            }
+            
+            return changes;
+        }
+
+		function initializeChart(canvasId, data) {
+			const ctx = document.getElementById(canvasId).getContext('2d');
+			
+			const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Reduced Items',
+                        data: data.reduced,
+                        backgroundColor: 'rgba(220, 53, 69, 0.5)',
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        borderWidth: 1
+                    }]
+                },
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						title: {
+							display: true,
+							text: `Changes Distribution (Total: ${data.total})`,
+							color: '#fff'
+						},
+						legend: {
+							labels: {
+								color: '#fff'
+							}
+						}
+					},
+					scales: {
+						x: {
+							stacked: true,
+							grid: {
+								color: 'rgba(255, 255, 255, 0.1)'
+							},
+							ticks: {
+								color: '#fff'
+							}
+						},
+						y: {
+							stacked: true,
+							grid: {
+								color: 'rgba(255, 255, 255, 0.1)'
+							},
+							ticks: {
+								color: '#fff'
+							}
+						}
+					}
+				}
+			});
+			
+			return chart;
+		}
+
+		function initializeComparison() {
+			const compareButton = document.getElementById('compareButton');
+			const closeComparisonButton = document.getElementById('closeComparison');
+			const comparisonSection = document.querySelector('.comparison-section');
+			
+			compareButton?.addEventListener('click', () => {
+				if (originalXmlContent && modifiedXmlContent) {
+					performComparison(originalXmlContent, modifiedXmlContent);
+					comparisonSection?.classList.remove('d-none');
+				}
+			});
+
+			closeComparisonButton?.addEventListener('click', () => {
+				comparisonSection?.classList.add('d-none');
+			});
+		}
+
+		function performComparison(original, modified) {
+			try {
+				const originalDoc = new DOMParser().parseFromString(original, 'text/xml');
+				const modifiedDoc = new DOMParser().parseFromString(modified, 'text/xml');
+				const boostFactor = document.getElementById('multiplierValue').textContent;
+                const multiplier = parseInt($('#multiplierValue').text());
+
+				if (multiplier === 0) {
+                    document.getElementById('diffContent').innerHTML = `
+                        <div class="alert alert-info text-center">
+                            <i class="ti ti-info-circle me-2"></i>
+                            No changes to compare - no reduction applied
+                        </div>
+                    `;
+                    document.getElementById('changeCount').textContent = '0';
+                    document.getElementById('loadedLines').textContent = originalDoc.getElementsByTagName('type').length;
+                    return;
+                }
+                
+                const headerElement = document.querySelector('.comparison-section .card-header h5');
+                if (headerElement) {
+                    headerElement.innerHTML = `File Comparison (${multiplier}% Reduction)`;
+                }
+
+				const originalTypes = originalDoc.getElementsByTagName('type');
+				const modifiedTypes = modifiedDoc.getElementsByTagName('type');
+
+				let diffHtml = '<div class="diff-container">';
+				diffHtml += '<table class="diff-table"><thead><tr><th>Item Name</th><th>Original Values</th><th>Modified Values</th></tr></thead><tbody>';
+
+				let changedCount = 0;
+
+				for (let i = 0; i < originalTypes.length; i++) {
+					const originalType = originalTypes[i];
+					const modifiedType = modifiedTypes[i];
+
+					if (!originalType || !modifiedType) continue;
+
+					const name = originalType.getAttribute('name');
+					const originalNominal = originalType.getElementsByTagName('nominal')[0]?.textContent;
+					const originalMin = originalType.getElementsByTagName('min')[0]?.textContent;
+					const modifiedNominal = modifiedType.getElementsByTagName('nominal')[0]?.textContent;
+					const modifiedMin = modifiedType.getElementsByTagName('min')[0]?.textContent;
+
+					if (originalNominal !== modifiedNominal || originalMin !== modifiedMin) {
+						changedCount++;
+						diffHtml += `
+							<tr class="diff-row">
+								<td class="item-name">${escapeHtml(name)}</td>
+								<td class="original-values">
+									nominal: ${originalNominal}<br>
+									min: ${originalMin}
+								</td>
+								<td class="modified-values${originalNominal !== modifiedNominal ? ' changed' : ''}${originalMin !== modifiedMin ? ' changed' : ''}">
+									nominal: ${modifiedNominal}<br>
+									min: ${modifiedMin}
+								</td>
+							</tr>
+						`;
+					}
+				}
+
+				diffHtml += '</tbody></table></div>';
+
+				document.getElementById('diffContent').innerHTML = diffHtml;
+				document.getElementById('changeCount').textContent = changedCount;
+				document.getElementById('loadedLines').textContent = originalTypes.length;
+
+				// Add required styles
+				addComparisonStyles();
+
+			} catch (error) {
+				console.error('Comparison error:', error);
+				document.getElementById('diffContent').innerHTML = '<div class="alert alert-danger">Error comparing files</div>';
+			}
+		}
+
+		function isLineDifferent(line1, line2) {
+			return line1 !== line2;
+		}
+
+		function countChangedLines(original, modified) {
+			let changes = 0;
+			const maxLength = Math.max(original.length, modified.length);
+			for (let i = 0; i < maxLength; i++) {
+				if (original[i] !== modified[i]) changes++;
+			}
+			return changes;
+		}
+
+		function escapeHtml(text) {
+			const div = document.createElement('div');
+			div.textContent = text;
+			return div.innerHTML;
+		}
+
+		function addComparisonStyles() {
+		if (!document.getElementById('comparisonStyles')) {
+			const styles = `
+				.diff-container { 
+					max-height: 500px; 
+					overflow: auto; 
+				}
+				.diff-table {
+					width: 100%;
+					border-collapse: collapse;
+					table-layout: fixed;
+				}
+				.diff-table th {
+					background: rgba(0,0,0,0.2);
+					padding: 8px;
+					text-align: left;
+				}
+				.diff-table th:first-child {
+					width: 30%; /* Item name column */
+				}
+				.diff-table th:nth-child(2),
+				.diff-table th:nth-child(3) {
+					width: 35%; /* Values columns */
+				}
+				.diff-table td {
+					padding: 8px;
+					border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+				.diff-row:hover {
+					background: rgba(255,255,255,0.05);
+				}
+				.item-name {
+					font-weight: bold;
+					color: #fff;
+					font-size: 0.9em;
+				}
+				.changed {
+					background-color: rgba(202, 97, 11, 0.32);
+					border-radius: 4px;
+				}
+                .original-values {
+                    background-color: rgba(28, 121, 32, 0.28);
+                    border-radius: 4px;
+                }
+				.original-values, .modified-values {
+					font-family: monospace;
+					font-size: 0.9em;
+					white-space: nowrap;
+				}
+			`;
+			
+			const styleElement = document.createElement('style');
+			styleElement.id = 'comparisonStyles';
+			styleElement.textContent = styles;
+			document.head.appendChild(styleElement);
+		}
+	}
+
+		function escapeHtml(text) {
+			const div = document.createElement('div');
+			div.textContent = text;
+			return div.innerHTML;
+		}
+
+		document.getElementById('helpGuideButton').addEventListener('click', function() {
+			const modalHtml = `
+						<div class="modal-onboarding modal fade animate__animated" id="helpGuideModal" tabindex="-1" aria-hidden="true">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header border-0">
+										<h5 class="modal-title">Types Reducer Guide</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div id="helpGuideCarousel" class="carousel slide" data-bs-interval="false">
+										<div class="carousel-inner">
+											<!-- File Upload -->
+											<div class="carousel-item active">
+												<div class="row align-items-center">
+													<div class="col-md-4 text-center">
+														<i class="ti ti-upload text-primary" style="font-size: 8rem;"></i>
+													</div>
+													<div class="col-md-8">
+														<div class="onboarding-content p-4">
+															<h4 class="mb-3">Step 1: File Upload</h4>
+															<div class="text-start">
+																<ul class="mb-3">
+																	<li>Use the drop zone to upload your types.xml file</li>
+																	<li>The tool will automatically validate your file</li>
+																	<li>Once uploaded, you'll see the total number of items detected</li>
+																</ul>
+																<div class="alert alert-warning">
+																	<i class="ti ti-alert-triangle me-2"></i>
+																	If your types file is invalid xml code for whatever reason, you will not be able to click the process button. An alert will show if your types.xml is invalid upon uploading it.
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<!-- Boost Settings -->
+											<div class="carousel-item">
+												<div class="row align-items-center">
+													<div class="col-md-4 text-center">
+														<i class="ti ti-multiplier-2x text-primary" style="font-size: 8rem;"></i>
+													</div>
+													<div class="col-md-8">
+														<div class="onboarding-content p-4">
+															<h4 class="mb-3">Step 2: Reduction Percentage</h4>
+															<div class="text-start">
+																<ul class="mb-3">
+                                                                    <li>Select from preset values (0% to 90% reduction)</li>
+                                                                    <li>Use "Custom Amount" for values between 1-99%</li>
+                                                                    <li>The reduction will be applied to all nominal values</li>
+                                                                </ul>
+																<div class="alert alert-info">
+																	<i class="ti ti-info-circle me-2"></i>
+																	Warning messages will appear for reductions above 75% to help you make informed decisions. Please note; if you reduce your loot by to much percent, nominal and min values will be at 1/1 ratio. 
+																</div>
+
+																<h6 class="mt-3 mb-2">Minimum Values</h6>
+																<ul>
+																	<li>When enabled: Automatically adjusts min values to 60% of the new nominal value</li>
+																	<li>When disabled: Keeps original min values unchanged</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<!-- Map Selection & Categories -->
+											<div class="carousel-item">
+												<div class="row align-items-center">
+													<div class="col-md-4 text-center">
+														<i class="ti ti-map text-primary" style="font-size: 8rem;"></i>
+													</div>
+													<div class="col-md-8">
+														<div class="onboarding-content p-4">
+															<h4 class="mb-3">Step 3: Map & Categories</h4>
+															<div class="text-start">
+																<h6 class="mb-2">Map Selection</h6>
+																<ul class="mb-3">
+																	<li>Choose your map type: Chernarus, Livonia, Sakhal, or Custom</li>
+																	<li>For custom maps, you can enter your specific map name</li>
+																</ul>
+
+																<h6 class="mt-3 mb-2">Category Targeting (Optional)</h6>
+																<ul class="mb-3">
+																	<li><strong>Target Categories:</strong> Only reduce items in selected categories</li>
+																	<li><strong>Exclusions:</strong> Reduce everything except selected categories</li>
+																	<li>You cannot use both targeting and exclusions simultaneously</li>
+																</ul>
+																<div class="alert alert-danger">
+																	<i class="ti ti-alert-circle me-2"></i>
+																	If you do not supply either target or exclusions your entire types.xml will be reduced to the value you choose (Highly not recommended)
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<!-- Processing & Comparison -->
+											<div class="carousel-item">
+												<div class="row align-items-center">
+													<div class="col-md-4 text-center">
+														<i class="ti ti-chart-bar text-primary" style="font-size: 8rem;"></i>
+													</div>
+													<div class="col-md-8">
+														<div class="onboarding-content p-4">
+															<h4 class="mb-3">Processing & Analysis</h4>
+															<div class="text-start">
+																<h6 class="mb-2">Processing</h6>
+																<ul class="mb-3">
+																	<li>Click "Process" to generate your modified types.xml</li>
+																	<li>A progress bar will show the processing status</li>
+																	<li>Upon completion, you'll see a changes distribution chart</li>
+																</ul>
+
+																<h6 class="mb-2">Comparison Feature</h6>
+																<ul class="mb-3">
+																	<li>View side-by-side comparisons of changed values</li>
+																	<li>See exactly which items were modified</li>
+																	<li>Track the total number of changes made</li>
+																</ul>
+																<div class="alert alert-info">
+																	<i class="ti ti-info-circle me-2"></i>
+																	Note: Comparison is only available when the reduction factor is greater than 0%
+																</div>
+
+																<h6 class="mb-2">Statistics</h6>
+																<ul>
+																	<li><strong>Total Items:</strong> Number of items with nominal values greater than 0</li>
+																	<li><strong>Modified Items:</strong> Number of items affected by your reduction settings</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<!-- Recommendations -->
+											<div class="carousel-item">
+												<div class="onboarding-content p-4">
+													<h4 class="mb-3">Our Recommendations</h4>
+													<div class="recommendations-grid">
+														<!-- Information Section -->
+														<div class="grid-section">
+															<div class="guide-info">
+																<div class="alert alert-light border-0">
+																	<i class="ti ti-alert-octagon me-2 text-warning"></i>
+																	It is our recommendation that you use this tool with care. While great care has been taken to make it user-friendly, reducing types.xml values through any tool can potentially affect server performance if not used properly.
+																</div>
+
+																<div class="row g-3">
+																	<div class="col-md-4">
+																		<div class="point">
+																			<i class="ti ti-shield-check me-2 text-primary"></i>
+																			Always keep a backup of your original types.xml file
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="point">
+																			<i class="ti ti-bulb me-2 text-primary"></i>
+																			Ensure you understand the tool before implementation
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="point">
+																			<i class="ti ti-users me-2 text-primary"></i>
+																			Join our Discord for support
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<!-- Best Practices Section -->
+														<div class="grid-section practices">
+															<div class="row g-3">
+																<div class="col-md-4">
+																	<div class="practice-card">
+																		<div class="practice-header">
+																			<i class="ti ti-scale me-2 text-primary"></i>
+																			<strong>Balanced Reduction</strong>
+																		</div>
+																		<ul class="practice-list">
+                                                                            <li>Maintains realistic scarcity while controlling loot availability</li>
+                                                                            <li>Prevents server economy saturation</li>
+                                                                            <li>Keeps player engagement and exploration meaningful</li>
+                                                                        </ul>
+																	</div>
+																</div>
+																<div class="col-md-4">
+																	<div class="practice-card">
+																		<div class="practice-header">
+																			<i class="ti ti-settings me-2 text-primary"></i>
+																			<strong>Things to remember</strong>
+																		</div>
+																		<ul class="practice-list">
+																			<li>Higher reduction values mean less loot availability</li>
+																		</ul>
+																	</div>
+																</div>
+																<div class="col-md-4">
+																	<div class="practice-card">
+																		<div class="practice-header">
+																			<i class="ti ti-car me-2 text-primary"></i>
+																			<strong>Vehicle Management</strong>
+																		</div>
+																		<ul class="practice-list">
+																			<li>Consider vehicle parts when reducing</li>
+                                                                            <li>Balance reduction with gameplay progression</li>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<!-- Warnings Section -->
+														<div class="grid-section">
+															<div class="alert alert-warning">
+																<i class="ti ti-balance-scale me-2"></i>
+																<strong>Finding the Right Balance:</strong>
+																<p class="mb-0 mt-2">The key to a successful DayZ server is maintaining the delicate balance between loot availability and survival challenge. Higher reduction values impact the survival experience - focus on creating an engaging experience that keeps players exploring and surviving.</p>
+															</div>
+
+															<div class="alert alert-info">
+																<i class="ti ti-info-circle me-2"></i>
+																Always validate your XML. We have our own, + there are multiple out there to validate them.
+															</div>
+
+															<div class="alert alert-warning">
+																<i class="ti ti-alert-triangle me-2"></i>
+																Reducing loot above 75% may significantly impact gameplay experience
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="modal-footer border-0 d-flex justify-content-between">
+											<button class="btn btn-outline-secondary" data-bs-target="#helpGuideCarousel" data-bs-slide="prev">
+												<i class="ti ti-chevron-left me-1"></i> Previous
+											</button>
+											<div class="carousel-indicators position-relative m-0">
+												<button type="button" data-bs-target="#helpGuideCarousel" data-bs-slide-to="0" class="active"></button>
+												<button type="button" data-bs-target="#helpGuideCarousel" data-bs-slide-to="1"></button>
+												<button type="button" data-bs-target="#helpGuideCarousel" data-bs-slide-to="2"></button>
+												<button type="button" data-bs-target="#helpGuideCarousel" data-bs-slide-to="3"></button>
+												<button type="button" data-bs-target="#helpGuideCarousel" data-bs-slide-to="4"></button>
+											</div>
+											<button class="btn btn-primary" data-bs-target="#helpGuideCarousel" data-bs-slide="next">
+												Next <i class="ti ti-chevron-right ms-1"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						`;
+
+		// Add modal to document
+		if (!document.getElementById('helpGuideModal')) {
+			document.body.insertAdjacentHTML('beforeend', modalHtml);
+		}
+
+		// Initialize and show modal
+		const modal = new bootstrap.Modal(document.getElementById('helpGuideModal'));
+		modal.show();
+	});
+	</script>
+
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/typesreduce by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:29 GMT -->
+</html>
+

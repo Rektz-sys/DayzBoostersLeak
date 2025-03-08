@@ -1,0 +1,1465 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+
+<html
+  lang="en"
+  class="layout-navbar-fixed layout-compact dark-style layout-menu-fixed layout-menu-collapsed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/spawngenerator by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Spawn Point Generator &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Generate spawnpoints using original dayz spawn point xml." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+	<link rel="stylesheet" href="../../../unpkg.com/leaflet%401.9.4/dist/leaflet.css"/>
+	<link rel="stylesheet" href="../../../unpkg.com/leaflet.markercluster%401.4.1/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="../../../unpkg.com/leaflet.markercluster%401.4.1/dist/MarkerCluster.Default.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  
+	  .leaflet-container {
+		background: transparent !important;
+	  }
+	  
+	  .map-container {
+		background: rgba(0, 0, 0, 0.2);
+		border-radius: 0.5rem;
+		overflow: hidden;
+	}
+	  
+	  .location-label {
+		background: none;
+		border: none;
+		font-size: 11px;
+		font-family: 'Public Sans', sans-serif;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.7px;
+	}
+
+	.location-label div {
+		color: rgba(255, 255, 255, 0.95);
+		text-shadow: 
+			-1px -1px 2px rgba(0,0,0,0.8),
+			1px -1px 2px rgba(0,0,0,0.8),
+			-1px 1px 2px rgba(0,0,0,0.8),
+			1px 1px 2px rgba(0,0,0,0.8);
+		white-space: nowrap;
+		transition: transform 0.2s ease;
+	}
+
+	.location-label div:hover {
+		transform: scale(1.1);
+	}
+
+	.leaflet-control-coordinates {
+		position: absolute;  /* Changed from fixed to absolute */
+		bottom: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+		background: rgba(0, 0, 0, 0.8);
+		color: white;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		font-family: monospace;
+		font-size: 0.875rem;
+		z-index: 999;  /* Make sure it's above the map but below other UI elements */
+		pointer-events: none;
+	}
+
+	/* Update the custom position class */
+	.leaflet-bottomcenter {  /* Changed from topcenter to bottomcenter */
+		position: absolute;
+		bottom: 0;  /* Changed from top to bottom */
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1000;
+	}
+	
+	.saved-coordinates-list {
+		border-top: 1px solid rgba(0,0,0,0.1);
+	}
+
+	.saved-coordinate-item {
+		padding: 1rem;
+		border-radius: 0.5rem;
+		background: rgba(255, 255, 255, 0.05);
+		margin-bottom: 0.75rem;
+		transition: all 0.3s ease;
+	}
+	
+	.saved-coordinate-item:hover {
+		background: rgba(255, 255, 255, 0.1);
+	}
+	
+	#xmlContent {
+		white-space: pre;
+		overflow-x: auto;
+		color: #e6e6e6;
+		font-family: monospace;
+		font-size: 0.875rem;
+		line-height: 1.5;
+	}
+	
+	.leaflet-popup-content-wrapper {
+    background: rgba(0, 0, 0, 0.85) !important;
+    color: white !important;
+}
+
+.leaflet-popup-tip {
+    background: rgba(0, 0, 0, 0.85) !important;
+}
+
+	.modal-content {
+		background: #2b2c40;
+		border: 1px solid rgba(255,255,255,0.1);
+	}
+
+	.modal-header {
+		border-bottom: 1px solid rgba(255,255,255,0.1);
+	}
+
+	.modal-footer {
+		border-top: 1px solid rgba(255,255,255,0.1);
+	}
+	
+	.poi-marker {
+		background: none;
+		border: none;
+	}
+
+	.poi-icon {
+		align-items: center;
+		border-radius: 50%;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+		color: white;
+		display: flex;
+		height: 30px;
+		justify-content: center;
+		transition: all 0.2s ease;
+		width: 30px;
+	}
+
+	.poi-icon:hover {
+		transform: scale(1.2);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+	}
+
+	.poi-icon i {
+		font-size: 16px;
+	}
+
+	.poi-popup {
+		color: white !important;
+	}
+
+	.poi-popup h6 {
+		color: white !important;
+		font-size: 0.9rem;
+	}
+
+	/* Coordinate Section in Popup */
+	.coords-section {
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 4px;
+		color: rgba(255, 255, 255, 0.9) !important;
+		padding: 8px;
+	}
+
+	.coord-group {
+		margin-bottom: 8px;
+	}
+
+	.coord-group:last-child {
+		margin-bottom: 0;
+	}
+
+	.coord-label {
+		color: #5a8dee !important;
+		display: block;
+		font-size: 0.75rem;
+		font-weight: 600;
+		margin-bottom: 4px;
+		text-transform: uppercase;
+	}
+
+	.coord-values {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	.coord-values span {
+		color: rgba(255, 255, 255, 0.7) !important;
+		font-size: 0.8rem;
+	}
+
+	.coord-values strong {
+		color: white !important;
+		font-family: monospace;
+		font-weight: 600;
+	}
+
+	  
+	</style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>		
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+			<div class="container-fluid p-4">
+				<!-- Hero Section -->
+				<div class="row mb-4">
+					  <div class="col-12">
+						<div class="card  border-0">
+						  <div class="card-body d-flex align-items-center p-4">
+							<div class="avatar avatar-lg rounded me-3">
+							  <i class="ti ti-file-code fs-2"></i>
+							</div>
+							<div>
+							  <h4 class="card-title mb-0">Spawn Point Generator</h4>
+							  <p class="card-text mb-0 text-muted">Generate spawnpoints using original dayz spawn point xml.</p>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+
+				<!-- Control Panel -->
+				<div class="row mb-4">
+					<div class="col-12">
+						<div class="card shadow-sm">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="form-label fw-semibold d-flex align-items-center" for="mapSelector">
+												<i class="ti ti-map-2 me-2"></i>Select Map
+											</label>
+											<select class="form-select form-select-lg shadow-sm mb-3" id="mapSelector">
+												<option value="chernarus">Chernarus</option>
+												<option value="livonia">Livonia</option>
+												<option value="sakhal">Sakhal</option>
+											</select>
+											
+											<!-- Toggle Switches -->
+											<div class="d-flex flex-column gap-2">
+												<div class="form-check form-switch">
+													<input class="form-check-input" type="checkbox" id="townNamesToggle" checked>
+													<label class="form-check-label" for="townNamesToggle">Show Town Names</label>
+												</div>
+												<div class="form-check form-switch">
+													<input class="form-check-input" type="checkbox" id="poiToggle" checked>
+													<label class="form-check-label" for="poiToggle">Show POI Markers</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-8">
+										<div class="alert alert-primary border-0 d-flex align-items-center shadow-sm mb-3">
+											<i class="ti ti-bulb fs-3 me-3"></i>
+											<div>
+												<h6 class="fw-bold mb-1">Quick Guide</h6>
+												<p class="mb-0">Click anywhere on the map to add spawn points. Points are automatically saved and displayed in the side panel.</p>
+											</div>
+										</div>
+										<div class="alert alert-danger border-0 d-flex align-items-center shadow-sm">
+											<i class="ti ti-alert-triangle fs-3 me-3"></i>
+											<div>
+												<p class="mb-0">When choosing spawn points, please make sure you have selected the correct map. Incorrect map spawn points will cause water spawns</p>
+											</div>
+										</div>
+										<div class="alert alert-info border-0 d-flex align-items-center shadow-sm">
+											<i class="ti ti-alert-triangle fs-3 me-3"></i>
+											<div>
+												<p class="mb-0">When testing spawn points, change player save to <code>0</code> in db->economy.xml to test faster. Change it back to 1 once you have finished</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Main Content Area -->
+				<div class="row g-4">
+					<!-- Map Section -->
+					<div class="col-lg-9">
+						<div class="card shadow-sm h-100">
+							<div class="card-header bg-light py-3">
+								<div class="d-flex align-items-center">
+									<i class="ti ti-compass me-2 fs-4"></i>
+									<h5 class="mb-0">Currently Viewing: <span id="currentMapView" class="fw-bold">Chernarus</span></h5>
+								</div>
+							</div>
+							<div class="card-body p-0">
+								<div id="myMap" style="width:100%; height:750px; border-radius: 0 0 0.5rem 0.5rem"></div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Coordinates Panel -->
+					<div class="col-lg-3">
+						<div class="card shadow-sm h-100">
+							<div class="card-header bg-light py-3">
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="d-flex align-items-center">
+										<i class="ti ti-list me-2 fs-4"></i>
+										<h5 class="mb-0">Spawn Points</h5>
+									</div>
+									<div class="btn-group">
+										<button class="btn btn-outline-primary btn-sm" onclick="importXML()">
+											<i class="ti ti-upload me-1"></i>Import
+										</button>
+										<button class="btn btn-primary btn-sm" onclick="generateXML()">
+											<i class="ti ti-download me-1"></i>Export
+										</button>
+									</div>
+									
+									
+									
+								</div>
+							</div>
+							<div class="card-body p-0">
+								<div id="savedCoordinates" class="saved-coordinates-list custom-scrollbar"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Export Modal -->
+				<div class="modal fade" id="exportModal" tabindex="-1">
+					<div class="modal-dialog modal-lg modal-dialog-centered">
+						<div class="modal-content border-0 shadow">
+							<div class="modal-header border-bottom">
+								<h5 class="modal-title d-flex align-items-center">
+									<i class="ti ti-file-export me-2"></i>Export Spawn Points XML
+								</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+							<div class="modal-body">
+								<div class="alert alert-info border-0 d-flex">
+									<i class="ti ti-info-circle fs-4 me-3"></i>
+									<div>Use this XML to replace your server's cfgplayerspawnpoints.xml file</div>
+								</div>
+								<pre class="bg-light p-3 rounded"><code id="xmlContent" class="text-dark"></code></pre>
+							</div>
+							<div class="modal-footer border-top">
+								<button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" id="downloadXml">
+									<i class="ti ti-download me-1"></i>Download XML
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Import Modal -->
+				<div class="modal fade" id="importModal" tabindex="-1">
+					<div class="modal-dialog modal-lg modal-dialog-centered">
+						<div class="modal-content border-0 shadow">
+							<div class="modal-header border-bottom">
+								<h5 class="modal-title d-flex align-items-center">
+									<i class="ti ti-file-import me-2"></i>Import Spawn Points XML
+								</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+							<div class="modal-body">
+								<div class="alert alert-info border-0 d-flex">
+									<i class="ti ti-info-circle fs-4 me-3"></i>
+									<div>Paste your cfgplayerspawnpoints.xml content below</div>
+								</div>
+								<div class="alert alert-danger border-0 d-flex">
+									<i class="ti ti-info-circle fs-4 me-3"></i>
+									<div>Original Spawn Points file is accepted for now. Grouping system xml code is not accepted at the moment.</div>
+								</div>
+								<textarea id="xmlInput" class="form-control text-white" rows="10"></textarea>
+							</div>
+							<div class="modal-footer p-3">
+								<button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" onclick="processImport()">
+									<i class="ti ti-file-import me-1"></i>Import Points
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>			<div class="content-backdrop fade"></div>
+		</div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+	<script src="../../../cdn.jsdelivr.net/npm/sweetalert2%4011.10.5/dist/sweetalert2.all.min.js"></script>
+	
+	<script src="../../../unpkg.com/leaflet%401.9.4/dist/leaflet.js"></script>
+	<script src="../../../unpkg.com/leaflet.markercluster%401.4.1/dist/leaflet.markercluster.js"></script>
+
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script type="text/javascript">
+	let currentMap = null;
+	let clickMarker = null;
+	let clickTimeout = null;
+	let coordsDiv = null;
+	let importedMarkers = [];
+	
+	let poiMarkers = [];
+	let townMarkers = [];
+	
+	let militaryMarkerGroup = null;
+
+	
+	function getUrlWithTimestamp(url) {
+		return `${url}?v=${new Date().getTime()}`;
+	}
+	function saveCoordinate(coordString, mapType) {
+		const savedCoordsList = document.getElementById('savedCoordinates');
+		const coordItem = document.createElement('div');
+		coordItem.className = 'saved-coordinate-item';
+		coordItem.innerHTML = `
+			<small class="text-muted">${mapType}</small>
+			<div class="d-flex justify-content-between align-items-center">
+				<code>${coordString}</code>
+				<button class="btn btn-sm btn-danger" onclick="removeCoordinate(this, '${coordString}')">
+					<i class="ti ti-trash"></i>
+				</button>
+			</div>
+		`;
+		savedCoordsList.appendChild(coordItem);
+	}
+
+	function removeCoordinate(button, coordString) {
+		const [x, z] = coordString.split(',').map(num => parseInt(num.trim()));
+		importedMarkers = importedMarkers.filter(marker => {
+			const latLng = marker.getLatLng();
+			const mapSize = mapConfigs[document.getElementById('mapSelector').value].size;
+			const markerX = Math.round(latLng.lng * mapSize / 256);
+			const markerZ = Math.round((latLng.lat + 256) * mapSize / 256);
+			
+			if (markerX === x && markerZ === z) {
+				currentMap.removeLayer(marker);
+				return false;
+			}
+			return true;
+		});
+		button.closest('.saved-coordinate-item').remove();
+	}
+	
+	function loadPointsOfInterest(mapType) {
+		poiMarkers.forEach(marker => currentMap.removeLayer(marker));
+		poiMarkers = [];
+
+		if (militaryMarkerGroup) {
+			currentMap.removeLayer(militaryMarkerGroup);
+		}
+		militaryMarkerGroup = L.markerClusterGroup({
+			showCoverageOnHover: false,
+			spiderfyOnMaxZoom: true,
+			disableClusteringAtZoom: 5,
+			maxClusterRadius: 80,
+			iconCreateFunction: function(cluster) {
+				const count = cluster.getChildCount();
+				return L.divIcon({
+					className: 'poi-marker',
+					html: `<i class="ti ti-building-fortress" style="color: #c53265; font-size: 24px; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);"></i>
+						   <div style="position: absolute; bottom: -12px; width: 100%; text-align: center; font-size: 10px; color: white; text-shadow: 0 0 3px black;">${count}</div>`,
+					iconSize: [24, 36]
+				});
+			}
+		});
+
+		fetch(getUrlWithTimestamp(`/apps/tools/map/${mapType}/poi.json`))
+			.then(response => response.json())
+			.then(data => {
+				const mapSize = mapConfigs[mapType].size;
+				
+				data.pointsOfInterest.forEach(poi => {
+					const lat = (poi.position[2] * 256 / mapSize) - 256;
+					const lng = poi.position[0] * 256 / mapSize;
+					
+					const iconConfig = data.iconTypes[poi.type];
+					
+					if (poi.type === 'military') {
+						const marker = L.marker([lat, lng], {
+							icon: L.divIcon({
+								className: 'poi-marker',
+								html: `<i class="${iconConfig.icon}" style="color: ${iconConfig.color}; font-size: 24px; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);"></i>`,
+								iconSize: [24, 24]
+							})
+						}).bindPopup(`
+							<div class="poi-popup">
+								<div class="d-flex align-items-center mb-2">
+									<i class="${iconConfig.icon} me-2" style="color: ${iconConfig.color}"></i>
+									<h6 class="mb-0">${poi.name}</h6>
+								</div>
+								<div class="coords-section">
+									<div class="coord-group">
+										<span class="coord-label">Position</span>
+										<div class="coord-values">
+											<span>X: <strong>${poi.position[0]}</strong></span>
+											<span>Z: <strong>${poi.position[2]}</strong></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						`);
+						militaryMarkerGroup.addLayer(marker);
+					} else {
+						const marker = L.marker([lat, lng], {
+							icon: L.divIcon({
+								className: 'poi-marker',
+								html: `<i class="${iconConfig.icon}" style="color: ${iconConfig.color}; font-size: 24px; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);"></i>`,
+								iconSize: [24, 24]
+							})
+						});
+						
+						marker.bindPopup(`
+							<div class="poi-popup">
+								<div class="d-flex align-items-center mb-2">
+									<i class="${iconConfig.icon} me-2" style="color: ${iconConfig.color}"></i>
+									<h6 class="mb-0">${poi.name}</h6>
+								</div>
+								<div class="coords-section">
+									<div class="coord-group">
+										<span class="coord-label">Position</span>
+										<div class="coord-values">
+											<span>X: <strong>${poi.position[0]}</strong></span>
+											<span>Z: <strong>${poi.position[2]}</strong></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						`);
+						
+						poiMarkers.push(marker);
+					}
+				});
+
+				if (document.getElementById('poiToggle').checked) {
+					poiMarkers.forEach(marker => marker.addTo(currentMap));
+					militaryMarkerGroup.addTo(currentMap);
+				}
+			})
+			.catch(error => console.log('Error loading POIs:', error));
+	}
+	
+	function togglePOI() {
+  const showPOI = document.getElementById('poiToggle').checked;
+  
+  poiMarkers.forEach(marker => {
+    if (showPOI && currentMap) {
+      if (!currentMap.hasLayer(marker)) {
+        marker.addTo(currentMap);
+      }
+    } else if (currentMap && currentMap.hasLayer(marker)) {
+      currentMap.removeLayer(marker);
+    }
+  });
+  
+  if (militaryMarkerGroup) {
+    if (showPOI && currentMap) {
+      if (!currentMap.hasLayer(militaryMarkerGroup)) {
+        militaryMarkerGroup.addTo(currentMap);
+      }
+    } else if (currentMap && currentMap.hasLayer(militaryMarkerGroup)) {
+      currentMap.removeLayer(militaryMarkerGroup);
+    }
+  }
+}
+
+// Improved function to toggle town names visibility
+function toggleTownNames() {
+  const showTowns = document.getElementById('townNamesToggle').checked;
+  
+  townMarkers.forEach(marker => {
+    if (showTowns && currentMap) {
+      if (!currentMap.hasLayer(marker)) {
+        marker.addTo(currentMap);
+      }
+    } else if (currentMap && currentMap.hasLayer(marker)) {
+      currentMap.removeLayer(marker);
+    }
+  });
+}
+
+
+	function initMap(mapType) {
+  map = document.getElementById('currentMapView').textContent = mapType.charAt(0).toUpperCase() + mapType.slice(1);
+  
+  if (currentMap) {
+    currentMap.off();
+    currentMap.remove();
+  }
+
+  // Clear all existing marker arrays
+  poiMarkers.forEach(marker => marker && marker.remove());
+  townMarkers.forEach(marker => marker && marker.remove());
+  importedMarkers.forEach(marker => marker && marker.remove());
+  poiMarkers = [];
+  townMarkers = [];
+  
+  // Reset marker cluster group
+  if (militaryMarkerGroup) {
+    militaryMarkerGroup.clearLayers();
+  }
+
+  currentMap = L.map('myMap', {
+    crs: L.CRS.Simple,
+    minZoom: 1,
+    maxZoom: 6,
+    maxNativeZoom: 6,
+    maxBounds: [[-256, 0], [0, 256]],
+    maxBoundsViscosity: 1.0,
+    attributionControl: false,
+    zoomControl: true,
+    layers: [] // Start with empty layers
+  });
+  
+  L.control.attribution({
+    prefix: map
+  }).addTo(currentMap);
+  
+  // Add the base tile layer
+  L.tileLayer(mapConfigs[mapType].path, {
+    tileSize: L.point(256, 256),
+    noWrap: true,
+    bounds: [[-256, 0], [0, 256]]
+  }).addTo(currentMap);
+  
+  currentMap.setView(mapConfigs[mapType].initialView, 1);
+
+  // Create coordinate display if it doesn't exist
+  if (!coordsDiv) {
+    coordsDiv = document.createElement('div');
+    coordsDiv.className = 'leaflet-control-coordinates';
+    document.querySelector('#myMap').appendChild(coordsDiv);
+  }
+
+  currentMap.on('mousemove', function(e) {
+    const mapSize = mapConfigs[mapType].size;
+    const dayzX = Math.round(e.latlng.lng * mapSize / 256);
+    const dayzY = Math.round((e.latlng.lat + 256) * mapSize / 256);
+    coordsDiv.innerHTML = `X: ${dayzX} | Y: ${dayzY}`;
+  });
+
+  currentMap.on('click', function(e) {
+    const mapSize = mapConfigs[mapType].size;
+    const dayzX = Math.round(e.latlng.lng * mapSize / 256);
+    const dayzY = Math.round((e.latlng.lat + 256) * mapSize / 256);
+    
+    if (dayzX < 0 || dayzX > mapSize || dayzY < 0 || dayzY > mapSize) {
+      Swal.fire({
+        title: 'Invalid Location',
+        text: 'Please click within the map boundaries to set spawn points.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'btn btn-primary'
+        },
+        buttonsStyling: false
+      });
+      return;
+    }
+
+    if (clickMarker) {
+      currentMap.removeLayer(clickMarker);
+      clearTimeout(clickTimeout);
+    }
+    
+    const coordString = `${dayzX}, ${dayzY}`;
+    
+    clickMarker = L.circleMarker(e.latlng, {
+      radius: 5,
+      color: '#FFA500',
+      fillOpacity: 0,
+      weight: 2
+    }).addTo(currentMap);
+    
+    clickTimeout = setTimeout(() => {
+      if (clickMarker) {
+        currentMap.removeLayer(clickMarker);
+        clickMarker = null;
+      }
+    }, 10000);
+    
+    navigator.clipboard.writeText(coordString).then(function() {
+      saveCoordinate(coordString, mapType);
+      
+      const currentCoords = coordsDiv.innerHTML;
+      coordsDiv.innerHTML = 'Coordinates copied to clipboard';
+      
+      setTimeout(() => {
+        coordsDiv.innerHTML = currentCoords;
+      }, 5000);
+    });
+  });
+
+  // Load locations asynchronously
+  loadLocations(mapType);
+  
+  // Load POIs
+  loadPointsOfInterest(mapType);
+}
+
+function loadLocations(mapType) {
+  fetch(getUrlWithTimestamp(mapConfigs[mapType].locationsFile))
+    .then(response => response.json())
+    .then(data => {
+      // Clear existing town markers
+      townMarkers.forEach(marker => marker && currentMap.removeLayer(marker));
+      townMarkers = [];
+
+      data.locations.forEach(location => {
+        const mapSize = mapConfigs[mapType].size;
+        const lat = (location.position[1] * 256 / mapSize) - 256;
+        const lng = location.position[0] * 256 / mapSize;
+
+        const marker = L.marker([lat, lng], {
+          icon: L.divIcon({
+            className: 'location-label',
+            html: `<div>${location.names.en}</div>`,
+            iconSize: [80, 16],
+            iconAnchor: [40, 8]
+          })
+        });
+
+        townMarkers.push(marker);
+        if (document.getElementById('townNamesToggle').checked) {
+          marker.addTo(currentMap);
+        }
+      });
+    })
+    .catch(error => console.log('Error loading locations:', error));
+}
+
+	function getBaseXMLConfig() {
+		return {
+			spawn_params: {
+				min_dist_infected: "30.0",
+				max_dist_infected: "70.0",
+				min_dist_player: "25.0",
+				max_dist_player: "70.0",
+				min_dist_static: "0.5",
+				max_dist_static: "2.0"
+			},
+			generator_params: {
+				grid_density: "8",
+				grid_width: "40.0",
+				grid_height: "40.0",
+				min_dist_static: "0.5",
+				max_dist_static: "2.0",
+				min_steepness: "-45",
+				max_steepness: "45"
+			}
+		};
+	}
+
+	function createXMLElement(name, value, indent = 0) {
+		const spaces = '    '.repeat(indent);
+		if (typeof value === 'object') {
+			const children = Object.entries(value)
+				.map(([k, v]) => createXMLElement(k, v, indent + 1))
+				.join('\n');
+			return `${spaces}<${name}>\n${children}\n${spaces}</${name}>`;
+		}
+		return `${spaces}<${name}>${value}</${name}>`;
+	}
+
+	function generateXML() {
+		const savedCoords = document.querySelectorAll('.saved-coordinate-item');
+		const currentMap = document.getElementById('mapSelector').value;
+		const config = getBaseXMLConfig();
+		
+		// Generate coordinates XML
+		const coordinates = Array.from(savedCoords).map(coord => {
+			const [x, z] = coord.querySelector('code').textContent
+				.split(',')
+				.map(num => num.trim());
+			return `            <pos x="${x}" z="${z}" />`;
+		}).join('\n');
+
+		// Construct the final XML
+		const xmlContent = [
+			'<' +'?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+			'<playerspawnpoints>',
+			'',
+			'    <fresh>',
+			createXMLElement('spawn_params', config.spawn_params, 2),
+			'',
+			createXMLElement('generator_params', config.generator_params, 2),
+			'',
+			'        <generator_posbubbles>',
+			`            <!-- Please note; these coordinates are for map: ${currentMap} -->`,
+			coordinates,
+			'        </generator_posbubbles>',
+			'    </fresh>',
+			'    <hop></hop>',
+			'    <travel></travel>',
+			'</playerspawnpoints>'
+		].join('\n');
+
+		document.getElementById('xmlContent').textContent = xmlContent;
+		const modal = new bootstrap.Modal(document.getElementById('exportModal'));
+		modal.show();
+	}
+
+	function importXML() {
+		const modal = new bootstrap.Modal(document.getElementById('importModal'));
+		modal.show();
+	}
+
+	function processImport() {
+		const xmlText = document.getElementById('xmlInput').value;
+		const parser = new DOMParser();
+		
+		try {
+			const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+			
+			// Get all generator_posbubbles elements
+			const posBubbles = xmlDoc.getElementsByTagName('generator_posbubbles');
+			
+			if (posBubbles.length === 0) {
+				throw new Error('No generator_posbubbles section found in XML');
+			}
+			
+			// Clear existing markers and coordinates
+			document.getElementById('savedCoordinates').innerHTML = '';
+			importedMarkers.forEach(marker => currentMap.removeLayer(marker));
+			importedMarkers = [];
+			
+			let importCount = 0;
+			
+			// Process each generator_posbubbles section
+			Array.from(posBubbles).forEach(bubble => {
+				// Get only direct child pos elements (not those inside groups)
+				const positions = Array.from(bubble.children).filter(child => 
+					child.tagName === 'pos' && child.parentNode === bubble
+				);
+				
+				positions.forEach(pos => {
+					const x = Math.round(parseFloat(pos.getAttribute('x')));
+					const z = Math.round(parseFloat(pos.getAttribute('z')));
+					const mapType = document.getElementById('mapSelector').value;
+					const mapSize = mapConfigs[mapType].size;
+					
+					const lng = x * 256 / mapSize;
+					const lat = (z * 256 / mapSize) - 256;
+					
+					const marker = L.circleMarker([lat, lng], {
+						radius: 5,
+						color: '#ff0000',
+						fillColor: '#ff0000',
+						fillOpacity: 0.5,
+						weight: 2
+					}).addTo(currentMap);
+					
+					importedMarkers.push(marker);
+					saveCoordinate(`${x}, ${z}`, mapType);
+					importCount++;
+				});
+			});
+
+			if (importCount === 0) {
+				throw new Error('No valid spawn points found outside of groups');
+			}
+
+			bootstrap.Modal.getInstance(document.getElementById('importModal')).hide();
+			
+			const toast = document.createElement('div');
+			toast.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';
+			toast.style.zIndex = '1050';
+			toast.innerHTML = `
+				<div class="d-flex">
+					<i class="ti ti-check me-2"></i>
+					<div>Successfully imported ${importCount} spawn points</div>
+				</div>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			`;
+			document.body.appendChild(toast);
+			setTimeout(() => toast.remove(), 3000);
+
+		} catch (error) {
+			const errorDiv = document.createElement('div');
+			errorDiv.className = 'alert alert-danger mt-3';
+			errorDiv.innerHTML = `
+				<i class="ti ti-alert-circle me-2"></i>
+				Error importing XML: ${error.message}
+			`;
+			document.getElementById('xmlInput').parentNode.appendChild(errorDiv);
+			setTimeout(() => errorDiv.remove(), 3000);
+		}
+	}
+
+	
+	document.addEventListener('DOMContentLoaded', function() {
+		coordsDiv = document.createElement('div');
+		coordsDiv.className = 'leaflet-control-coordinates';
+		document.querySelector('#myMap').appendChild(coordsDiv);
+		
+		 document.getElementById('townNamesToggle').addEventListener('change', toggleTownNames);
+		document.getElementById('poiToggle').addEventListener('change', togglePOI);
+		
+		
+		initMap('chernarus');
+		
+		document.getElementById('mapSelector').addEventListener('change', function(e) {
+			importedMarkers.forEach(marker => currentMap.removeLayer(marker));
+			importedMarkers = [];
+			initMap(e.target.value);
+		});
+		
+		document.getElementById('downloadXml').addEventListener('click', function() {
+			const xmlContent = document.getElementById('xmlContent').textContent;
+			const blob = new Blob([xmlContent], { type: 'text/xml' });
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'cfgplayerspawnpoints.html';
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+			document.body.removeChild(a);
+		});
+	});
+	</script>
+
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/spawngenerator by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:35 GMT -->
+</html>
+

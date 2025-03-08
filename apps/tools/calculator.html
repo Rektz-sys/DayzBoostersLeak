@@ -1,0 +1,971 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script>
+<!doctype html>
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/calculator by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Day/Night Calculator &mdash; DayZ BoosterZ</title>
+    <meta name="description" content="Advanced calculator for DayZ server day/night cycle configuration" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link href="../../../fonts.googleapis.com/css28ebe.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    
+    <!-- Additional CSS for new features -->
+    <style>
+      .preset-chip {
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .preset-chip:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+      .time-preview {
+        background: linear-gradient(90deg, #ffd700 var(--day-percent), #1a237e var(--day-percent));
+        height: 20px;
+        border-radius: 10px;
+        margin: 10px 0;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+      .copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+      .config-box {
+        position: relative;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        padding: 15px;
+        margin-top: 10px;
+      }
+      .config-box pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+	  
+	  /* Day Card */
+		.day-card {
+			background: linear-gradient(180deg, #87CEEB 0%, #4A90E2 100%);
+			border: none;
+			overflow: hidden;
+			position: relative;
+			min-height: 120px;
+		}
+
+		.sun-icon {
+			position: absolute;
+			width: 40px;
+			height: 40px;
+			background: #FFD700;
+			border-radius: 50%;
+			right: 20px;
+			top: 20px;
+			box-shadow: 0 0 20px #FFD700;
+		}
+
+		.clouds {
+			position: absolute;
+			width: 60px;
+			height: 20px;
+			background: rgba(255, 255, 255, 0.8);
+			border-radius: 20px;
+			top: 15px;
+			left: 20px;
+		}
+
+		.clouds:before {
+			content: '';
+			position: absolute;
+			width: 40px;
+			height: 20px;
+			background: rgba(255, 255, 255, 0.8);
+			border-radius: 20px;
+			top: 10px;
+			left: 15px;
+		}
+
+		/* Night Card */
+		.night-card {
+			background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+			border: none;
+			overflow: hidden;
+			position: relative;
+			min-height: 120px;
+		}
+
+		.moon {
+			position: absolute;
+			width: 35px;
+			height: 35px;
+			background: #ffffff;
+			border-radius: 50%;
+			right: 20px;
+			top: 20px;
+			box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+		}
+
+		.stars {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+
+		.stars:after {
+			content: '';
+			position: absolute;
+			width: 2px;
+			height: 2px;
+			background: white;
+			box-shadow: 
+				10px 10px white,
+				20px 30px white,
+				30px 15px white,
+				40px 40px white,
+				50px 25px white,
+				60px 10px white,
+				70px 35px white,
+				80px 20px white,
+				90px 30px white,
+				100px 15px white;
+			border-radius: 50%;
+			animation: twinkle 4s infinite;
+		}
+
+		@keyframes twinkle {
+			0%, 100% { opacity: 0.8; }
+			50% { opacity: 0.4; }
+		}
+
+		/* Card Hover Effects */
+		.day-card:hover, .night-card:hover {
+			transform: translateY(-2px);
+			transition: all 0.3s ease;
+		}
+
+		/* Text Shadow for better readability */
+		.day-card .card-body, .night-card .card-body {
+			text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+		}
+		
+		.icon {
+			width: 32px;
+			height: 32px;
+		  }
+
+    </style>
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <script src="../../assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <!-- Breadcrumb -->
+              <div class="row mb-4">
+				  <div class="col-12">
+					<div class="card  border-0">
+					  <div class="card-body d-flex align-items-center p-4">
+						<div class="avatar avatar-lg rounded me-3">
+						  <i class="ti ti-file-code fs-2"></i>
+						</div>
+						<div>
+						  <h4 class="card-title mb-0">Day/Night Calculator</h4>
+						  <p class="card-text mb-0 text-muted">Advanced calculator for DayZ server day/night cycle configuration</p>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+              <div class="row">
+                <!-- Main Calculator Card -->
+                <div class="col-xl-8 col-lg-7">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Day/Night Cycle Calculator</h5>                        
+                      </div>
+                    </div>
+                    
+                    <div class="card-body">
+                      <!-- Presets Section -->
+                      <div class="mb-4">
+                        <label class="form-label d-block">Quick Presets</label>
+                        <div class="d-flex gap-2 flex-wrap">
+                          <div class="badge bg-label-primary preset-chip" data-day="3" data-night="45">
+                            Balanced (3h/45m)
+                          </div>
+                          <div class="badge bg-label-success preset-chip" data-day="4" data-night="30">
+                            Casual (4h/30m)
+                          </div>
+                          <div class="badge bg-label-danger preset-chip" data-day="1" data-night="15">
+                            Hardcore (1h/15m)
+                          </div>
+                          <div class="badge bg-label-warning preset-chip" data-day="6" data-night="60">
+                            Relaxed (6h/60m)
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Main Calculator Form -->
+                      <form id="calculatorForm">
+                        <div class="row g-3">
+                          <div class="col-md-6">
+                            <label class="form-label">Day Duration</label>
+                            <div class="input-group">
+                              <input type="number" class="form-control" id="full" value="2" min="1" max="12" required>
+                              <span class="input-group-text">hours</span>
+                            </div>
+                          </div>
+                          
+                          <div class="col-md-6">
+                            <label class="form-label">Night Duration</label>
+                            <div class="input-group">
+                              <input type="number" class="form-control" id="night" value="15" min="1" max="3840" required>
+                              <span class="input-group-text">minutes</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Visual Preview -->
+                        <div class="mt-4">
+                          <label class="form-label">Cycle Preview</label>
+                          <div class="time-preview" id="timePreview"></div>
+                          <div class="d-flex justify-content-between text-muted small">
+                            <span>Sunrise</span>
+                            <span>Sunset</span>
+                          </div>
+                        </div>
+                        
+
+                        <div class="mt-4">
+                          <button type="button" class="btn btn-primary waves-effect" id="calc">
+                            <i class="ti ti-calculator me-2"></i>Calculate Settings
+                          </button>
+                        </div>
+                      </form>
+
+                      <!-- Results Section -->
+                      <div id="resultsSection" style="display: none;" class="mt-4">
+                        <div class="divider">
+                          <div class="divider-text">Calculated Results</div>
+                        </div>
+
+                        <div class="row g-3">
+							<div class="col-md-6">
+								<div class="card day-card">
+									<div class="sun-icon"></div>
+									<div class="clouds"></div>
+									<div class="card-body text-center p-3 position-relative">
+										<h6 class="mb-2 text-white">Day Multiplier</h6>
+										<h2 class="mb-0 text-white" id="result-day">0</h2>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card night-card">
+									<div class="moon"></div>
+									<div class="stars"></div>
+									<div class="card-body text-center p-3 position-relative">
+										<h6 class="mb-2 text-white">Night Multiplier</h6>
+										<h2 class="mb-0 text-white" id="result-night">0</h2>
+									</div>
+								</div>
+							</div>
+						</div>
+
+                        <!-- Server Configuration -->
+                        <div class="mt-4">
+						  <div class="alert alert-primary">
+							<div class="d-flex">
+							  <i class="ti ti-info-circle me-2 mt-1"></i>
+							  <div>
+								<h6 class="alert-heading mb-1">Server Configuration</h6>
+								<p id="serverConfigInstruction" class="mb-0">Add these lines to your <code>serverDZ.cfg</code> file:</p>
+							  </div>
+							</div>
+							<div class="mt-3">
+							  <div class="form-check form-check-inline mb-3">
+								<input class="form-check-input" type="radio" name="platform" id="platformPC" value="pc">
+								<label class="form-check-label" for="platformPC">PC Server</label>
+							  </div>
+							  <div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="platform" id="platformConsole" value="console" checked>
+								<label class="form-check-label" for="platformConsole">Console (Nitrado)</label>
+							  </div>
+
+							  <!-- PC Config -->
+							  <div id="pcConfig" class="config-section">
+								<pre class="mb-0"><code id="configCodePC"></code></pre>
+							  </div>
+
+							  <!-- Console Config -->
+							  <div id="consoleConfig" class="config-section" style="display: none;">
+								<div class="alert alert-info">
+								  <small class="d-block mb-2"><i class="ti ti-info-circle me-1"></i>Set these values in Nitrado under General:</small>
+								  <dl class="mb-0">
+									<dt>Server Time Multiplier</dt>
+									<dd id="consoleTimeMultiplier"></dd>
+									<dt>Server Time Multiplier (Night)</dt>
+									<dd id="consoleNightMultiplier"></dd>
+								  </dl>
+								</div>
+							  </div>
+							</div>
+						  </div>
+						</div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Info Card -->
+                <div class="col-xl-4 col-lg-5">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5 class="card-title mb-0">Information</h5>
+                    </div>
+                    <div class="card-body">
+                      <div class="mb-4">
+                        <h6>About Day/Night Cycles</h6>
+                        <p>The day/night cycle in DayZ affects gameplay dynamics and server atmosphere. A well-balanced cycle can enhance player experience and server popularity.</p>
+                      </div>
+
+                      <div class="mb-4">
+                        <h6>Recommended Settings</h6>
+                        <ul class="ps-3 mb-0">
+                          <li class="mb-2">PvP Focused: Shorter nights (15-30 mins)</li>
+                          <li class="mb-2">Survival: Longer nights (45-60 mins)</li>
+                          <li class="mb-2">Roleplay: Balanced cycles (30-45 mins night)</li>
+                          <li>Casual: Short nights with long days</li>
+                        </ul>
+                      </div>
+
+                      <div class="alert alert-warning mb-0">
+                        <div class="d-flex">
+                          <i class="ti ti-alert-circle me-2"></i>
+                          <div>
+                            <h6 class="alert-heading mb-1">Note</h6>
+                            <p class="mb-0">Changes to these settings require a server restart to take effect.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>          </div>
+        </div>
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+      
+      <!-- Support Button -->
+      		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	    </div>
+
+    <!-- Core JS -->
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+
+    <!-- Calculator Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const dayElem = document.getElementById("full");
+    const nightElem = document.getElementById("night");
+    const resultDay = document.getElementById("result-day");
+    const resultNight = document.getElementById("result-night");
+    const resultsSection = document.getElementById("resultsSection");
+    const calcButton = document.getElementById("calc");
+    const timePreview = document.getElementById("timePreview");
+    const platformPC = document.getElementById("platformPC");
+    const platformConsole = document.getElementById("platformConsole");
+    const pcConfig = document.getElementById("pcConfig");
+    const consoleConfig = document.getElementById("consoleConfig");
+    const configCodePC = document.getElementById("configCodePC");
+    const consoleTimeMultiplier = document.getElementById("consoleTimeMultiplier");
+    const consoleNightMultiplier = document.getElementById("consoleNightMultiplier");
+    const serverConfigInstruction = document.getElementById("serverConfigInstruction");
+
+    // Preset clicks
+    document.querySelectorAll('.preset-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            // Convert string values to numbers explicitly
+            dayElem.value = parseInt(chip.dataset.day);
+            nightElem.value = parseInt(chip.dataset.night);
+            calculate();
+        });
+    });
+
+    // Initial display for configuration sections
+    if (platformConsole.checked) {
+        pcConfig.style.display = 'none';
+        consoleConfig.style.display = 'block';
+        serverConfigInstruction.textContent = 'Set these values in Nitrado under General settings:';
+    } else {
+        pcConfig.style.display = 'block';
+        consoleConfig.style.display = 'none';
+        serverConfigInstruction.textContent = 'Add these lines to your serverDZ.cfg file:';
+    }
+
+    // Platform toggle
+    document.querySelectorAll('input[name="platform"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (platformPC.checked) {
+                pcConfig.style.display = 'block';
+                consoleConfig.style.display = 'none';
+                serverConfigInstruction.textContent = 'Add these lines to your serverDZ.cfg file:';
+            } else {
+                pcConfig.style.display = 'none';
+                consoleConfig.style.display = 'block';
+                serverConfigInstruction.textContent = 'Set these values in Nitrado under General settings:';
+            }
+        });
+    });
+
+    function updateTimePreview() {
+        const dayMinutes = parseFloat(dayElem.value) * 60;
+        const nightMinutes = parseFloat(nightElem.value);
+        const totalMinutes = dayMinutes + nightMinutes;
+        const dayPercentage = (dayMinutes / totalMinutes) * 100;
+
+        timePreview.style.setProperty('--day-percent', `${dayPercentage}%`);
+    }
+
+    function calculate() {
+        resultsSection.style.display = 'block';
+        
+        const dayHours = parseFloat(dayElem.value);
+        const nightMinutes = parseFloat(nightElem.value);
+
+        // PC and Console Calculation (Identical)
+        let dayMultiplier = Math.floor(12 / dayHours);
+        let nightMultiplier = (dayHours * 60) / nightMinutes;
+
+        resultDay.textContent = dayMultiplier;
+        resultNight.textContent = nightMultiplier.toFixed(2);
+
+        // PC format
+        configCodePC.textContent = 
+`serverTime="SystemTime";
+serverTimeAcceleration=${dayMultiplier};
+serverNightTimeAcceleration=${nightMultiplier.toFixed(2)};
+serverTimePersistent=1;`;
+
+        // Console Multipliers (Same as PC)
+        consoleTimeMultiplier.textContent = `${dayMultiplier.toFixed(2)} (Accelerated Time)`;
+        consoleNightMultiplier.textContent = `${nightMultiplier.toFixed(2)} (Accelerated Night Time)`;
+
+        updateTimePreview();
+    }
+
+    // Event listeners
+    dayElem.addEventListener("input", calculate);
+    nightElem.addEventListener("input", calculate);
+    calcButton.addEventListener("click", calculate);
+
+    // Initial calculation
+    calculate();
+});
+
+    </script>
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/calculator by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:58 GMT -->
+</html>

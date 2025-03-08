@@ -1,0 +1,1012 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/economy by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Economy Editor &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Configure DayZ economy settings with ease. Customize dynamic values for animals, zombies, vehicles, and more, then download an optimized XML file for your server." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+    .copy-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        opacity: 0.6;
+        transition: opacity 0.2s;
+    }
+    .copy-btn:hover {
+        opacity: 1;
+    }
+    .code-block {
+        position: relative;
+        background: #2a2a2a;
+        border-radius: 6px;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    .code-content {
+        font-family: monospace;
+        color: #e6e6e6;
+    }
+	
+	/* Modern Switch Control */
+	.switch-control {
+		position: relative;
+		display: inline-block;
+		width: 48px;
+		height: 24px;
+	}
+
+	.switch-control input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	.slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #e5e7eb;
+		transition: .4s;
+		border-radius: 24px;
+	}
+
+	.slider:before {
+		position: absolute;
+		content: "";
+		height: 20px;
+		width: 20px;
+		left: 2px;
+		bottom: 2px;
+		background-color: white;
+		transition: .4s;
+		border-radius: 50%;
+	}
+
+	input:checked + .slider {
+		background-color: #3b82f6;
+	}
+
+	input:checked + .slider:before {
+		transform: translateX(24px);
+	}
+
+	/* Code Preview Styling */
+	.code-preview {
+		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		overflow-x: auto;
+	}
+
+	/* Hover Effects */
+	.control-item {
+		transition: all 0.3s ease;
+	}
+
+	.control-item:hover {
+		transform: translateY(-2px);
+	}
+
+	/* Icon Wrapper */
+	.icon-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 10px;
+		background-color: currentColor;
+		background-opacity: 0.1;
+	}
+
+	.icon-wrapper i {
+		color: white;
+	}
+
+	/* Export Button */
+	.export-btn {
+		transition: all 0.3s ease;
+	}
+
+	.export-btn:hover {
+		transform: translateY(-1px);
+		box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+	}
+	.icon {
+		width: 32px;
+		height: 32px;
+	  }
+    </style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>		
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+				<div class="row mb-4">
+					  <div class="col-12">
+						<div class="card  border-0">
+						  <div class="card-body d-flex align-items-center p-4">
+							<div class="avatar avatar-lg rounded me-3">
+							  <i class="ti ti-file-code fs-2"></i>
+							</div>
+							<div>
+							  <h4 class="card-title mb-0">Economy Editor</h4>
+								<p class="card-text mb-0 text-muted">Configure DayZ economy settings with ease. Customize dynamic values for animals, zombies, vehicles, and more, then download an optimized XML file for your server.</p>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+												  <div class="alert alert-danger">Economy Editor is becoming obsolete. Within the next couple of days it will no longer be an available tool</div>
+
+              <div class="row mb-6">
+			  
+			  
+				<div class="col-md-4">
+
+					  <div class="card shadow-sm rounded-lg h-100">
+						<div class="card-header bg-light py-2 px-3">
+						  <h6 class="mb-0 text-dark">Dynamic, Animals & Infected</h6>
+						</div>
+						<div class="card-body p-3">
+						  <!-- Dynamic Settings -->
+						  <div class="section">
+							<h6 class="mb-2">Dynamic Settings</h6>
+							<p class="small mb-2">
+							  Refresh server loot cycle. Set values to <code>0</code>, restart, then revert to <code>1</code>.
+							</p>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="dynamic_radio" id="dynamic-0" value="0" onclick="setDynamicValues(0)">
+							  <label class="form-check-label" for="dynamic-0">Set to 0</label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="dynamic_radio" id="dynamic-1" value="1" onclick="setDynamicValues(1)" checked>
+							  <label class="form-check-label" for="dynamic-1">Set to 1 (default)</label>
+							</div>
+							<div class="code-block bg-light rounded p-2 mt-2">
+							  <pre class="code-content small" id="dynamicValues"></pre>
+							  <button class="btn btn-outline-primary btn-sm mt-1" onclick="copyToClipboard('dynamicValues')">
+								<i class="ti ti-copy"></i> Copy
+							  </button>
+							</div>
+						  </div>
+						  <hr>
+						  <!-- Animals -->
+						  <div class="section">
+							<h6 class="mb-2">Animals</h6>
+							<p class="small mb-2">Control animal spawns by adjusting values.</p>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="animals_radio" id="animals-0" value="0" onclick="setAnimalValues(0)">
+							  <label class="form-check-label" for="animals-0">Set to 0</label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="animals_radio" id="animals-1" value="1" onclick="setAnimalValues(1)" checked>
+							  <label class="form-check-label" for="animals-1">Set to 1 (default)</label>
+							</div>
+							<div class="code-block bg-light rounded p-2 mt-2">
+							  <pre class="code-content small" id="animalValues"></pre>
+							  <button class="btn btn-outline-primary btn-sm mt-1" onclick="copyToClipboard('animalValues')">
+								<i class="ti ti-copy"></i> Copy
+							  </button>
+							</div>
+						  </div>
+						  <hr>
+						  <!-- Infected -->
+						  <div class="section">
+							<h6 class="mb-2">Infected</h6>
+							<p class="small mb-2">Turn infected spawns on/off below.</p>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="infected_radio" id="infected-0" value="0" onclick="setInfectedValues(0)">
+							  <label class="form-check-label" for="infected-0">Set to 0</label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="infected_radio" id="infected-1" value="1" onclick="setInfectedValues(1)" checked>
+							  <label class="form-check-label" for="infected-1">Set to 1 (default)</label>
+							</div>
+							<div class="code-block bg-light rounded p-2 mt-2">
+							  <pre class="code-content small" id="infectedValues"></pre>
+							  <button class="btn btn-outline-primary btn-sm mt-1" onclick="copyToClipboard('infectedValues')">
+								<i class="ti ti-copy"></i> Copy
+							  </button>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+
+					<!-- Card 2: Vehicles & Random Events -->
+					<div class="col-md-4">
+					  <div class="card shadow-sm rounded-lg h-100">
+						<div class="card-header bg-light py-2 px-3">
+						  <h6 class="mb-0 text-dark">Vehicles & Random Events</h6>
+						</div>
+						<div class="card-body p-3">
+						  <!-- Vehicles -->
+						  <div class="section">
+							<h6 class="mb-2">Vehicles</h6>
+							<p class="small mb-2">Wipe and refresh server vehicles using these controls.</p>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="vehicles_radio" id="vehicles-0" value="0" onclick="setVehiclesValues(0)">
+							  <label class="form-check-label" for="vehicles-0">Set to 0</label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="vehicles_radio" id="vehicles-1" value="1" onclick="setVehiclesValues(1)" checked>
+							  <label class="form-check-label" for="vehicles-1">Set to 1 (default)</label>
+							</div>
+							<div class="code-block bg-light rounded p-2 mt-2">
+							  <pre class="code-content small" id="vehiclesValues"></pre>
+							  <button class="btn btn-outline-primary btn-sm mt-1" onclick="copyToClipboard('vehiclesValues')">
+								<i class="ti ti-copy"></i> Copy
+							  </button>
+							</div>
+						  </div>
+						  <hr>
+						  <!-- Random Events -->
+						  <div class="section">
+							<h6 class="mb-2">Random Events</h6>
+							<p class="small mb-2">Control dynamic events like helicopter crashes.</p>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="randoms_radio" id="randoms-0" value="0" onclick="setRandomsValues(0)">
+							  <label class="form-check-label" for="randoms-0">Set to 0</label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="randoms_radio" id="randoms-1" value="1" onclick="setRandomsValues(1)" checked>
+							  <label class="form-check-label" for="randoms-1">Set to 1 (default)</label>
+							</div>
+							<div class="code-block bg-light rounded p-2 mt-2">
+							  <pre class="code-content small" id="randomsValues"></pre>
+							  <button class="btn btn-outline-primary btn-sm mt-1" onclick="copyToClipboard('randomsValues')">
+								<i class="ti ti-copy"></i> Copy
+							  </button>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+
+					<!-- Card 3: Customs, Building, Export -->
+					<div class="col-md-4">
+					  <div class="card shadow-sm rounded-lg h-100">
+						<div class="card-header bg-light py-2 px-3">
+						  <h6 class="mb-0 text-dark">Customs & Export</h6>
+						</div>
+						<div class="card-body p-3">
+						  <!-- Customs -->
+						  <div class="section">
+							<h6 class="mb-2">Customs</h6>
+							<p class="small mb-2">Manage map group positions and territories.</p>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="customs_radio" id="custom-0" value="0" onclick="setCustomValues(0)" checked>
+							  <label class="form-check-label" for="custom-0">Set to 0 (default)</label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="customs_radio" id="custom-1" value="1" onclick="setCustomValues(1)">
+							  <label class="form-check-label" for="custom-1">Set to 1</label>
+							</div>
+							<div class="code-block bg-light rounded p-2 mt-2">
+							  <pre class="code-content small" id="customValues"></pre>
+							  <button class="btn btn-outline-primary btn-sm mt-1" onclick="copyToClipboard('customValues')">
+								<i class="ti ti-copy"></i> Copy
+							  </button>
+							</div>
+						  </div>
+						  <hr>
+						  <!-- Building -->
+						  <div class="section">
+							<h6 class="mb-2">Building</h6>
+							<p class="small mb-2">Manage building door states and configurations.</p>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="building_radio" id="building-0" value="0" onclick="setBuildingValues(0)">
+							  <label class="form-check-label" for="building-0">Set to 0</label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" name="building_radio" id="building-1" value="1" onclick="setBuildingValues(1)" checked>
+							  <label class="form-check-label" for="building-1">Set to 1 (default)</label>
+							</div>
+							<div class="code-block bg-light rounded p-2 mt-2">
+							  <pre class="code-content small" id="buildingValues"></pre>
+							  <button class="btn btn-outline-primary btn-sm mt-1" onclick="copyToClipboard('buildingValues')">
+								<i class="ti ti-copy"></i> Copy
+							  </button>
+							</div>
+						  </div>
+						  <hr>
+						  <!-- Export -->
+						  <div class="section">
+							<h6 class="mb-2">Export Configuration</h6>
+							<p class="small mb-2">Export your settings to <code>economy.xml</code>.</p>
+							<button class="btn btn-primary btn-sm" onclick="downloadXMLFile()">
+							  <i class="ti ti-file-xml"></i> Export to XML
+							</button>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+                
+				
+
+              </div>             
+
+              <!-- / Payment Methods modal -->
+            </div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script>
+		document.getElementById("dynamicValues").innerHTML = `<code>&lt;dynamic init="1" load="1" respawn="1" save="1"/&gt;</code>`;
+		document.getElementById("animalValues").innerHTML = `<code>&lt;animals init="1" load="0" respawn="1" save="0"/&gt;</code>`;
+		document.getElementById("infectedValues").innerHTML = `<code>&lt;zombies init="1" load="0" respawn="1" save="0"/&gt;</code>`;
+		document.getElementById("vehiclesValues").innerHTML = `<code>&lt;vehicles init="1" load="1" respawn="1" save="1"/&gt;</code>`;
+		document.getElementById("randomsValues").innerHTML = `<code>&lt;randoms init="0" load="0" respawn="1" save="0"/&gt;</code>`;
+		document.getElementById("customValues").innerHTML = `<code>&lt;custom init="0" load="0" respawn="0" save="0"/&gt;</code>`;
+		document.getElementById("buildingValues").innerHTML = `<code>&lt;building init="1" load="1" respawn="0" save="1"/&gt;</code>`;
+
+		function setDynamicValues(value) {
+			document.getElementById("dynamicValues").innerHTML = `<code>&lt;dynamic init="${value}" load="${value}" respawn="${value}" save="${value}"/&gt;</code>`;
+		}
+
+		function setAnimalValues(value) {
+			if (value === 1) {
+				document.getElementById("animalValues").innerHTML = `<code>&lt;animals init="1" load="0" respawn="1" save="0"/&gt;</code>`;
+			} else {
+				document.getElementById("animalValues").innerHTML = `<code>&lt;animals init="${value}" load="${value}" respawn="${value}" save="${value}"/&gt;</code>`;
+			}
+		}
+		function setInfectedValues(value) {
+			if (value === 1) {
+				document.getElementById("infectedValues").innerHTML = `<code>&lt;zombies init="1" load="0" respawn="1" save="0"/&gt;</code>`;
+			} else {
+				document.getElementById("infectedValues").innerHTML = `<code>&lt;zombies init="${value}" load="${value}" respawn="${value}" save="${value}"/&gt;</code>`;
+			}
+		}
+		function setVehiclesValues(value) {
+			if (value === 1) {
+				document.getElementById("vehiclesValues").innerHTML = `<code>&lt;vehicles init="1" load="1" respawn="1" save="1"/&gt;</code>`;
+			} else {
+				document.getElementById("vehiclesValues").innerHTML = `<code>&lt;vehicles init="${value}" load="${value}" respawn="${value}" save="${value}"/&gt;</code>`;
+			}
+		}
+		function setRandomsValues(value) {
+			if (value === 0) {
+				document.getElementById("randomsValues").innerHTML = `<code>&lt;randoms init="0" load="0" respawn="0" save="0"/&gt;</code>`;
+			} else {
+				document.getElementById("randomsValues").innerHTML = `<code>&lt;randoms init="0" load="0" respawn="1" save="0"/&gt;</code>`;
+			}
+		}
+		function setCustomValues(value) {
+			if (value === 1) {
+				document.getElementById("customValues").innerHTML = `<code>&lt;custom init="1" load="1" respawn="1" save="1"/&gt;</code>`;
+			} else {
+				document.getElementById("customValues").innerHTML = `<code>&lt;custom init="${value}" load="${value}" respawn="${value}" save="${value}"/&gt;</code>`;
+			}
+		}
+		function setBuildingValues(value) {
+			if (value === 1) {
+				document.getElementById("buildingValues").innerHTML = `<code>&lt;building init="1" load="1" respawn="0" save="1"/&gt;</code>`;
+			} else {
+				document.getElementById("buildingValues").innerHTML = `<code>&lt;building init="${value}" load="${value}" respawn="${value}" save="${value}"/&gt;</code>`;
+			}
+		}
+		
+		function copyToClipboard(elementId) {
+			// Get the text content from the specified element
+			var copyText = document.getElementById(elementId).innerText;
+
+			// Use the Clipboard API to write the text to the clipboard
+			navigator.clipboard.writeText(copyText).then(() => {
+				// Show a success message using SweetAlert2
+				Swal.fire({
+					icon: 'success',
+					title: 'Copied!',
+					text: 'The content has been successfully copied to the clipboard.',
+					confirmButtonText: 'OK'
+				});
+			}).catch(err => {
+				// Log an error if the copy operation fails
+				console.error('Failed to copy text: ', err);
+				// Show an error message using SweetAlert2
+				Swal.fire({
+					icon: 'error',
+					title: 'Error',
+					text: 'Failed to copy text to the clipboard.',
+					confirmButtonText: 'OK'
+				});
+			});
+		}
+		
+		function generateXML() {
+			// Helper function to get selected radio button values or default to "1"
+			const getSelectedValue = (name) => {
+				const selected = document.querySelector(`input[name="${name}"]:checked`);
+				return selected ? selected.value : "1";
+			};
+
+			let xmlContent = '<' + '?xml version="1.0" encoding="UTF-8" standalone="yes"?' + '>\n<economy>\n';
+			xmlContent += `    <dynamic init="${getSelectedValue('dynamic_radio')}" load="${getSelectedValue('dynamic_radio')}" respawn="${getSelectedValue('dynamic_radio')}" save="${getSelectedValue('dynamic_radio')}"/>\n`;
+			xmlContent += `    <animals init="${getSelectedValue('animals_radio')}" load="${getSelectedValue('animals_radio')}" respawn="${getSelectedValue('animals_radio')}" save="${getSelectedValue('animals_radio')}"/>\n`;
+			xmlContent += `    <zombies init="${getSelectedValue('infected_radio')}" load="${getSelectedValue('infected_radio')}" respawn="${getSelectedValue('infected_radio')}" save="${getSelectedValue('infected_radio')}"/>\n`;
+			xmlContent += `    <vehicles init="${getSelectedValue('vehicles_radio')}" load="${getSelectedValue('vehicles_radio')}" respawn="${getSelectedValue('vehicles_radio')}" save="${getSelectedValue('vehicles_radio')}"/>\n`;
+			xmlContent += `    <randoms init="${getSelectedValue('randoms_radio')}" load="${getSelectedValue('randoms_radio')}" respawn="${getSelectedValue('randoms_radio')}" save="${getSelectedValue('randoms_radio')}"/>\n`;
+			xmlContent += `    <custom init="${getSelectedValue('customs_radio')}" load="${getSelectedValue('customs_radio')}" respawn="${getSelectedValue('customs_radio')}" save="${getSelectedValue('customs_radio')}"/>\n`;
+			xmlContent += `    <building init="${getSelectedValue('building_radio')}" load="${getSelectedValue('building_radio')}" respawn="${getSelectedValue('building_radio')}" save="${getSelectedValue('building_radio')}"/>\n`;
+			xmlContent += '    <player init="1" load="1" respawn="1" save="1"/>\n';
+			xmlContent += '</economy>';
+			return xmlContent;
+		}
+
+		function downloadXMLFile() {
+			const xmlData = generateXML();
+			const blob = new Blob([xmlData], { type: 'application/xml' });
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'economy-2.html';
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+			URL.revokeObjectURL(url);
+		}
+	
+	</script>
+
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/economy by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:59 GMT -->
+</html>
+

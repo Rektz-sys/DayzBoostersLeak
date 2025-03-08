@@ -1,0 +1,1220 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/mapgrouppos by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>MapGroupPos Converter &mdash; DayZ BoosterZ</title>
+    <meta name="description" content="Convert DayZ map group positions to event spawns" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap" rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+	
+	<link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.css">
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/darcula.min.css">
+    
+    <!-- Custom styles -->
+    <style>
+      .icon {
+        width: 32px;
+        height: 32px;
+      }
+      
+      #outputArea {
+        width: 100%;
+        min-height: 200px;
+        margin-top: 10px;
+        font-family: monospace;
+      }
+    </style>
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <script src="../../assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+          <!-- / Navbar -->
+
+			<!-- Content wrapper -->
+			<div class="content-wrapper">
+			  <!-- Content -->
+			  <div class="container-xxl flex-grow-1 container-p-y">
+				<!-- Header Card -->
+				<div class="row mb-4">
+				  <div class="col-12">
+					<div class="card border-0 text-white">
+					  <div class="card-body d-flex align-items-center p-4">
+						<div class="avatar avatar-lg rounded me-3">
+						  <i class="ti ti-map fs-2 text-primary"></i>
+						</div>
+						<div>
+						  <h4 class="card-title mb-0 text-white">MapGroupPos to Event Spawn</h4>
+						  <p class="card-text mb-0 text-white opacity-75">Convert map group positions to event spawns for DayZ maps</p>
+						</div>
+						<!-- Quick Tips Toggle -->
+						<button class="btn btn-icon btn-sm ms-auto" data-bs-toggle="collapse" data-bs-target="#quickTips">
+						  <i class="ti ti-help fs-2"></i>
+						</button>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+				<!-- Quick Tips Section -->
+				<div class="row mb-4 collapse" id="quickTips">
+				  <div class="col-12">
+					<div class="card bg-lighter border-0">
+					  <div class="card-body">
+						<div class="d-flex align-items-center justify-content-center mb-3">
+						  <i class="ti ti-bulb text-warning fs-3 me-2"></i>
+						  <h5 class="mb-0">Quick Tips</h5>
+						</div>
+						<div class="row g-3 justify-content-center">
+						  <div class="col-md-5">
+							<div class="p-3 rounded-2 h-100 border border-1">
+							  <h6 class="fw-semibold"><i class="ti ti-map-pin me-2 text-primary"></i>Map Selection</h6>
+							  <p class="mb-0 small text-muted">Choose your map first to load the correct building database. All positions will be relative to the selected map.</p>
+							</div>
+						  </div>
+						  <div class="col-md-5">
+							<div class="p-3 rounded-2 h-100 border border-1">
+							  <h6 class="fw-semibold"><i class="ti ti-building me-2 text-primary"></i>Building Types</h6>
+							  <p class="mb-0 small text-muted">Use the search feature in the building selector to find specific structures. Recent selections are saved for quick access.</p>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+				<!-- Main Content -->
+				<div class="row">
+				  <div class="col-12">
+					<div class="card shadow-none border">
+					  <div class="card-header border-bottom d-flex justify-content-between align-items-center">
+						<h5 class="mb-0"></h5>
+						<!-- Building Stats -->
+						<div class="d-flex gap-2">
+						  <span class="badge bg-label-primary p-2">
+							<i class="ti ti-building-community me-1"></i>
+							<span id="buildingCount">0</span> Buildings
+						  </span>
+						  <span class="badge bg-label-success p-2">
+							<i class="ti ti-pointer me-1"></i>
+							<span id="positionCount">0</span> Positions
+						  </span>
+						</div>
+					  </div>
+					  
+					  <div class="card-body p-4">
+						<!-- Progress Tracker -->
+						<div class="mb-4 px-2">
+						  <div class="d-flex justify-content-between mb-2">
+							<span class="fw-medium small">Conversion Progress</span>
+							<span class="fw-medium small" id="progressText">Step 1 of 3</span>
+						  </div>
+						  <div class="progress" style="height: 6px;">
+							<div class="progress-bar" role="progressbar" style="width: 33%"></div>
+						  </div>
+						</div>
+
+						<div class="row">
+						  <!-- Left Column - Input Controls -->
+						  <div class="col-12 col-md-6 mb-4 mb-md-0">
+							<div class="p-3 bg-lighter rounded-2">
+							  <div class="d-flex justify-content-between align-items-center mb-3">
+								<h6 class="fw-semibold mb-0">Input Parameters</h6>
+								<!-- Recent Groups Dropdown -->
+								<div class="dropdown">
+								  <button class="btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+									<i class="ti ti-history"></i>
+								  </button>
+								  <ul class="dropdown-menu" id="recentGroups">
+									<li><h6 class="dropdown-header">Recent Groups</h6></li>
+									<!-- Will be populated by JS -->
+								  </ul>
+								</div>
+							  </div>
+
+							  <!-- Group Name Input -->
+							  <div class="mb-4">
+								<label for="groupName" class="form-label fw-medium">Group Name (optional)</label>
+								<div class="input-group">
+								  <span class="input-group-text"><i class="ti ti-tag"></i></span>
+								  <input type="text" id="groupName" class="form-control" placeholder="Enter Group Name">
+								  <button class="btn btn-outline-primary" type="button" id="generateName">
+									<i class="ti ti-refresh"></i>
+								  </button>
+								</div>
+							  </div>
+
+							  <!-- Map Selection -->
+							  <div class="mb-4">
+								<label class="form-label fw-medium d-block">Choose Map</label>
+								<div class="d-flex gap-3">
+								  <div class="form-check">
+									<input type="radio" id="chernarus" name="mapChoice" value="C" 
+										   class="form-check-input" onclick="updateBuildingNames()">
+									<label class="form-check-label" for="chernarus">
+									  <i class="ti ti-map-2 me-1"></i>Chernarus
+									</label>
+								  </div>
+								  <div class="form-check">
+									<input type="radio" id="livonia" name="mapChoice" value="L" 
+										   class="form-check-input" onclick="updateBuildingNames()">
+									<label class="form-check-label" for="livonia">
+									  <i class="ti ti-map-2 me-1"></i>Livonia
+									</label>
+								  </div>
+								  <div class="form-check">
+									<input type="radio" id="sakhal" name="mapChoice" value="S" 
+										   class="form-check-input" onclick="updateBuildingNames()">
+									<label class="form-check-label" for="sakhal">
+									  <i class="ti ti-map-2 me-1"></i>Sakhal
+									</label>
+								  </div>
+								</div>
+							  </div>
+
+							  <!-- Building Selection -->
+							  <div class="mb-4">
+								<label for="buildingName" class="form-label fw-medium">
+								  <i class="ti ti-building me-1"></i>Select Building
+								</label>
+								<select class="select2 form-select" id="buildingName">
+								  <!-- Options will be filled by JavaScript -->
+								</select>
+							  </div>
+
+							  <!-- Generate Button -->
+							  <div class="text-end">
+								<button class="btn btn-primary" onclick="main()">
+								  <i class="ti ti-wand me-1"></i>Generate Positions
+								</button>
+							  </div>
+							</div>
+						  </div>
+
+						  <!-- Right Column - Output -->
+						  <div class="col-12 col-md-6">
+							<div class="p-3 bg-lighter rounded-2 h-100">
+							  <div class="d-flex justify-content-between align-items-center mb-3">
+								<h6 class="fw-semibold mb-0">Generated Output</h6>
+								<!-- Output Format Toggle -->
+							  </div>
+							  
+							  <div class="mb-3">
+								<label for="outputArea" class="form-label fw-medium">Position Data</label>
+								<textarea id="outputArea" class="form-control font-monospace" rows="10" 
+										 style="resize: vertical;" readonly></textarea>
+							  </div>
+
+							  <div class="d-flex justify-content-between">
+								<button class="btn btn-text-secondary" onclick="clearOutput()">
+								  <i class="ti ti-trash me-1"></i>Clear
+								</button>
+								<div>
+								  <button class="btn btn-outline-primary me-2" id="downloadOutput">
+									<i class="ti ti-download me-1"></i>Download
+								  </button>
+								  <button id="copyButton" class="btn btn-success">
+									<i class="ti ti-copy me-1"></i>Copy
+								  </button>
+								</div>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+
+					  <!-- Credits Footer -->
+					  <div class="card-footer border-top py-3">
+						<div class="row align-items-center">
+						  <div class="col-md-6 text-center text-md-start">
+							<p class="text-muted small mb-0">
+							  Credits to <a href="https://discord.gg/ZaGzSJF3H5" target="_blank" class="fw-semibold">DonSibley</a> 
+							  for the original script
+							</p>
+						  </div>
+						  <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+							<div class="btn-group btn-group-sm">
+							  <button type="button" class="btn btn-text-secondary" data-bs-toggle="modal" data-bs-target="#historyModal">
+								<i class="ti ti-history me-1"></i>History
+							  </button>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <!-- / Content -->
+
+			  <!-- History Modal -->
+			  <div class="modal fade" id="historyModal" tabindex="-1">
+				<div class="modal-dialog modal-lg">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title">Conversion History</h5>
+					  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+					  <div class="table-responsive">
+						<table class="table table-sm">
+						  <thead>
+							<tr>
+							  <th>Date</th>
+							  <th>Map</th>
+							  <th>Building</th>
+							  <th>Positions</th>
+							  <th>Actions</th>
+							</tr>
+						  </thead>
+						  <tbody id="historyTable">
+							<!-- Will be populated by JS -->
+						  </tbody>
+						</table>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+
+			  <!-- Footer -->
+			  <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>			  <!-- / Footer -->
+
+			  <div class="content-backdrop fade"></div>
+			</div>
+		  
+		  <!-- END CONTENT WRAPPER -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+      
+      		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/libs/select2/select2.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+    <script src="../../assets/js/main.js"></script>
+	
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/json-lint.min.js"></script>
+
+    <!-- Initialize Select2 -->
+	<script>    
+		// Constants and Configurations
+		const CONFIG = {
+		  maps: {
+			C: './config/p3d/buildingName.json?v=6',
+			L: './config/p3d/buildingNameLivonia.json?v=6',
+			S: './config/p3d/buildingNameSakhal.json?v=6'
+		  },
+		  select2Options: {
+			allowClear: false,
+			placeholder: "Select an option"
+		  },
+		  storage: {
+			history: 'mapgrouppos_history',
+			recentGroups: 'mapgrouppos_recent_groups',
+			presets: 'mapgrouppos_presets'
+		  },
+		  maxHistoryItems: 50,
+		  maxRecentGroups: 5
+		};
+
+		// Utility Functions
+		const Utils = {
+		  async fetchJSON(url) {
+			try {
+			  const response = await fetch(url);
+			  return await response.json();
+			} catch (error) {
+			  console.error('Error fetching JSON:', error);
+			  throw error;
+			}
+		  },
+
+		  normalizeAngle(angle) {
+			let normalized = angle % 360.0;
+			return normalized < 0 ? normalized + 360.0 : normalized;
+		  },
+
+		  calculateAngle(a) {
+			if (a <= -90) {
+			  return -270 - a;
+			}
+			return 90 - a;
+		  },
+
+		  formatDate(date) {
+			return new Intl.DateTimeFormat('en-US', {
+			  year: 'numeric',
+			  month: 'short',
+			  day: '2-digit',
+			  hour: '2-digit',
+			  minute: '2-digit'
+			}).format(date);
+		  },
+
+		  generateRandomName() {
+			const adjectives = [
+				'North', 'South', 'East', 'West', 'Central', 'Military', 'Civilian', 'Industrial',
+				'Arctic', 'Desert', 'Urban', 'Rural', 'Coastal', 'Mountainous', 'Riverine', 
+				'Alpine', 'Jungle', 'Forested', 'Underground', 'Aerial', 'Remote', 'Hidden',
+				'Secret', 'Advanced', 'Frontline', 'Outer', 'Inner', 'Strategic', 'Critical',
+				'Highland', 'Lowland', 'Frozen', 'Volcanic', 'Secure', 'Isolated', 'Mobile',
+				'Decommissioned', 'Experimental', 'Recon', 'Supply', 'Medical', 'Command',
+				'Forward', 'Rear', 'Advanced', 'Primary', 'Secondary', 'Tactical', 'Research'
+			];
+
+			const nouns = [
+				'Base', 'Outpost', 'Camp', 'Checkpoint', 'Station', 'Complex', 'Zone', 
+				'Facility', 'Depot', 'Bunker', 'Shelter', 'Barracks', 'Dock', 'Landing',
+				'Harbor', 'Site', 'Perimeter', 'Headquarters', 'Sector', 'Tower', 'Garrison',
+				'Fortress', 'Stronghold', 'Encampment', 'Post', 'Node', 'Network', 'Field',
+				'Range', 'Observatory', 'Workshop', 'Forge', 'Assembly', 'Hangar', 'Warehouse',
+				'Hub', 'Control', 'Relay', 'Grid', 'Outlook', 'Beacon', 'Haven', 'Sanctuary'
+			];
+
+			const randomNum = Math.floor(Math.random() * 1000);
+			return `${adjectives[Math.floor(Math.random() * adjectives.length)]}${nouns[Math.floor(Math.random() * nouns.length)]}_${randomNum}`;
+		  }
+		};
+
+		// Progress Manager
+		const ProgressManager = {
+		  currentStep: 1,
+		  totalSteps: 3,
+
+		  updateProgress(step) {
+			this.currentStep = step;
+			const percentage = (step / this.totalSteps) * 100;
+			
+			document.querySelector('.progress-bar').style.width = `${percentage}%`;
+			document.getElementById('progressText').textContent = `Step ${step} of ${this.totalSteps}`;
+		  },
+
+		  reset() {
+			this.updateProgress(1);
+		  }
+		};
+
+		// Stats Manager
+		const StatsManager = {
+		  updateBuildingCount(count) {
+			document.getElementById('buildingCount').textContent = count;
+		  },
+
+		  updatePositionCount(count) {
+			document.getElementById('positionCount').textContent = count;
+		  }
+		};
+
+		// History Manager
+		const HistoryManager = {
+		  getHistory() {
+			return JSON.parse(localStorage.getItem(CONFIG.storage.history) || '[]');
+		  },
+
+		  addToHistory(entry) {
+			const history = this.getHistory();
+			history.unshift({
+			  ...entry,
+			  date: new Date().toISOString(),
+			  id: Date.now()
+			});
+
+			while (history.length > CONFIG.maxHistoryItems) {
+			  history.pop();
+			}
+
+			localStorage.setItem(CONFIG.storage.history, JSON.stringify(history));
+			this.updateHistoryTable();
+		  },
+
+		  updateHistoryTable() {
+			const history = this.getHistory();
+			const tbody = document.getElementById('historyTable');
+			tbody.innerHTML = '';
+
+			history.forEach(entry => {
+			  const tr = document.createElement('tr');
+			  tr.innerHTML = `
+				<td>${Utils.formatDate(new Date(entry.date))}</td>
+				<td>${entry.map}</td>
+				<td>${entry.building}</td>
+				<td>${entry.positions}</td>
+				<td>
+				  <button class="btn btn-sm btn-icon btn-text-secondary" onclick="HistoryManager.loadHistoryEntry(${entry.id})">
+					<i class="ti ti-reload"></i>
+				  </button>
+				</td>
+			  `;
+			  tbody.appendChild(tr);
+			});
+		  },
+
+		  loadHistoryEntry(id) {
+			const history = this.getHistory();
+			const entry = history.find(h => h.id === id);
+			if (!entry) return;
+
+			// Load the history entry data into the form
+			document.getElementById('groupName').value = entry.groupName;
+			document.querySelector(`input[name="mapChoice"][value="${entry.map}"]`).checked = true;
+			BuildingManager.updateBuildingNames().then(() => {
+			  $('#buildingName').val(entry.building).trigger('change');
+			});
+		  }
+		};
+		
+		// Recent Groups Manager
+		const RecentGroupsManager = {
+		  getRecentGroups() {
+			return JSON.parse(localStorage.getItem(CONFIG.storage.recentGroups) || '[]');
+		  },
+
+		  addRecentGroup(groupName) {
+			if (!groupName) return;
+			
+			const recentGroups = this.getRecentGroups();
+			
+			// Remove if already exists to avoid duplicates
+			const index = recentGroups.indexOf(groupName);
+			if (index > -1) {
+			  recentGroups.splice(index, 1);
+			}
+			
+			// Add to beginning
+			recentGroups.unshift(groupName);
+			
+			// Keep only the most recent ones
+			while (recentGroups.length > CONFIG.maxRecentGroups) {
+			  recentGroups.pop();
+			}
+			
+			localStorage.setItem(CONFIG.storage.recentGroups, JSON.stringify(recentGroups));
+			this.updateRecentGroupsDropdown();
+		  },
+
+		  updateRecentGroupsDropdown() {
+			const recentGroups = this.getRecentGroups();
+			const dropdown = document.getElementById('recentGroups');
+			
+			// Clear everything after the header
+			const header = dropdown.querySelector('.dropdown-header');
+			dropdown.innerHTML = '';
+			if (header) dropdown.appendChild(header);
+			
+			if (recentGroups.length === 0) {
+			  const li = document.createElement('li');
+			  li.innerHTML = '<span class="dropdown-item text-muted">No recent groups</span>';
+			  dropdown.appendChild(li);
+			  return;
+			}
+			
+			recentGroups.forEach(group => {
+			  const li = document.createElement('li');
+			  li.innerHTML = `
+				<a class="dropdown-item" href="javascript:void(0);" onclick="RecentGroupsManager.selectGroup('${group}')">
+				  <i class="ti ti-tag me-2"></i>${group}
+				</a>
+			  `;
+			  dropdown.appendChild(li);
+			});
+		  },
+
+		  selectGroup(groupName) {
+			document.getElementById('groupName').value = groupName;
+		  }
+		};
+
+		// Select2 Management
+		const Select2Manager = {
+		  init(elementId) {
+			const $select = $(`#${elementId}`);
+			
+			const tryInitialize = () => {
+			  if ($select.find('option:not([hidden])').length > 0) {
+				$select.select2(CONFIG.select2Options);
+				console.log('Select2 initialized for:', elementId);
+			  } else {
+				console.log('Retrying initialization:', elementId);
+				setTimeout(tryInitialize, 100);
+			  }
+			};
+
+			tryInitialize();
+		  },
+
+		  destroy(elementId) {
+			$(`#${elementId}`).select2('destroy');
+		  }
+		};
+
+		// Building Manager (Enhanced)
+		const BuildingManager = {
+		  async updateBuildingNames() {
+			ProgressManager.updateProgress(1);
+			const mapChoice = document.querySelector('input[name="mapChoice"]:checked')?.value;
+			if (!mapChoice || !CONFIG.maps[mapChoice]) return;
+
+			const buildingNameSelect = document.getElementById('buildingName');
+			Select2Manager.destroy('buildingName');
+			buildingNameSelect.innerHTML = "";
+
+			try {
+			  const buildingData = await Utils.fetchJSON(CONFIG.maps[mapChoice]);
+			  const buildingNames = [...new Set(buildingData.mapGroupPos.map(bld => bld._name))];
+
+			  buildingNames.forEach(name => {
+				const option = document.createElement('option');
+				option.value = name;
+				option.textContent = name;
+				buildingNameSelect.appendChild(option);
+			  });
+
+			  Select2Manager.init('buildingName');
+			  StatsManager.updateBuildingCount(buildingNames.length);
+			  ProgressManager.updateProgress(2);
+			} catch (error) {
+			  console.error('Error updating building names:', error);
+			}
+		  },
+
+		  async generatePositions() {
+			ProgressManager.updateProgress(2);
+			const groupName = document.getElementById('groupName').value.trim() || "YourGroupNameHere";
+			const promptBuilding = document.getElementById('buildingName').value;
+			const mapChoice = document.querySelector('input[name="mapChoice"]:checked')?.value;
+
+			if (!mapChoice || !CONFIG.maps[mapChoice]) {
+			  Swal.fire({
+				icon: 'error',
+				title: 'Error',
+				text: 'Please select a valid map',
+				timer: 2000,
+				showConfirmButton: false
+			  });
+			  return;
+			}
+
+			try {
+			  const buildingData = await Utils.fetchJSON(CONFIG.maps[mapChoice]);
+			  const positions = buildingData.mapGroupPos
+				.filter(bld => bld._name.toLowerCase() === promptBuilding.toLowerCase())
+				.map(bld => {
+				  const [x, y, z] = bld._pos.split(" ");
+				  const angle = Utils.normalizeAngle(Utils.calculateAngle(bld._a));
+				  return `<pos x="${x}" z="${z}" a="${angle}" y="${y}" group="${groupName}"/>`;
+				});
+
+			  let output = positions.join('\n');
+			  if (output) {
+				output += '\n';
+			  }
+
+			  window.codeMirrorEditor.setValue(output);
+			  StatsManager.updatePositionCount(positions.length);
+			  
+			  // Add to history
+			  HistoryManager.addToHistory({
+				map: mapChoice,
+				building: promptBuilding,
+				groupName: groupName,
+				positions: positions.length
+			  });
+			  
+			RecentGroupsManager.addRecentGroup(groupName);
+				
+			  ProgressManager.updateProgress(3);
+			} catch (error) {
+			  console.error('Error generating positions:', error);
+			}
+		  }
+		};
+
+		// Clipboard Management
+		const ClipboardManager = {
+		  async copyToClipboard() {
+			try {
+			  const text = window.codeMirrorEditor.getValue();
+			  await navigator.clipboard.writeText(text);
+			  
+			  Swal.fire({
+				icon: 'success',
+				title: 'Copied!',
+				text: 'The output has been copied to the clipboard.',
+				timer: 2000,
+				showConfirmButton: false
+			  });
+			} catch (error) {
+			  Swal.fire({
+				icon: 'error',
+				title: 'Error',
+				text: `Could not copy text: ${error}`,
+				timer: 2000,
+				showConfirmButton: false
+			  });
+			}
+		  },
+
+		  downloadOutput() {
+			const text = window.codeMirrorEditor.getValue();
+			if (!text) return;
+
+			const blob = new Blob([text], { type: 'text/plain' });
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = `positions_${new Date().toISOString().slice(0,10)}.xml`;
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+			document.body.removeChild(a);
+		  }
+		};
+
+		// CodeMirror Setup
+		const CodeMirrorManager = {
+		  init() {
+			const editor = CodeMirror.fromTextArea(document.getElementById('outputArea'), {
+			  lineNumbers: true,
+			  mode: 'application/xml',
+			  theme: 'darcula',
+			  readOnly: true
+			});
+			window.codeMirrorEditor = editor;
+		  }
+		};
+
+		// Event Listeners and Initialization
+		document.addEventListener('DOMContentLoaded', () => {
+		  // Initialize components
+		  $('.select2').select2();
+		  CodeMirrorManager.init();
+		  HistoryManager.updateHistoryTable();
+		  RecentGroupsManager.updateRecentGroupsDropdown();
+
+		  // Add event listeners
+		  document.getElementById('copyButton').addEventListener('click', ClipboardManager.copyToClipboard);
+		  document.getElementById('downloadOutput').addEventListener('click', ClipboardManager.downloadOutput);
+		  document.getElementById('generateName').addEventListener('click', () => {
+			document.getElementById('groupName').value = Utils.generateRandomName();
+		  });
+
+		  // Clear output function
+		  window.clearOutput = () => {
+			window.codeMirrorEditor.setValue('');
+			StatsManager.updatePositionCount(0);
+			ProgressManager.reset();
+		  };
+		});
+
+		// Make functions globally available (to maintain compatibility)
+		window.updateBuildingNames = BuildingManager.updateBuildingNames;
+		window.main = BuildingManager.generatePositions;
+	</script>
+	
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/mapgrouppos by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:45 GMT -->
+</html>

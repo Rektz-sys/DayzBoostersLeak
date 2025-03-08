@@ -1,0 +1,1103 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/spawnobjectconvert by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>SpawnObject Converter &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Convert and spawn objects dynamically with ease using our Spawn Object Convert tool. This page enables users to input, modify, and export JSON data for spawning objects, with customizable parameters and validation for optimized outputs." />
+    <meta content="DayZ server management, DayZ boosting loot, DayZ loadout generator, console loadouts, loadouts dayz, DayZ loot customization, gaming, DayZ server settings, DayZ night cycle calculator, DayZ loot accelerator" name="keywords">
+    <meta name="author" content="OzzieHouso & KingAlobar">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+
+    <!-- Additional CSS specifically for SpawnObject -->
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.css">
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/darcula.min.css">
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  
+	  .cursor-pointer {
+		  cursor: pointer;
+		}
+
+
+		.form-check-input:checked {
+		  background-color: var(--bs-primary);
+		  border-color: var(--bs-primary);
+		}
+
+		.avatar {
+		  width: 32px;
+		  height: 32px;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		  border-radius: 6px;
+		}
+	  
+	</style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+            <!-- Navbar content from template-2 -->
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+          </nav>
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+		<div class="content-wrapper">
+		  <!-- Content -->
+		  <div class="container-xxl flex-grow-1 container-p-y">
+			<!-- Header card -->
+			<div class="row mb-4">
+			  <div class="col-12">
+				<div class="card border-0 text-white">
+				  <div class="card-body d-flex align-items-center p-4">
+					<div class="avatar avatar-lg  me-3">
+					  <i class="ti ti-code fs-2 text-primary"></i>
+					</div>
+					<div>
+					  <h4 class="card-title mb-0 text-white">SpawnObject Converter</h4>
+					  <p class="card-text mb-0 text-white opacity-75">Convert and spawn objects dynamically with ease using our Spawn Object Convert tool.</p>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+
+			<!-- Main content -->
+			<div class="row">
+			  <div class="col-12">
+				<!-- Input Section -->
+				<div class="card mb-4">
+				  <div class="card-header border-bottom">
+					<h5 class="card-title mb-0">
+					  <i class="ti ti-edit me-2"></i>Input Configuration
+					</h5>
+				  </div>
+				  <div class="card-body">
+					<form id="spawnerForm">
+					  <!-- Map Selection -->
+					  <div class="form-group mb-4 mt-4">
+						  <label class="form-label d-block fw-semibold">Select Map:</label>
+						  <div class="row g-2">
+							<div class="col-md-4">
+							  <div class="card h-100">
+								<div class="card-body p-3">
+								  <input type="radio" id="mapCherarus" name="mapChoice" value="c" class="form-check-input float-end mt-1" required>
+								  <label for="mapCherarus" class="form-check-label w-100 cursor-pointer">
+									<div class="d-flex align-items-center">
+									  <div class="avatar avatar-sm me-2 bg-primary-subtle">
+										<i class="ti ti-map text-primary"></i>
+									  </div>
+									  <div>
+										<h6 class="mb-0">Chernarus</h6>
+										<small class="text-muted">Default Map</small>
+									  </div>
+									</div>
+								  </label>
+								</div>
+							  </div>
+							</div>
+							
+							<div class="col-md-4">
+							  <div class="card h-100">
+								<div class="card-body p-3">
+								  <input type="radio" id="mapLivonia" name="mapChoice" value="l" class="form-check-input float-end mt-1" required>
+								  <label for="mapLivonia" class="form-check-label w-100 cursor-pointer">
+									<div class="d-flex align-items-center">
+									  <div class="avatar avatar-sm me-2 bg-success-subtle">
+										<i class="ti ti-map text-success"></i>
+									  </div>
+									  <div>
+										<h6 class="mb-0">Livonia</h6>
+										<small class="text-muted">DLC Map</small>
+									  </div>
+									</div>
+								  </label>
+								</div>
+							  </div>
+							</div>
+							
+							<div class="col-md-4">
+							  <div class="card h-100">
+								<div class="card-body p-3">
+								  <input type="radio" id="mapSakhal" name="mapChoice" value="s" class="form-check-input float-end mt-1" required>
+								  <label for="mapSakhal" class="form-check-label w-100 cursor-pointer">
+									<div class="d-flex align-items-center">
+									  <div class="avatar avatar-sm me-2 bg-warning-subtle">
+										<i class="ti ti-map text-warning"></i>
+									  </div>
+									  <div>
+										<h6 class="mb-0">Sakhal</h6>
+										<small class="text-muted">New Map</small>
+									  </div>
+									</div>
+								  </label>
+								</div>
+							  </div>
+							</div>
+						  </div>
+						</div>
+
+					  <!-- Fill Building Chance -->
+					  <div class="form-group mb-4">
+						<label for="fillBldChance" class="form-label fw-semibold">Fill Building Chance:</label>
+						<div class="input-group input-group-merge">
+						  <input type="number" id="fillBldChance" class="form-control" step="0.01" value="1.00" required>
+						  <span class="input-group-text">%</span>
+						  <button type="button" id="fillBldChanceInfo" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Controls the probability of objects spawning in buildings">
+							<i class="ti ti-info-circle"></i>
+						  </button>
+						</div>
+					  </div>
+
+					  <!-- SpawnObject Input -->
+					  <div class="form-group mb-4">
+						<label for="spawnObjectInput" class="form-label fw-semibold">
+						  <i class="ti ti-code me-1"></i>SpawnObject Calls:
+						</label>
+						<textarea id="spawnObjectInput" class="form-control font-monospace" rows="10" required placeholder="Paste your SpawnObject calls here..."></textarea>
+					  </div>
+
+					  <!-- Submit Button -->
+					  <div class="text-end">
+						<button type="submit" class="btn btn-primary">
+						  <i class="ti ti-wand me-1"></i>Generate Output
+						</button>
+						<button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#howToModal">
+						<i class="ti ti-book me-1"></i>How to Use Guide
+					  </button>
+					  </div>
+					</form>
+				  </div>
+				</div>
+			  </div>
+
+			  <!-- Output Section -->
+			  <div class="col-12">
+				<div class="card">
+				  <div class="card-header border-bottom d-flex justify-content-between align-items-center">
+					<h5 class="card-title mb-0">
+					  <i class="ti ti-code-dots me-2"></i>Generated Output
+					</h5>
+					<div class="card-actions">
+					  <button id="copyButton" class="btn btn-primary btn-sm me-2">
+						<i class="ti ti-copy me-1"></i>Copy
+					  </button>
+					  <button id="downloadButton" class="btn btn-success btn-sm">
+						<i class="ti ti-download me-1"></i>Download
+					  </button>
+					</div>
+				  </div>
+				  <div class="card-body p-4">
+					<textarea id="output" class="form-control font-monospace mt-3" rows="10" readonly></textarea>
+				  </div>
+				  <div class="card-footer text-center text-muted">
+					<small>All credits for this feature goto <a href="https://discord.gg/ZaGzSJF3H5" class="text-primary">DonSibley</a>, 
+					for allowing me to use his original script and convert it for DayZ BoosterZ</small>
+				  </div>
+				</div>
+			  </div>
+			</div>
+					  
+		  </div>
+		  <!-- / Content -->
+
+		  <!-- Footer -->
+		  <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>		  <!-- / Footer -->
+
+		  <div class="content-backdrop fade"></div>
+		</div>
+		<!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+	  
+	  <!-- How To Modal -->
+		<div class="modal fade" id="howToModal" tabindex="-1" aria-labelledby="howToModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			  <div class="modal-header bg-primary">
+				<h5 class="modal-title text-white" id="howToModalLabel">
+				  <i class="ti ti-book me-2"></i>SpawnObject Converter Guide
+				</h5>
+				<button type="button" class="btn-close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body p-4">
+				<!-- Quick Overview -->
+				<div class="alert alert-primary d-flex align-items-center mb-4" role="alert">
+				  <i class="ti ti-info-circle me-2 fs-4"></i>
+				  <div>
+					This tool helps you convert individual building spawns into a format that can be used across multiple locations on the map.
+				  </div>
+				</div>
+
+				<!-- Step by Step Guide -->
+				<div class="card shadow-none border mb-4">
+				  <div class="card-header">
+					<h6 class="card-title mb-0">
+					  <i class="ti ti-list-numbers me-2"></i>Step-by-Step Instructions
+					</h6>
+				  </div>
+				  <div class="card-body">
+					<div class="timeline-vertical">
+					  <div class="timeline-item mb-4 position-relative">
+						<div class="d-flex align-items-center">
+						  <div class="timeline-indicator bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 2.5rem; height: 2.5rem;">
+							<i class="ti ti-search text-white fs-5"></i>
+						  </div>
+						  <div class="ms-4">
+							<h6 class="mb-1">Find Your Building</h6>
+							<p class="mb-0">Locate a building or object that has entries in the <code>mapgrouppos.xml</code> file you want to decorate</p>
+						  </div>
+						</div>
+					  </div>
+
+					  <div class="timeline-item mb-4 position-relative">
+						<div class="d-flex align-items-center">
+						  <div class="timeline-indicator bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 2.5rem; height: 2.5rem;">
+							<i class="ti ti-edit text-white fs-5"></i>
+						  </div>
+						  <div class="ms-4">
+							<h6 class="mb-1">Create in Editor</h6>
+							<p class="mb-0">In the DayZ Editor, create a DZE and place your building/wreck with an RPY of 0 (zero)</p>
+						  </div>
+						</div>
+					  </div>
+
+					  <div class="timeline-item mb-4 position-relative">
+						<div class="d-flex align-items-center">
+						  <div class="timeline-indicator bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 2.5rem; height: 2.5rem;">
+							<i class="ti ti-file-export text-white fs-5"></i>
+						  </div>
+						  <div class="ms-4">
+							<h6 class="mb-1">Export Files</h6>
+							<p class="mb-0">Export the building and objects to a .C file - ensure the building is at the top of the list</p>
+						  </div>
+						</div>
+					  </div>
+
+					  <div class="timeline-item mb-4 position-relative">
+						<div class="d-flex align-items-center">
+						  <div class="timeline-indicator bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 2.5rem; height: 2.5rem;">
+							<i class="ti ti-clipboard text-white fs-5"></i>
+						  </div>
+						  <div class="ms-4">
+							<h6 class="mb-1">Paste Objects</h6>
+							<p class="mb-0">Copy your spawn objects and paste them into this tool to generate the JSON format</p>
+						  </div>
+						</div>
+					  </div>
+
+					  <div class="timeline-item mb-4 position-relative">
+						<div class="d-flex align-items-center">
+						  <div class="timeline-indicator bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 2.5rem; height: 2.5rem;">
+							<i class="ti ti-percentage text-white fs-5"></i>
+						  </div>
+						  <div class="ms-4">
+							<h6 class="mb-1">Set Spawn Chances</h6>
+							<p class="mb-0">Use the "Fill Building Chance" to set the probability of objects appearing in buildings</p>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+				<!-- Example Section -->
+				<div class="card shadow-none border">
+				  <div class="card-header">
+					<h6 class="card-title mb-0">
+					  <i class="ti ti-code me-2"></i>Example Code
+					</h6>
+				  </div>
+				  <div class="card-body">
+					<div class="alert alert-dark mb-3">
+					  <p class="mb-2">Basic structure of spawn object calls:</p>
+					  <code class="text-warning">SpawnObject(objectName, position, rotation, chance);</code>
+					</div>
+					<pre class="bg-dark p-3 rounded mb-0"><code>// Example of multiple spawn objects
+SpawnObject("Land_House_1W08", "12203.709961 143.007538 12479.150391", "0.000000 -0.000000 -0.000000", 1);
+SpawnObject("StaticObj_Misc_WoodPile1", "12210.200195 143.233002 12482.625977", "-179.999985 0.000000 0.000000", 0.99999);
+SpawnObject("StaticObj_Furniture_tools_racking", "12210.261719 141.036850 12481.516602", "90.000000 0.000000 0.000000", 0.999999);</code></pre>
+				  </div>
+				</div>
+
+				<!-- Important Note -->
+				<div class="alert alert-warning mt-4 d-flex" role="alert">
+				  <i class="ti ti-alert-triangle me-2 fs-4"></i>
+				  <div>
+					<strong>Important:</strong> Keep in mind the number of locations a building has. Large numbers of locations may require splitting into multiple files for better performance.
+				  </div>
+				</div>
+			  </div>
+			  <div class="modal-footer bg-light p-3">
+				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+				  <i class="ti ti-check me-1"></i>Got it!
+				</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+
+      <!-- Buy Now Button -->
+      		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      
+
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/json-lint.min.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const spawnObjectInput = CodeMirror.fromTextArea(document.getElementById('spawnObjectInput'), {
+            mode: "javascript",
+            lineNumbers: true,
+            matchBrackets: true,
+            theme: 'darcula'
+        });
+
+        document.getElementById('spawnObjectInput').removeAttribute('required');
+
+        const output = CodeMirror.fromTextArea(document.getElementById('output'), {
+            mode: "application/json",
+            lineNumbers: true,
+            readOnly: true,
+            theme: 'darcula',
+            readOnly: "nocursor"
+        });
+
+        let originBld = '';
+        let OrigPos = null;
+        let OrigOri = null;
+        let mGroup = null; // Store map data globally
+
+        // Function to reset variables and clear the output when map changes
+        const resetState = () => {
+            originBld = '';
+            OrigPos = null;
+            OrigOri = null;
+            mGroup = null;
+            output.setValue(''); // Clear output
+        };
+
+        // Function to load map data based on selection
+        const loadMapData = async (mapChoice) => {
+			try {
+				// Generate timestamp for cache busting
+				const timestamp = new Date().getTime();
+				
+				const mapFiles = {
+					'c': 'buildingName.json',
+					'l': 'buildingNameLivonia.json',
+					's': 'buildingNameSakhal.json'
+				};
+
+				const filename = mapFiles[mapChoice];
+				if (!filename) {
+					throw new Error('Invalid map choice');
+				}
+
+				mGroup = await fetch(`./config/p3d/${filename}?t=${timestamp}`)
+					.then(response => response.json());
+
+			} catch (error) {
+				output.setValue('Error loading JSON for selected map: ' + error.message);
+				mGroup = null;
+			}
+		};
+
+        // Attach change event listener to map selection radio buttons
+        document.querySelectorAll('input[name="mapChoice"]').forEach((radio) => {
+            radio.addEventListener('change', async () => {
+                resetState();
+                const mapChoice = document.querySelector('input[name="mapChoice"]:checked').value.toLowerCase();
+                await loadMapData(mapChoice);
+            });
+        });
+
+        const form = document.getElementById('spawnerForm');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            // Validation checks
+            const mapChoicePrompt = document.querySelector('input[name="mapChoice"]:checked');
+            const fillBldChance = parseFloat(document.getElementById('fillBldChance').value);
+            const spawnObjectInputValue = spawnObjectInput.getValue().trim();
+
+            if (!mapChoicePrompt || isNaN(fillBldChance) || fillBldChance <= 0 || !spawnObjectInputValue) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Missing Input',
+                    text: 'Please ensure all inputs are filled correctly.',
+                    showConfirmButton: true
+                });
+                return;
+            }
+
+            if (!mGroup || !mGroup.mapGroupPos) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Map Data',
+                    text: 'Map data is missing or invalid. Please re-select the map.',
+                    showConfirmButton: true
+                });
+                return;
+            }
+
+            let outPut = [];
+
+            function SpawnObject(objectName, vec, orientation, scale) {
+				if (!originBld) {
+					originBld = objectName;
+					OrigPos = vec.split(" ");
+					OrigOri = orientation.split(" ");
+					return;
+				}
+				
+				const cords = vec.split(" ");
+				const cxyz = OrigPos;
+
+				const x = cords[0];
+				const y = cords[1];
+				const z = cords[2];
+
+				const cx = cxyz[0];
+				const cy = cxyz[1];
+				const cz = cxyz[2];
+
+				const newObjectName = objectName;
+				const len = mGroup.mapGroupPos.length;
+				const objectOri = orientation.split(" ");
+				let ObScale = "";
+				scale ? ObScale = scale : ObScale = 1;
+
+				for (let i = 0; i < len; i++) {
+					const bldingChance = +Math.random().toFixed(2);
+					if ((originBld == mGroup.mapGroupPos[i]._name) && (bldingChance <= fillBldChance)) {
+						const mGroupPos = mGroup.mapGroupPos[i]._pos.split(" ");
+						const mRpy = mGroup.mapGroupPos[i]._rpy.split(" ");
+						let a = mGroup.mapGroupPos[i]._a;
+
+						function NormalizeAngle(a) {
+							a = a % 360.0;
+							if (a < 0)
+								a += 360.0;
+							return a;
+						}
+						
+						a = NormalizeAngle(a);
+						a = a + -90;
+
+						let b = +mRpy[2] + +objectOri[0]; // Building Yaw plus Object Yaw
+						const p = +objectOri[1]; //pitch
+						const r = +objectOri[2]; //roll
+						b = NormalizeAngle(b); // Building Yaw plus Object Yaw Normalized
+
+						function rotate(x, y, xm, ym, a) {
+							const cos = Math.cos,
+								sin = Math.sin;
+							a = a * Math.PI / 180; // Convert to radians
+							// Subtract midpoints, so that midpoint is translated to origin
+							// and add it in the end again
+							const xr = (x - xm) * cos(a) - (y - ym) * sin(a) + xm,
+								yr = (x - xm) * sin(a) + (y - ym) * cos(a) + ym;
+							return [xr, yr];
+						}
+
+						const offset = rotate(x, z, cx, cz, a);
+						const rX = parseFloat(offset[0]);
+						const rY = parseFloat(y) - parseFloat(cy);
+						const rZ = parseFloat(offset[1]);
+
+						outPut.push({
+							"name": newObjectName,
+							"pos": [
+								(+mGroupPos[0] + +rX),
+								(+mGroupPos[1] + +rY),
+								(+mGroupPos[2] + +rZ)
+							],
+							"ypr": [
+								b,
+								p,
+								r
+							],
+							"scale": ObScale,
+							"enableCEPersistency": false
+						});
+					}
+				}
+			}
+
+            try {
+                eval(spawnObjectInputValue);
+            } catch (error) {
+                output.setValue('Error in SpawnObject input: ' + error.message);
+                return;
+            }
+
+            const formattedOutput = JSON.stringify({ "Objects": outPut }, null, 4);
+            output.setValue(formattedOutput);
+        });
+
+        document.getElementById('copyButton').addEventListener('click', () => {
+            const text = output.getValue().trim();
+            if (!text) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Nothing to Copy',
+                    text: 'There is no output to copy. Please generate output first.',
+                    showConfirmButton: true
+                });
+                return;
+            }
+            navigator.clipboard.writeText(text).then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Copied to clipboard',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }).catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed to copy',
+                    text: err.message,
+                    showConfirmButton: true
+                });
+            });
+        });
+
+        document.getElementById('downloadButton').addEventListener('click', () => {
+            if (!originBld) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'No Output to Download',
+                    text: 'Please generate output before downloading.',
+                    showConfirmButton: true
+                });
+                return;
+            }
+            const text = output.getValue();
+            const blob = new Blob([text], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${originBld}_Custom.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        document.getElementById('fillBldChanceInfo').addEventListener('click', () => {
+            Swal.fire({
+                icon: 'info',
+                title: 'Fill Building Chance',
+                text: 'The fill building chance determines the likelihood of spawning objects within a building. It ranges from 0 to 1, where 1 means objects will always spawn, and 0 means they will never spawn.',
+                showConfirmButton: true
+            });
+        });
+    });
+</script>
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/spawnobjectconvert by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:45 GMT -->
+</html>

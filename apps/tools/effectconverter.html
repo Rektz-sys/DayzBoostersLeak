@@ -1,0 +1,992 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/effectconverter by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Effect Converter &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Convert and customize effect settings for DayZ. Upload JSON files, choose preset effects, and export your configurations." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+	
+	<link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+	<link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/darcula.min.css">
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  
+	  .typing-effect {
+		  color: #6c757d;
+		  font-size: 1rem;
+		  font-family: monospace;
+		  position: relative;
+		  display: inline-block;
+		}
+
+		.dots {
+		  display: inline-block;
+		  animation: dotAnimation 1.5s infinite;
+		  opacity: 0;
+		}
+
+		.dots::after {
+		  content: '.';
+		}
+
+		@keyframes dotAnimation {
+		  0% { opacity: 0; }
+		  20% { opacity: 0; }
+		  40% { opacity: 1; }
+		  60% { opacity: 1; }
+		  80% { opacity: 1; }
+		  100% { opacity: 0; }
+		}
+		
+		.CodeMirror {
+			height: auto;
+			min-height: 200px;
+			width: 100%;
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 0.375rem;
+		  }
+		  
+		  /* Prevent horizontal overflow */
+		  .CodeMirror-scroll {
+			max-width: 100%;
+			overflow-x: auto !important;
+		  }
+		  
+		  /* Fix container width */
+		  .bg-dark.bg-opacity-10.p-3.rounded-3.mb-3 {
+			width: 100%;
+			overflow: hidden;
+		  }
+		  
+		  /* Ensure textarea doesn't cause overflow */
+		  #codeMirrorEditor {
+			max-width: 100%;
+			box-sizing: border-box;
+		  }
+	  
+	</style>
+	
+  </head>
+
+  <body>
+  
+  <div id="spinnerOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item active">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>		
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+				<div class="row mb-4">
+					  <div class="col-12">
+						<div class="card  border-0">
+						  <div class="card-body d-flex align-items-center p-4">
+							<div class="avatar avatar-lg rounded me-3">
+							  <i class="ti ti-file-code fs-2"></i>
+							</div>
+							<div>
+							  <h4 class="card-title mb-0">Effect Converter</h4>
+							  <p class="card-text mb-0 text-muted">Convert and customize effect settings for DayZ. Upload JSON files, choose preset effects, and export your configurations.</p>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+              <div class="row mb-6">
+			  
+			  <div class="col-12">
+					<div class="card mb-4">
+					  <div class="card-header d-flex justify-content-between align-items-center">
+						<div>
+						  <h5 class="card-title mb-0">Effect Converter</h5>
+						  <small class="text-muted">Upload your JSON configuration file</small>
+						</div>
+					  </div>
+					  <div class="card-body">
+						<div class="alert alert-danger d-flex" role="alert">
+						  <i class="ti ti-alert-circle ti-xs me-2"></i>
+						  <div>
+							This tool changes all chemlight coordinates placed into an object spawner into cfgEffectArea.json compatible entries. Please make sure you understand that before attempting to use this tool.
+						  </div>
+						</div>
+						<form id="jsonUploadForm" action="https://app.dayzboosterz.com/apps/tools/config/effectConverter.php" method="post" enctype="multipart/form-data">
+						  
+						  <input type="file" class="form-control" id="jsonFile" name="jsonFile" data-allowed-file-extensions="json">
+						</form>
+					  </div>
+					</div>
+				  </div>
+				  
+				  <!-- Effects Selection Card -->
+				  <div class="col-12">
+					  <div class="card mb-4">
+						<div class="card-header">
+						  <div class="d-flex justify-content-between align-items-center">
+							<div>
+							  <h5 class="card-title mb-0">Set Desired Effects</h5>
+							  <small class="text-muted">More effects will be added in the future</small>
+							</div>
+						  </div>
+						</div>
+						<div class="card-body">
+						  <!-- Environment Effects -->
+						  <h6 class="fw-semibold mb-4">Environment Effects</h6>
+						  <div class="row g-4 mb-4">
+							<!-- Water Effects Column -->
+							<div class="col-md-6">
+							  <div class="p-3 border rounded-3 bg-dark bg-opacity-10 h-100">
+								<div class="d-flex align-items-center mb-3">
+								  <i class="ti ti-droplet text-primary me-2"></i>
+								  <h6 class="mb-0 text-primary">Water Effects</h6>
+								</div>
+								<div class="form-check form-check-custom mb-3">
+								  <input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/water_jet" id="waterJetChecked">
+								  <label class="form-check-label ms-2" for="waterJetChecked">Set Waterjet</label>
+								</div>
+								<div class="form-check form-check-custom mb-3">
+								  <input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/water_jet_weak" id="waterJetWeakChecked">
+								  <label class="form-check-label ms-2" for="waterJetWeakChecked">Set Waterjet Weak</label>
+								</div>
+								<div class="form-check form-check-custom mb-3">
+								  <input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/water_spilling" id="waterSpillingChecked">
+								  <label class="form-check-label ms-2" for="waterSpillingChecked">Set Water Spilling</label>
+								</div>
+								<div class="form-check form-check-custom mb-3">
+								  <input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/smoking_barrel_steam_small" id="barrelSteamSmall">
+								  <label class="form-check-label ms-2" for="barrelSteamSmall">Set Smoking Barrel</label>
+								</div>
+							  </div>
+							</div>
+
+							<!-- Special Effects Column -->
+							<div class="col-md-6">
+							  <div class="p-3 border rounded-3 bg-dark bg-opacity-10 h-100">
+								<div class="d-flex align-items-center mb-3">
+								  <i class="ti ti-sparkles text-info me-2"></i>
+								  <h6 class="mb-0 text-info">Special Effects</h6>
+								</div>
+								<div class="form-check form-check-custom mb-3">
+								  <input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/env_fly_swarm_01" id="envFlySwarmChecked">
+								  <label class="form-check-label ms-2" for="envFlySwarmChecked">Set Env Fly Swarm</label>
+								</div>
+								<div class="form-check form-check-custom mb-3">
+								  <input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/cupid_bolt" id="cupidHearts">
+								  <label class="form-check-label ms-2" for="cupidHearts">Set Cupid Hearts</label>
+								</div>
+							  </div>
+							</div>
+						  </div>
+						  
+						  <!-- Fire & Smoke Effects -->
+					<h6 class="fw-semibold mb-4">Fire & Smoke Effects</h6>
+					<div class="row g-4 mb-4">
+					  <!-- Fire Effects Column -->
+					  <div class="col-md-4">
+						<div class="p-3 border rounded-3 bg-dark bg-opacity-10 h-100">
+						  <div class="d-flex align-items-center mb-3">
+							<i class="ti ti-flame text-danger me-2"></i>
+							<h6 class="mb-0 text-danger">Fire Effects</h6>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_small_torch_01" id="fireSmallTorchChecked">
+							<label class="form-check-label ms-2" for="fireSmallTorchChecked">Set Fire Small Torch</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_small_house_01" id="fireSmallHouseChecked">
+							<label class="form-check-label ms-2" for="fireSmallHouseChecked">Set Fire Small House</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_small_camp_01" id="fireSmallCampChecked">
+							<label class="form-check-label ms-2" for="fireSmallCampChecked">Set Fire Small Camp</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_medium_house_01" id="fireMediumHouseChecked">
+							<label class="form-check-label ms-2" for="fireMediumHouseChecked">Set Fire Medium House</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_bonfire" id="fireBonfireChecked">
+							<label class="form-check-label ms-2" for="fireBonfireChecked">Set Fire Bonfire</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_small_stove_01" id="fireSmallStove">
+							<label class="form-check-label ms-2" for="fireSmallStove">Set Fire Small Stove</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/menu_engine_fire" id="engineSmoke">
+							<label class="form-check-label ms-2" for="engineSmoke">Set Engine Fire</label>
+						  </div>
+						</div>
+					  </div>
+
+					  <!-- Flares Column -->
+					  <div class="col-md-4">
+						<div class="p-3 border rounded-3 bg-dark bg-opacity-10 h-100">
+						  <div class="d-flex align-items-center mb-3">
+							<i class="ti ti-flare text-warning me-2"></i>
+							<h6 class="mb-0 text-warning">Flare Effects</h6>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_small_flare_blue_01" id="fireSmallFlareB">
+							<label class="form-check-label ms-2" for="fireSmallFlareB">Set Fire Blue Flare</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_small_flare_green_01" id="fireSmallFlareG">
+							<label class="form-check-label ms-2" for="fireSmallFlareG">Set Fire Green Flare</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_small_flare_red_01" id="fireSmallFlareR">
+							<label class="form-check-label ms-2" for="fireSmallFlareR">Set Fire Red Flare</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_small_flare_yellow_01" id="fireSmallFlareY">
+							<label class="form-check-label ms-2" for="fireSmallFlareY">Set Fire Yellow Flare</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/fire_small_roadflare_red_03" id="fireRoadFlare">
+							<label class="form-check-label ms-2" for="fireRoadFlare">Set Small Road Flare</label>
+						  </div>
+						</div>
+					  </div>
+
+					  <!-- Smoke Effects Column -->
+					  <div class="col-md-4">
+						<div class="p-3 border rounded-3 bg-dark bg-opacity-10 h-100">
+						  <div class="d-flex align-items-center mb-3">
+							<i class="ti ti-access-point text-success me-2"></i>
+							<h6 class="mb-0 text-success">Smoke Effects</h6>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/smoke_M18_green_02" id="smokeM18GreenChecked">
+							<label class="form-check-label ms-2" for="smokeM18GreenChecked">Set Smoke M18 Green</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/smoke_M18_purple_02" id="smokeM18PurpleChecked">
+							<label class="form-check-label ms-2" for="smokeM18PurpleChecked">Set Smoke M18 Purple</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/smoke_M18_red_02" id="smokeM18RedChecked">
+							<label class="form-check-label ms-2" for="smokeM18RedChecked">Set Smoke M18 Red</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/smoke_M18_white_02" id="smokeM18WhiteChecked">
+							<label class="form-check-label ms-2" for="smokeM18WhiteChecked">Set Smoke M18 White</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/smoke_M18_yellow_02" id="smokeM18YellowChecked">
+							<label class="form-check-label ms-2" for="smokeM18YellowChecked">Set Smoke M18 Yellow</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/smoke_generic_wreck" id="wreckSmoke">
+							<label class="form-check-label ms-2" for="wreckSmoke">Set Wreck Smoke</label>
+						  </div>
+						  <div class="form-check form-check-custom mb-3">
+							<input class="form-check-input effect-checkbox" type="checkbox" value="graphics/particles/smoke_bonfire" id="bonfireSmoke">
+							<label class="form-check-label ms-2" for="bonfireSmoke">Set Bonfire Smoke</label>
+						  </div>
+						</div>
+					  </div>
+					</div>
+
+					<!-- Map-Specific Effects -->
+					<h6 class="fw-semibold mb-4">Map-Specific Effects</h6>
+					<div class="row g-4">
+					  <!-- Sakhal Effects -->
+					  <div class="col-12">
+						<div class="p-3 border rounded-3 bg-dark bg-opacity-10">
+						  <div class="d-flex align-items-center mb-3">
+							<i class="ti ti-letter-s-small text-warning me-2"></i>
+							<h6 class="mb-0 text-warning">Sakhal Special Effects</h6>
+						  </div>
+						  <div class="row">
+							<div class="col-md-4">
+							  <div class="form-check form-check-custom mb-3">
+								<input class="form-check-input effect-checkbox" type="checkbox" value="HotSpringArea" id="hotSpringsTrigger">
+								<label class="form-check-label ms-2" for="hotSpringsTrigger">Set Hot Springs Area</label>
+							  </div>
+							</div>
+							<div class="col-md-4">
+							  <div class="form-check form-check-custom mb-3">
+								<input class="form-check-input effect-checkbox" type="checkbox" value="VolcanicArea" id="volcanicTrigger">
+								<label class="form-check-label ms-2" for="volcanicTrigger">Set Volcanic Area</label>
+							  </div>
+							</div>
+							<div class="col-md-4">
+							  <div class="form-check form-check-custom mb-3">
+								<input class="form-check-input effect-checkbox" type="checkbox" value="GeyserArea" id="GeyserTrigger">
+								<label class="form-check-label ms-2" for="GeyserTrigger">Set Geyser Effect</label>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+
+					<!-- Image Preview -->
+					<div class="row mt-4">
+					  <div class="col-12">
+						<!-- No Selection State -->
+						<div id="noSelection" class="text-center p-4 border rounded-3 bg-dark bg-opacity-10">
+						  <div class="typing-effect">Waiting for user selection<span class="dots">...</span></div>
+						</div>
+						<!-- Image Preview State -->
+						<div id="imageContainer" class="text-center p-4 border rounded-3 bg-dark bg-opacity-10" style="display:none;">
+						  <img id="effectImage" src="#" alt="Effect Image" class="img-fluid mb-3" style="max-width: 500px;">
+						  <div class="text-muted">Images provided by KingAlobar</div>
+						</div>
+					  </div>
+					</div>
+
+					</div>
+				  </div>
+				</div>
+				
+				<!-- Map Selection Card -->
+				  <div class="col-12">
+					  <div class="card mb-4">
+						<div class="card-header">
+						  <div class="d-flex justify-content-between align-items-center">
+							<div>
+							  <h5 class="card-title mb-0">Select Map</h5>
+							  <small class="text-muted">Choose your game map</small>
+							</div>
+						  </div>
+						</div>
+						<div class="card-body">
+						  <div class="alert alert-danger d-flex mb-4" role="alert">
+							<i class="ti ti-alert-circle ti-xs me-2"></i>
+							<div>
+							  Please select a map only if you are using the default <code>cfgEffectArea.json</code>. If you have a modified file or don't want to append vanilla code, select "None".
+							</div>
+						  </div>
+						  <div class="row">
+							<div class="col-md-12">
+							  <div class="form-check mb-2">
+								<input class="form-check-input" type="radio" name="mapSelection" id="chernarusMap" value="chernarus">
+								<label class="form-check-label" for="chernarusMap">Chernarus</label>
+							  </div>
+							  <div class="form-check mb-2">
+								<input class="form-check-input" type="radio" name="mapSelection" id="livoniaMap" value="livonia">
+								<label class="form-check-label" for="livoniaMap">Livonia</label>
+							  </div>
+							  <div class="form-check mb-2">
+								<input class="form-check-input" type="radio" name="mapSelection" id="sakhalMap" value="sakhal">
+								<label class="form-check-label" for="sakhalMap">Sakhal</label>
+							  </div>
+							  <div class="form-check mb-2">
+								<input class="form-check-input" type="radio" name="mapSelection" id="noneMap" value="none">
+								<label class="form-check-label" for="noneMap">None</label>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					
+					<!-- JSON Output Card -->
+				  <div class="col-12">
+					<div class="card mb-4">
+					  <div class="card-header">
+						<div class="d-flex justify-content-between align-items-center">
+						  <div>
+							<h5 class="card-title mb-0">Converted JSON Effect</h5>
+							<small class="text-muted">This output should be used in <code>cfgEffectArea.json</code></small>
+						  </div>
+						</div>
+					  </div>
+					  <div class="card-body">
+						<div class="bg-dark bg-opacity-10 p-3 rounded-3 mb-3 position-relative overflow-hidden">
+  <textarea id="codeMirrorEditor" name="codeMirrorEditor" class="w-100"></textarea>
+</div>
+						<div class="d-flex gap-2">
+						  <button type="submit" class="btn btn-primary" form="jsonUploadForm">
+							<i class="ti ti-upload me-2"></i>Upload JSON
+						  </button>
+						  <button type="button" id="clearFile" class="btn btn-secondary">
+							<i class="ti ti-eraser me-2"></i>Clear File
+						  </button>
+						  <button type="button" id="downloadEffect" class="btn btn-success">
+							<i class="ti ti-download me-2"></i>Download Effect
+						  </button>
+						  <button type="button" id="copyJson" class="btn btn-info">
+							<i class="ti ti-copy me-2"></i>Copy JSON
+						  </button>
+						</div>
+					  </div>
+					</div>
+				  </div>
+                
+				
+
+              </div>             
+
+              <!-- / Payment Methods modal -->
+            </div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Additional JS for Effect Converter -->
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.js"></script>
+	<script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/json-lint.min.js"></script>
+
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script src="../../assets/js/effect-converterae52.js?v=5"></script>
+
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/effectconverter by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:46 GMT -->
+</html>
+

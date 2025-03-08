@@ -1,0 +1,1663 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!doctype html>
+
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/gameplay by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:21:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>CfgGameplay Generator &mdash; DayZ BoosterZ</title>
+
+    <meta name="description" content="Do you like the idea of modding your dayz console server? Look no further, using our cfggameplay generator you can add BuildAnywhere mod, infinite stamina etc. Join the community @ discord.gg/dayzboosterz" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link
+      href="../../../fonts.googleapis.com/css2ad73.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+      rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+	<link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+	
+	<style>
+	  .icon {
+		width: 32px;
+		height: 32px;
+	  }
+	  
+	  .toast-container {
+		position: fixed;
+		top: 1rem;
+		right: 1rem;
+		padding: 1rem;
+		z-index: 9999; /* Set a very high value to ensure it's above other elements */
+	}
+
+	.toast {
+		z-index: 9999; /* Ensures individual toasts are on top */
+	}
+	  
+	</style>
+	
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>		
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+				<!-- Header -->
+				<div class="row mb-4">
+				  <div class="col-12">
+					<div class="card  border-0">
+					  <div class="card-body d-flex align-items-center p-4">
+						<div class="avatar avatar-lg rounded me-3">
+						  <i class="ti ti-settings fs-2"></i>
+						</div>
+						<div>
+						  <h4 class="card-title mb-0">CfgGameplay Generator</h4>
+						  <p class="card-text mb-0 text-muted">Configure and customize your DayZ server settings</p>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+	
+
+			<form action="https://app.dayzboosterz.com/apps/tools/config/generateCfgJson" method="post" enctype="multipart/form-data" id="configForm">
+				<div class="row">
+					<div class="col-12">
+						<div class="nav-align-top mb-4">
+							<ul class="nav nav-tabs nav-fill" role="tablist">
+								<li class="nav-item">
+									<button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#generalSettings">
+										<i class="ti ti-adjustments-alt me-1"></i>General Data
+									</button>
+								</li>
+								<li class="nav-item">
+									<button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#playerSettings">
+										<i class="ti ti-user me-1"></i>Player Data
+									</button>
+								</li>
+								<li class="nav-item">
+									<button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#movementSettings">
+										<i class="ti ti-run me-1"></i>Movement Data
+									</button>
+								</li>
+								<li class="nav-item">
+									<button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#buildingSettings">
+										<i class="ti ti-building me-1"></i>Base Building
+									</button>
+								</li>
+								<li class="nav-item">
+									<button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#markerSettings">
+										<i class="ti ti-map-pin me-1"></i>Map Markers
+									</button>
+								</li>
+								<li class="nav-item">
+									<button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#sakhalSettings">
+										<i class="ti ti-map me-1"></i>Sakhal
+									</button>
+								</li>
+								<li class="nav-item">
+									<button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#worldSettings">
+										<i class="ti ti-world me-1"></i>World Data
+									</button>
+								</li>
+								<li class="nav-item">
+									<button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#vehicleSettings">
+										<i class="ti ti-car me-1"></i>Vehicle Data
+									</button>
+								</li>
+								<li class="nav-item">
+									<button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#customSettings">
+										<i class="ti ti-file me-1"></i>Custom Files
+									</button>
+								</li>
+							</ul>
+
+							<div class="tab-content">
+								<!-- General Settings -->
+								<div class="tab-pane fade show active" id="generalSettings" role="tabpanel">
+									<div class="row g-3">
+										<div class="col-xl-4 col-lg-6">
+											<div class="form-check form-switch mb-2">
+												<input class="form-check-input" type="checkbox" id="disablebdamage" name="disablebdamage">
+												<label class="form-check-label" for="disablebdamage">Disable Base Damage</label>
+											</div>
+											<div class="form-check form-switch mb-2">
+												<input class="form-check-input" type="checkbox" id="disablecdamage" name="disablecdamage">
+												<label class="form-check-label" for="disablecdamage">Disable Container Damage</label>
+											</div>
+											<div class="form-check form-switch mb-2">
+												<input class="form-check-input" type="checkbox" id="disablerdialog" name="disablerdialog">
+												<label class="form-check-label" for="disablerdialog">Disable Respawn Dialog</label>
+											</div>
+											<div class="form-check form-switch">
+												<input class="form-check-input" type="checkbox" id="disableurdialog" name="disableurdialog">
+												<label class="form-check-label" for="disableurdialog">Disable Unconscious Respawn</label>
+											</div>
+											<div class="form-check form-switch">
+												<input class="form-check-input" type="checkbox" id="disablepldialog" name="disablepldialog">
+												<label class="form-check-label" for="disablepldialog">Disable Personal Light</label>
+											</div>
+										</div>
+										<div class="col-xl-8 col-lg-6">
+											<div class="alert alert-info mb-0">
+												<div class="d-flex gap-3">
+													<i class="ti ti-info-circle fs-4"></i>
+													<div>
+														<h6 class="alert-heading mb-1">General Settings</h6>
+														<p class="mb-0">These settings affect core gameplay mechanics and server behavior.</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Player Settings -->
+								<div class="tab-pane fade" id="playerSettings" role="tabpanel">
+									<div class="row g-3">
+										<div class="col-xl-4 col-lg-6">
+											<div class="form-check form-switch mb-2">
+												<input class="form-check-input" type="checkbox" id="infstam" name="infstam">
+												<label class="form-check-label" for="infstam">Unlimited Stamina</label>
+											</div>
+											<div class="form-check form-switch mb-2">
+												<input class="form-check-input" type="checkbox" id="hitindi" name="hitindi">
+												<label class="form-check-label" for="hitindi">Remove Hit Indicators</label>
+											</div>
+											<div class="form-check form-switch mb-2">
+												<input class="form-check-input" type="checkbox" id="shockState" name="shockState">
+												<label class="form-check-label" for="shockState">Better Shock Recovery</label>
+											</div>
+											<div class="form-check form-switch">
+												<input class="form-check-input" type="checkbox" id="drownState" name="drownState">
+												<label class="form-check-label" for="drownState">Disable Drowning</label>
+											</div>
+											<div class="form-check form-switch mb-2">
+												<input class="form-check-input" type="checkbox" id="use3dMap" name="use3dMap">
+												<label class="form-check-label" for="use3dMap">Turn on 3D Map</label>
+											</div>
+										</div>
+										<div class="col-xl-8 col-lg-6">
+											<div class="card">
+												<div class="card-body">
+													<h6>Hit Direction Style</h6>
+													<div class="btn-group w-100 mb-3" role="group">
+														<input type="radio" class="btn-check" name="hitDirectionStyle" id="hitStyleSplash" value="0" checked>
+														<label class="btn btn-outline-primary" for="hitStyleSplash">Splash</label>
+														<input type="radio" class="btn-check" name="hitDirectionStyle" id="hitStyleSpike" value="1">
+														<label class="btn btn-outline-primary" for="hitStyleSpike">Spike</label>
+														<input type="radio" class="btn-check" name="hitDirectionStyle" id="hitStyleArrow" value="2">
+														<label class="btn btn-outline-primary" for="hitStyleArrow">Arrow</label>
+													</div>
+													<div class="mb-3">
+														<label class="form-label">Hit Indicator Color</label>
+														<div class="d-flex gap-2">
+															<input type="color" class="form-control form-control-color border-0 p-0" id="hitindicatorVal" name="hitindicatorVal" value="#bb0a1e" title="Choose your color">
+															<input type="text" class="form-control" id="colorHexVal" value="#bb0a1e" readonly>
+														</div>
+														<small class="form-text text-muted" id="colorPickLbl">RGB colors will be automatically converted to hex format.</small>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Building Settings -->
+								<div class="tab-pane fade" id="buildingSettings" role="tabpanel">
+									<div class="row g-3">
+										<div class="col-xl-4 col-lg-6">
+											<div class="form-check form-switch mb-3">
+												<input class="form-check-input" type="checkbox" id="banywhere" name="banywhere">
+												<label class="form-check-label" for="banywhere">Build Anywhere</label>
+											</div>
+											<div class="form-check form-switch mb-3">
+												<input class="form-check-input" type="checkbox" id="disableColdArea" name="disableColdArea">
+												<label class="form-check-label" for="disableColdArea">Disable Cold Area Placement Check</label>
+											</div>
+											<div class="alert alert-warning">
+												<i class="ti ti-alert-triangle me-2"></i>
+												GardenPlot remains disabled. Please change it manually if you wish!
+											</div>
+										</div>
+										<div class="col-xl-8 col-lg-6">
+											<label for="undergroundBuildRestrictions" class="form-label">Underground Build Restrictions</label>
+											<div class="select2-success">
+												<div class="position-relative">
+													<select id="undergroundBuildRestrictions" 
+															class="select2 form-select select2-hidden-accessible" 
+															name="disallowedTypes[]" 
+															multiple 
+															style="width: 100%" 
+															tabindex="-1" 
+															aria-hidden="true">
+														<option>Fencekit</option>
+														<option>TerritoryFlagKit</option>
+														<option>WatchtowerKit</option>
+														<option>ShelterKit</option>
+														<option>CarTent</option>
+														<option>MediumTent</option>
+														<option>MediumTent_Green</option>
+														<option>MediumTent_Orange</option>
+														<option>PartyTent</option>
+														<option>PartyTent_Blue</option>
+														<option>PartyTent_Brown</option>
+														<option>PartyTent_Lunapark</option>
+														<option>TripwireTrap</option>
+														<option>PowerGenerator</option>
+														<option>GardenPlot</option>
+														<option>GardenPlotGreenhouse</option>
+														<option>GardenPlotPolytunnel</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<!-- World Settings -->
+								<div class="tab-pane fade" id="worldSettings" role="tabpanel">
+									<div class="row">
+										<div class="col-xl-4 mb-4">
+											<div class="card">
+												<div class="card-body">
+													<h6>Map Temperatures</h6>
+													<div class="btn-group-vertical w-100">
+														<input type="radio" class="btn-check" name="predefinedTemp" id="chernarusTemps" value="chernarus" checked>
+														<label class="btn btn-outline-primary position-relative" for="chernarusTemps">
+															<i class="ti ti-temperature position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
+															<span class="d-block text-center">Chernarus</span>
+														</label>
+														<input type="radio" class="btn-check" name="predefinedTemp" id="livoniaTemps" value="livonia">
+														<label class="btn btn-outline-primary position-relative" for="livoniaTemps">
+															<i class="ti ti-temperature position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
+															<span class="d-block text-center">Livonia</span>
+														</label>
+														<input type="radio" class="btn-check" name="predefinedTemp" id="sakhalTemps" value="sakhal">
+														<label class="btn btn-outline-primary position-relative" for="sakhalTemps">
+															<i class="ti ti-temperature position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
+															<span class="d-block text-center">Sakhal</span>
+														</label>
+														<input type="radio" class="btn-check" name="predefinedTemp" id="namalskTemps" value="namalsk">
+														<label class="btn btn-outline-primary position-relative" for="namalskTemps">
+															<i class="ti ti-temperature position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
+															<span class="d-block text-center">Namalsk Temps</span>
+														</label>
+														<input type="radio" class="btn-check" name="predefinedTemp" id="banovTemps" value="banov">
+														<label class="btn btn-outline-primary position-relative" for="banovTemps">
+															<i class="ti ti-temperature position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
+															<span class="d-block text-center">Banov Temps</span>
+														</label>
+														<input type="radio" class="btn-check" name="predefinedTemp" id="honoluluTemps" value="honolulu">
+														<label class="btn btn-outline-primary position-relative" for="honoluluTemps">
+															<i class="ti ti-temperature position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
+															<span class="d-block text-center">Honolulu Temps</span>
+														</label>
+														<input type="radio" class="btn-check" name="predefinedTemp" id="customTemps" value="custom">
+														<label class="btn btn-outline-primary position-relative" for="customTemps">
+															<i class="ti ti-settings position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
+															<span class="d-block text-center">Custom</span>
+														</label>
+													</div>
+												</div>
+												<div class="card-footer text-center">
+													<i class="ti ti-alert-circle me-2"></i>
+													Want a map featured here? Let us know on Discord!
+												</div>
+											</div>
+										</div>
+
+										
+										<div class="col-xl-8">
+											<div class="card">
+												<div class="card-body">
+													<div class="row">
+														<div class="col-6">
+															<h4>Minimum Temperatures</h4>
+																															<div class="form-group row">
+																	<label for="minTemp1" class="col-sm-6 col-form-label">January:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp1" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(0, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp2" class="col-sm-6 col-form-label">February:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp2" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(1, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp3" class="col-sm-6 col-form-label">March:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp3" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(2, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp4" class="col-sm-6 col-form-label">April:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp4" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(3, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp5" class="col-sm-6 col-form-label">May:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp5" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(4, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp6" class="col-sm-6 col-form-label">June:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp6" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(5, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp7" class="col-sm-6 col-form-label">July:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp7" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(6, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp8" class="col-sm-6 col-form-label">August:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp8" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(7, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp9" class="col-sm-6 col-form-label">September:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp9" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(8, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp10" class="col-sm-6 col-form-label">October:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp10" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(9, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp11" class="col-sm-6 col-form-label">November:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp11" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(10, 'min')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="minTemp12" class="col-sm-6 col-form-label">December:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="minTemp12" name="environmentMinTemps[]" class="form-control form-control-sm" onchange="validateTempPair(11, 'min')">
+																	</div>
+																</div>
+																													</div>
+														<div class="col-6">
+															<h4>Maximum Temperatures</h4>
+																															<div class="form-group row">
+																	<label for="maxTemp1" class="col-sm-6 col-form-label">January:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp1" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(0, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp2" class="col-sm-6 col-form-label">February:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp2" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(1, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp3" class="col-sm-6 col-form-label">March:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp3" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(2, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp4" class="col-sm-6 col-form-label">April:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp4" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(3, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp5" class="col-sm-6 col-form-label">May:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp5" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(4, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp6" class="col-sm-6 col-form-label">June:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp6" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(5, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp7" class="col-sm-6 col-form-label">July:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp7" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(6, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp8" class="col-sm-6 col-form-label">August:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp8" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(7, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp9" class="col-sm-6 col-form-label">September:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp9" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(8, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp10" class="col-sm-6 col-form-label">October:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp10" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(9, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp11" class="col-sm-6 col-form-label">November:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp11" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(10, 'max')">
+																	</div>
+																</div>
+																															<div class="form-group row">
+																	<label for="maxTemp12" class="col-sm-6 col-form-label">December:</label>
+																	<div class="col-sm-6">
+																		<input type="number" step="0.1" id="maxTemp12" name="environmentMaxTemps[]" class="form-control form-control-sm" onchange="validateTempPair(11, 'max')">
+																	</div>
+																</div>
+																													</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+                        <!-- Custom Files -->
+                        <div class="tab-pane fade" id="customSettings" role="tabpanel">
+                            <div class="row g-3">
+							<div class="col-12">
+                                    <div class="alert alert-warning mb-0">
+										<i class="ti ti-alert-circle me-2"></i>
+										<strong>File Path Format:</strong> Enter only the filename without extension. For example, enter <code>file1</code>. The system will automatically add <code>custom/</code> prefix and <code>.json</code> extension. Do not add commas after filenames.<br/>
+
+										<i class="ti ti-alert-circle me-2"></i>
+										2. <strong>Bot Integration:</strong> If you're using a bot that automatically inserts code and have been advised to do so, manually use the format <code>./custom/file1.json</code> instead.<br/>
+										<i class="ti ti-alert-circle me-2"></i>
+										3. <strong>Player Restricted Area Files:</strong> These will only appear in your downloaded file, if it's enabled in the Sakhal tab.
+									</div>
+
+                                </div>
+								
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Loadout Config Files</label>
+                                        <textarea id="loadoutFiles" name="loadoutFiles" class="form-control" 
+                                                  rows="4" placeholder="Enter loadout file paths, one per line"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Object Spawn Config Files</label>
+                                        <textarea id="objectSpawnFiles" name="objectSpawnFiles" class="form-control" 
+                                                  rows="4" placeholder="Enter object spawner file paths, one per line"></textarea>
+                                    </div>
+                                </div>
+								<div class="col-lg-6">
+									<div class="mb-3">
+										<label class="form-label">Player Restricted Area Files</label>
+										<textarea 
+											id="praFiles" 
+											name="praFiles" 
+											class="form-control" 
+											rows="4" 
+											placeholder="Enter player restrictedarea file paths, one per line" 
+											disabled></textarea>
+									</div>
+								</div>
+                                
+                            </div>
+                        </div>
+                    </div>
+					
+					<div class="tab-content">
+						<!-- Movement Data -->
+						<div class="tab-pane fade" id="movementSettings" role="tabpanel">
+							<div class="row">
+								<div class="col-12">
+									<h6 class="fw-bold mb-3">Movement Data</h6>
+								</div>
+								<div class="col-xl-4">
+									<div class="form-check form-switch d-flex align-items-center mb-4">
+										<input 
+											class="form-check-input" 
+											type="checkbox" 
+											id="movement" 
+											name="movement" 
+											value="1" 
+											onclick="showToast('Movement has been changed to 1.18.', 'Movement has been reset to default.')">
+										<label class="form-check-label ms-3" for="movement">Change movement to 1.18 Movement</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Map Markers -->
+						<div class="tab-pane fade" id="markerSettings" role="tabpanel">
+							<div class="row">
+								<div class="col-12">
+									<h6 class="fw-bold mb-3">Map Markers</h6>
+								</div>
+								<div class="col-xl-6">
+									<div class="form-check form-switch d-flex align-items-center mb-4">
+										<input 
+											class="form-check-input" 
+											type="checkbox" 
+											id="ploc" 
+											name="ploc" 
+											value="1" 
+											onclick="showToast('Player markers have been enabled.', 'Player markers have been disabled.')">
+										<label class="form-check-label ms-3" for="ploc">Player markers</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- Sakhal -->
+						<div class="tab-pane fade" id="sakhalSettings" role="tabpanel">
+							<div class="row">
+								<div class="col-12">
+									<h6 class="fw-bold mb-3">Sakhal Options</h6>
+								</div>
+								<div class="col-12">
+									<div class="alert alert-warning mb-4">
+										<i class="ti ti-alert-triangle me-2"></i>
+										These options are explicitly for the Sakhal map. If you have your own Player Restricted Area files, please use Custom Files tab
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="alert alert-warning mb-4">
+										<i class="ti ti-alert-triangle me-2"></i>
+										<strong>Player Restricted Area Options:</strong>
+										<ul class="mb-0 mt-1">
+											<li><strong>Sakhal Restricted Areas:</strong> Automatically includes warheadstorage.json while allowing additional custom PRA files</li>
+											<li><strong>Custom Restricted Areas:</strong> Define your own restricted areas without including Sakhal's warheadstorage.json</li>
+											<li><strong>Additional Files:</strong> Add your PRA files in the Custom Files tab once you've selected an option</li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-xl-4">
+									<label class="form-label">Player Restricted Area Type:</label>
+									<div class="form-check mb-2">
+										<input class="form-check-input" type="radio" name="praType" id="praNone" value="none" checked>
+										<label class="form-check-label" for="praNone">No Restricted Areas</label>
+									</div>
+									<div class="form-check mb-2">
+										<input class="form-check-input" type="radio" name="praType" id="praSakhal" value="sakhal">
+										<label class="form-check-label" for="praSakhal">Sakhal Restricted Areas</label>
+									</div>
+									<div class="form-check mb-2">
+										<input class="form-check-input" type="radio" name="praType" id="praCustom" value="custom">
+										<label class="form-check-label" for="praCustom">Custom Restricted Areas</label>
+									</div>
+								</div>
+								<div class="col-xl-4">
+									<div class="mb-3">
+										<label for="lightingConfig" class="form-label">Lighting Configuration:</label>
+										<select id="lightingConfig" name="lightingConfig" class="form-select mt-1">
+											<option value="0">Brighter Night</option>
+											<option value="1">Darker Night</option>
+											<option value="2">Sakhal-specific Lighting</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- Vehicle Data -->
+						<div class="tab-pane fade" id="vehicleSettings" role="tabpanel">
+							<div class="row">
+								<div class="col-12">									
+								</div>
+								<div class="col-xl-6">
+									<div class="mb-3">
+										<label for="boatDecayMultiplier" class="form-label">Boat Decay Multiplier:</label>
+										<input 
+											type="number" 
+											step="0.1" 
+											id="boatDecayMultiplier" 
+											name="boatDecayMultiplier" 
+											class="form-control form-control-sm" 
+											placeholder="Enter multiplier value">
+										<small class="form-text text-muted">Multiplier for the speed of boat decay. Default is 1.0.</small>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column">
+									<div class="d-flex justify-content-between align-items-center">
+										<div>
+											<h5 class="mb-1">Generate Configuration</h5>
+											<p class="text-muted mb-0">Download your customized cfggameplay.json</p>
+										</div>
+										<button type="submit" class="btn btn-primary">
+											<i class="ti ti-download me-2"></i>Generate & Download
+										</button>
+									</div>
+									<div class="mt-3 text-end">
+										<small class="text-muted">
+											<strong>Definitions:</strong>
+											<a href="https://community.bistudio.com/wiki/DayZ:Gameplay_Settings" target="_blank" rel="noopener noreferrer">
+												https://community.bistudio.com/wiki/DayZ:Gameplay_Settings
+											</a>
+										</small>
+									</div>
+								</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container position-fixed top-0 end-0 p-3"></div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	 		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	<script src="../../assets/vendor/libs/select2/select2.js"></script>
+	<script src="../../assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+	<script src="../../assets/vendor/libs/tagify/tagify.js"></script>
+	<script src="../../assets/js/forms-selects.js"></script>
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			// Form Controller
+			const formController = {
+				init: function() {
+					const submitButton = document.querySelector('button[type="submit"]');
+					const wizardElements = document.querySelectorAll(
+						'input[type="checkbox"], input[type="radio"], input[type="number"], input[type="color"], textarea, select'
+					);
+					
+					const initialState = {};
+					wizardElements.forEach(element => {
+						if (element.type === 'checkbox' || element.type === 'radio') {
+							initialState[element.id] = element.checked;
+						} else {
+							initialState[element.id] = element.value;
+						}
+					});
+
+					function hasChanges() {
+						return Array.from(wizardElements).some(element => {
+							if (element.type === 'checkbox' || element.type === 'radio') {
+								return element.checked !== initialState[element.id];
+							} else {
+								return element.value !== initialState[element.id];
+							}
+						});
+					}
+
+					function updateButtonState() {
+						submitButton.disabled = !hasChanges();
+					}
+
+					wizardElements.forEach(element => {
+						element.addEventListener('change', updateButtonState);
+						element.addEventListener('input', updateButtonState);
+					});
+					updateButtonState();
+					
+					this.prepareFormSubmission = function() {
+						const form = document.querySelector('form');
+						form.addEventListener('submit', function(event) {
+							const loadoutFilesList = Array.from(document.querySelectorAll('#loadoutFilesList .list-group-item'))
+								.map(item => item.textContent.trim().replace('Remove', '').trim());
+							const objectSpawnFilesList = Array.from(document.querySelectorAll('#objectSpawnFilesList .list-group-item'))
+								.map(item => item.textContent.trim().replace('Remove', '').trim());
+							const praFilesList = Array.from(document.querySelectorAll('#praFilesList .list-group-item'))
+								.map(item => item.textContent.trim().replace('Remove', '').trim());
+							
+							const addHiddenInput = (name, files) => {
+								const input = document.createElement('input');
+								input.type = 'hidden';
+								input.name = name;
+								input.value = JSON.stringify(files);
+								form.appendChild(input);
+							};
+							
+							addHiddenInput('loadoutFiles', loadoutFilesList);
+							addHiddenInput('objectSpawnFiles', objectSpawnFilesList);
+							addHiddenInput('praFiles', praFilesList);
+						});
+					};
+					this.prepareFormSubmission();
+				}
+			};
+			
+			function validateLoadoutAndSpawnFiles() {
+				// Get all the files from the lists
+				const loadoutFiles = Array.from(document.querySelectorAll('#loadoutFilesList .list-group-item'))
+					.map(item => item.textContent.trim().replace('Remove', '').trim());
+				const objectSpawnFiles = Array.from(document.querySelectorAll('#objectSpawnFilesList .list-group-item'))
+					.map(item => item.textContent.trim().replace('Remove', '').trim());
+				const praFiles = Array.from(document.querySelectorAll('#praFilesList .list-group-item'))
+					.map(item => item.textContent.trim().replace('Remove', '').trim());
+
+				// Check if at least one file is added when the corresponding type is selected
+				const praType = document.querySelector('input[name="praType"]:checked').value;
+				if (praType === 'custom' && praFiles.length === 0) {
+					// Show warning toast
+					const toastContainer = document.querySelector('.toast-container');
+					const toastElement = document.createElement('div');
+					toastElement.classList.add('toast', 'align-items-center', 'text-white', 'bg-danger', 'border-0');
+					toastElement.setAttribute('role', 'alert');
+					toastElement.setAttribute('aria-live', 'assertive');
+					toastElement.setAttribute('aria-atomic', 'true');
+					toastElement.innerHTML = `
+						<div class="d-flex">
+							<div class="toast-body">Please add at least one Custom Restricted Area file</div>
+							<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						</div>
+					`;
+					toastContainer.appendChild(toastElement);
+					const toast = new bootstrap.Toast(toastElement);
+					toast.show();
+					return false;
+				}
+
+				return true;
+			}	
+			
+			
+
+			// Temperature Controller
+			const temperatureController = {
+				predefinedTemps: {
+					chernarus: {
+						min: [-3.0, -2.0, 0.0, 4.0, 9.0, 14.0, 18.0, 17.0, 12.0, 7.0, 4.0, 0.0],
+						max: [3.0, 5.0, 7.0, 14.0, 19.0, 24.0, 26.0, 25.0, 21.0, 16.0, 10.0, 5.0]
+					},
+					livonia: {
+						min: [-7.0, -7.4, -4.1, 1.5, 7.0, 11.3, 13.4, 13.1, 9.3, 5.3, 0.8, -3.6],
+						max: [-2.5, -2.1, 2.3, 9.0, 15.5, 19.4, 20.9, 20.4, 16.0, 10.5, 4.2, 0.1]
+					},
+					sakhal: {
+						min: [-7, -7.4, -4.1, 1.5, 7, 11.3, 20.4, 19.1, 18, 5.3, 0.8, -3.6],
+						max: [-2.5, -2.1, 2.3, 9, 15.5, 19.4, 25, 22, 21, 10.5, 4.2, 0.1]
+					},
+					namalsk: {
+						min: [-32, -27, -21, -14, -7, -4, -2, 2, -3, -7, -15, -25],
+						max: [-12, -8, -3, 0, 2, 5, 7, 11, 8, 5, 2, -8]
+					},
+					banov: {
+						min: [-7.0, -7.4, -4.1, 1.5, 7.0, 11.3, 13.4, 13.1, 9.3, 5.3, 0.8, -3.6],
+						max: [-2.5, -2.1, 2.3, 9.0, 15.5, 19.4, 20.9, 20.4, 16.0, 10.5, 4.2, 0.1]
+					},
+					honolulu: {
+						min: [20.0, 20.0, 20.6, 21.7, 22.2, 23.3, 23.9, 24.4, 24.4, 23.9, 22.8, 21.1],
+						max: [26.1, 26.1, 26.7, 27.2, 28.3, 29.4, 30.0, 30.6, 30.6, 29.4, 28.3, 26.7]
+					}
+				},
+
+				init: function() {
+					const tempRadioButtons = document.querySelectorAll('input[type="radio"][name="predefinedTemp"]');
+					const minTempInputs = document.querySelectorAll('input[name="environmentMinTemps[]"]');
+					const maxTempInputs = document.querySelectorAll('input[name="environmentMaxTemps[]"]');
+					
+					tempRadioButtons.forEach(radio => {
+						radio.addEventListener('change', function () {
+							if (this.checked) {
+								const selectedTemps = temperatureController.predefinedTemps[this.value];
+								if (selectedTemps) {
+									minTempInputs.forEach((input, index) => input.value = selectedTemps.min[index]);
+									maxTempInputs.forEach((input, index) => input.value = selectedTemps.max[index]);
+								} else {
+									minTempInputs.forEach(input => input.value = '');
+									maxTempInputs.forEach(input => input.value = '');
+								}
+							}
+						});
+					});
+				}
+			};
+
+			// Toast Controller
+			const toastController = {
+				messages: {
+					disablebdamage: ['Bases can now be damaged', 'Bases can no longer be damaged'],
+					disablecdamage: ['Containers can now be damaged', 'Containers can no longer be damaged'],
+					disablerdialog: ['Respawn Dialog has been enabled', 'Respawn Dialog has been disabled'],
+					disableurdialog: ['Respawn in Unconscious has been enabled', 'Respawn in Unconscious has been disabled'],
+					infstam: ['Unlimited Stamina has been disabled', 'Unlimited Stamina has been enabled, run like the wind....'],
+					disablepldialog: ['Personal Light has been enabled', 'Personal Light has been disabled'],
+					hitindi: ['Hit Indications have been enabled', 'Hit Indications have been removed'],
+					movement: ['Movement is left at default values', 'Movement has been changed to 1.18, some people prefer it'],
+					banywhere: ['Build Anywhere has been disabled', 'Build Anywhere has been enabled, not including GardenPlots'],
+					ploc: ['Player markers have been disabled', 'Player markers have been enabled'],
+					shockState: ['Infected can knock you as they do on vanilla', 'Infected take longer to knock you, with faster uncon recovery'],
+					drownState: ['Drown Data set to vanilla values', 'No worries, swim happy... Try not to dro...'],
+					restrictedArea: ['Sakhal restrictedAreaFiles has been disabled', 'Sakhal restrictedAreaFiles has been enabled'],
+					use3dMap: ['3D Map has been turned off', '3D Map has been enabled']
+				},
+
+				showToast: function(disabledMessage, enabledMessage) {
+					return function (event) {
+						const isChecked = event.target.checked;
+						const message = isChecked ? enabledMessage : disabledMessage;
+						const type = isChecked ? 'bg-success' : 'bg-danger';
+
+						const toastElement = document.createElement('div');
+						toastElement.classList.add('toast', 'align-items-center', 'text-white', type, 'border-0');
+						toastElement.setAttribute('role', 'alert');
+						toastElement.setAttribute('aria-live', 'assertive');
+						toastElement.setAttribute('aria-atomic', 'true');
+
+						toastElement.innerHTML = `
+							<div class="d-flex">
+								<div class="toast-body">${message}</div>
+								<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+							</div>
+						`;
+
+						const toastContainer = document.querySelector('.toast-container');
+						toastContainer.appendChild(toastElement);
+
+						const toast = new bootstrap.Toast(toastElement);
+						toast.show();
+
+						toastElement.addEventListener('hidden.bs.toast', () => {
+							toastElement.remove();
+						});
+					};
+				},
+
+				init: function() {
+					Object.entries(this.messages).forEach(([id, messages]) => {
+						const toggle = document.getElementById(id);
+						if (toggle) {
+							toggle.addEventListener('change', this.showToast(messages[0], messages[1]));
+						}
+					});
+				}
+			};
+
+			// Hit Indicator Controller
+			const hitIndicatorController = {
+				init: function() {
+					const hitindiCheckbox = document.getElementById('hitindi');
+					const colorPicker = document.getElementById('hitindicatorVal');
+					const colorHexVal = document.getElementById('colorHexVal');
+					const colorPickLbl = document.getElementById('colorPickLbl');
+
+					function toggleColorPicker() {
+						const shouldDisable = hitindiCheckbox.checked;
+						colorPicker.disabled = shouldDisable;
+						colorHexVal.disabled = shouldDisable;
+						colorPickLbl.textContent = shouldDisable
+							? 'Color picker is disabled when Hit Indicators are removed.'
+							: 'RGB colors will be automatically converted to hex format.';
+					}
+
+					if (hitindiCheckbox && colorPicker) {
+						hitindiCheckbox.addEventListener('change', toggleColorPicker);
+						colorPicker.addEventListener('input', () => {
+							colorHexVal.value = colorPicker.value;
+						});
+						toggleColorPicker();
+					}
+				}
+			};						
+
+			// Custom Files Controller
+			const customFilesController = {
+			init: function() {
+				const loadoutContainer = document.querySelector('#loadoutFiles').closest('.mb-3');
+				const objectSpawnContainer = document.querySelector('#objectSpawnFiles').closest('.mb-3');
+				const praContainer = document.querySelector('#praFiles').closest('.mb-3');
+
+				this.createDynamicFileInput(loadoutContainer, 'loadoutFiles', 'Loadout Config');
+				this.createDynamicFileInput(objectSpawnContainer, 'objectSpawnFiles', 'Object Spawn Config');
+				this.createDynamicFileInput(praContainer, 'praFiles', 'Player Restricted Area', true);
+			},
+
+			createDynamicFileInput: function(container, baseId, label, isConditional = false) {
+				const existingTextarea = container.querySelector('textarea');
+				existingTextarea.remove();
+
+				const dynamicContainer = document.createElement('div');
+				dynamicContainer.innerHTML = `
+					<div class="input-group mb-2">
+						<span class="input-group-text">custom/</span>
+						<input type="text" id="${baseId}Input" class="form-control" placeholder="Enter filename">
+						<span class="input-group-text">.json</span>
+						<button class="btn btn-primary" type="button" id="${baseId}AddBtn">Add</button>
+					</div>
+					${baseId === 'praFiles' ? '<div class="text-danger mb-2" id="praWarning">Please select Custom Restricted Areas option</div>' : ''}
+					<div id="${baseId}List" class="list-group"></div>
+				`;
+				container.appendChild(dynamicContainer);
+
+				const input = container.querySelector(`#${baseId}Input`);
+				const addBtn = container.querySelector(`#${baseId}AddBtn`);
+				const fileList = container.querySelector(`#${baseId}List`);
+				const warningText = container.querySelector('#praWarning');
+
+				if (isConditional) {
+					const praTypeRadios = document.querySelectorAll('input[name="praType"]');
+					
+					function updatePraInputState() {
+						const selectedValue = document.querySelector('input[name="praType"]:checked').value;
+						const isEnabled = selectedValue === 'sakhal' || selectedValue === 'custom';
+						
+						input.disabled = !isEnabled;
+						addBtn.disabled = !isEnabled;
+						
+						if (warningText) {
+							warningText.style.display = !isEnabled ? 'block' : 'none';
+						}
+						
+						if (selectedValue === 'sakhal') {
+							input.placeholder = 'Enter additional PRA files (Sakhal warheadstorage.json will be included)';
+						} else if (selectedValue === 'custom') {
+							input.placeholder = 'Enter your PRA files';
+						} else {
+							input.placeholder = 'Please enable Restricted Areas option';
+						}
+					}
+
+					praTypeRadios.forEach(radio => {
+						radio.addEventListener('change', updatePraInputState);
+					});
+					updatePraInputState();
+				}
+
+				addBtn.addEventListener('click', () => this.addFile(input, fileList, baseId, label));
+				input.addEventListener('keypress', (e) => {
+					if (e.key === 'Enter') {
+						e.preventDefault();
+						this.addFile(input, fileList, baseId, label);
+					}
+				});
+			},
+
+			addFile: function(input, fileList, baseId, label) {
+				let filePath = input.value.trim();
+
+				if (!filePath) {
+					this.showToast(`Please enter a ${label} filename.`, false);
+					return;
+				}
+
+				// Remove any existing custom/ or .json prefix/suffix
+				filePath = filePath.replace(/^custom\//, '').replace(/\.json$/, '');
+
+				// Construct full path with custom/ prefix and .json suffix
+				const fullPath = `custom/${filePath}.json`;
+
+				// Check for duplicate
+				const existingFiles = Array.from(fileList.querySelectorAll('.list-group-item'))
+					.map(item => item.textContent.trim().replace('Remove', '').trim());
+
+				if (existingFiles.includes(fullPath)) {
+					this.showToast(`${label} file '${fullPath}' is already added.`, false);
+					input.value = '';
+					return;
+				}
+
+				const listItem = document.createElement('div');
+				listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+				listItem.innerHTML = `
+					${fullPath}
+					<button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
+				`;
+
+				const removeBtn = listItem.querySelector('button');
+				removeBtn.addEventListener('click', () => {
+					fileList.removeChild(listItem);
+					this.showToast(`${label} file '${fullPath}' removed.`, true);
+				});
+
+				fileList.appendChild(listItem);
+				input.value = '';
+				this.showToast(`${label} file added successfully.`, true);
+			},
+
+				showToast: function(message, isSuccess) {
+					const toastContainer = document.querySelector('.toast-container');
+					
+					const toastElement = document.createElement('div');
+					toastElement.classList.add('toast', 'align-items-center', 'text-white', 
+						isSuccess ? 'bg-success' : 'bg-danger', 'border-0');
+					toastElement.setAttribute('role', 'alert');
+					toastElement.setAttribute('aria-live', 'assertive');
+					toastElement.setAttribute('aria-atomic', 'true');
+
+					toastElement.innerHTML = `
+						<div class="d-flex">
+							<div class="toast-body">${message}</div>
+							<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						</div>
+					`;
+
+					toastContainer.appendChild(toastElement);
+
+					const toast = new bootstrap.Toast(toastElement);
+					toast.show();
+
+					toastElement.addEventListener('hidden.bs.toast', () => {
+						toastElement.remove();
+					});
+				}
+			};
+
+			// Initialize all controllers
+			formController.init();
+			temperatureController.init();
+			toastController.init();
+			hitIndicatorController.init();
+			customFilesController.init();
+
+			// Dropdown initialization
+			$(document).ready(function () {
+				const selectElement = $('#undergroundBuildRestrictions');
+				selectElement.select2({
+					dropdownParent: $('body'),
+					placeholder: 'Select options'
+				});
+				
+				selectElement.prepend('<option value="selectAll">Select All</option>');
+				
+				function toggleSelectAllText(isAllSelected) {
+					const selectAllOption = selectElement.find('option[value="selectAll"]');
+					selectAllOption.text(isAllSelected ? 'Remove All' : 'Select All');
+					
+					selectElement.select2('destroy').select2({
+						dropdownParent: $('body'),
+						placeholder: 'Select options'
+					});
+				}
+				
+				selectElement.on('select2:select', function (e) {
+					if (e.params.data.id === 'selectAll') {
+						const allOptions = selectElement.find('option:not([value="selectAll"])');
+						const isAllSelected = allOptions.length === allOptions.filter(':selected').length;
+						
+						if (!isAllSelected) {
+							allOptions.prop('selected', true);
+							toggleSelectAllText(true);
+						} else {
+							allOptions.prop('selected', false);
+							toggleSelectAllText(false);
+						}
+						
+						selectElement.trigger('change');
+						selectElement.val(selectElement.val().filter(value => value !== 'selectAll')).trigger('change');
+					}
+				});
+				
+				selectElement.on('select2:unselect', function () {
+					const allOptions = selectElement.find('option:not([value="selectAll"])');
+					const isAllSelected = allOptions.length === allOptions.filter(':selected').length;
+					toggleSelectAllText(isAllSelected);
+				});
+				
+				toggleSelectAllText(false);
+			});
+		});
+	</script>
+
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/gameplay by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:21:08 GMT -->
+</html>
+

@@ -1,0 +1,1549 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            title: "Terms of Use Updated",
+            text: "We have updated our Terms of Use. Please review the changes.",
+            icon: "info",
+            confirmButtonText: "View Terms",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            // Set cookie to not show again
+            document.cookie = "terms_update_20250309=acknowledged; expires=Fri, 31 Dec 2030 23:59:59 GMT; path=/; SameSite=Strict";
+            
+            // Redirect to Terms of Use page
+            window.location.href = "terms.html";
+        });
+    });
+    </script><!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../../assets/"
+  data-template="vertical-menu-template"
+  data-style="dark">
+  
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/xmlvalidator by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>XML Validator &mdash; DayZ BoosterZ</title>
+    <meta name="description" content="Effortlessly validate XML files with our XML Validator tool. Paste or upload XML content, receive real-time error checks, and ensure accurate XML structure with intuitive validation feedback." />
+    <meta name="keywords" content="DayZ XML validator, XML checker, XML validation tool, server XML check, DayZ tools">
+    <meta name="author" content="OzzieHouso & KingAlobar">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html" />
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin />
+    <link href="../../../fonts.googleapis.com/css28ebe.css?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- XML Validator specific CSS -->
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.css">
+    <link rel="stylesheet" href="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/darcula.min.css">
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+	<link rel="stylesheet" href="../../assets/vendor/libs/shepherd/shepherd.css" />
+
+    <!-- Custom styles -->
+    <style>
+        .CodeMirror {
+		  height: 400px;
+		  border: 1px solid rgba(255, 255, 255, 0.1);
+		  border-radius: 0.375rem;
+		  font-family: monospace;
+		}
+
+		#warningsList li {
+		  color: #ffc107;
+		}
+
+		.button-group .btn {
+		  margin-left: 0.5rem;
+		}
+
+		#xmlInfo {
+		  background-color: rgba(255, 255, 255, 0.05);
+		}
+		.icon {
+			width: 32px;
+			height: 32px;
+		  }
+		  .tree-node {
+			font-size: 0.875rem;
+			font-family: var(--bs-font-monospace);
+		}
+
+		.cursor-pointer {
+			cursor: pointer;
+		}
+
+		.tree-node .border-start {
+			border-color: rgba(var(--bs-primary-rgb), 0.2) !important;
+		}
+
+		.tree-node:hover > .cursor-pointer {
+			background-color: rgba(var(--bs-primary-rgb), 0.05);
+		}
+
+		.node-content {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		#xmlStructure.tree-view {
+			max-height: 400px;
+			overflow-y: auto;
+			scrollbar-width: thin;
+		}
+
+		#xmlStructure.tree-view::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		#xmlStructure.tree-view::-webkit-scrollbar-track {
+			background: rgba(0, 0, 0, 0.1);
+			border-radius: 3px;
+		}
+
+		#xmlStructure.tree-view::-webkit-scrollbar-thumb {
+			background: rgba(var(--bs-primary-rgb), 0.2);
+			border-radius: 3px;
+		}
+
+		#xmlStructure.tree-view::-webkit-scrollbar-thumb:hover {
+			background: rgba(var(--bs-primary-rgb), 0.3);
+		}
+	  
+    </style>
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <script src="../../assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="../../index.html" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="../../../raw.githubusercontent.com/OzzieHouso/dzb-icon/refs/heads/main/gamer.svg" alt="dzb-icon" class="icon" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">DZB</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+      <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+    </a>
+  </div>
+  <div class="menu-inner-shadow"></div>
+  <ul class="menu-inner py-1">          
+    <!-- Home -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Home</span>
+    </li>
+    <li class="menu-item ">
+        <a href="../../index.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home"></i>
+            <div>Home</div>
+        </a>
+    </li>
+	<li class="menu-item ">
+        <a href="../index-2.html" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-home-check"></i>
+            <div>Tools Home</div>
+        </a>
+    </li>
+    <li class="menu-item ">
+      <a href="latest.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-files"></i>
+        <div>Latest Files</div>
+      </a>
+    </li>
+    
+    <li class="menu-header small">
+      <span class="menu-header-text">Connections</span>
+    </li>
+    <li class="menu-item ">
+      <a href="communities.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cloud-network"></i>
+        <div>Discord Servers</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="partners.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+        <div>DZB Partners</div>
+      </a>
+    </li>
+        
+    <!-- Types Management -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Types Management</span>
+    </li>
+    <li class="menu-item ">
+      <a href="advancedtypes.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-settings"></i>
+        <div data-tool-name="Advanced Types">Advanced Types</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-up"></i>
+        <div data-tool-name="Types Boosting">Types Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesreduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrow-down"></i>
+        <div data-tool-name="Types Reducer">Types Reducer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="typesorganise.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hierarchy"></i>
+        <div data-tool-name="Types Organiser">Types Organiser</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="tierboost.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-layers-intersect"></i>
+        <div data-tool-name="Tier Boosting">Tier Boosting</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="lifetimereduce.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-hourglass"></i>
+        <div data-tool-name="Lifetime Reducer">Lifetime Reducer</div>
+      </a>
+    </li>
+
+    <!-- Generators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Generators</span>
+    </li>
+    <li class="menu-item">
+      <a href="https://dayzyourway.com/loadouts" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-user"></i>
+        <div data-tool-name="Loadout Generator">Loadout Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="gameplay.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-device-gamepad"></i>
+        <div data-tool-name="Gameplay Generator">Gameplay Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="messages.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-message"></i>
+        <div data-tool-name="Messages Generator">Messages Generator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawngenerator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="Spawn Point Generator">Spawn Point Generator</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="jsonheatmap.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-map-pin"></i>
+			<div data-tool-name="Object Distribution Heat Map">Object Heat Map</div>
+		</a>
+	</li>
+
+    <!-- Converters -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Converters</span>
+    </li>
+    <li class="menu-item ">
+      <a href="jsondze.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-exchange"></i>
+        <div data-tool-name="JSON to DZE">JSON to DZE</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="ctoobjectspawner.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="INIT.C to Object Spawner">INIT.C to Object Spawner</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectconvert.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-cube"></i>
+        <div data-tool-name="SpawnObject Converter">SpawnObject Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="mapgrouppos.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-map-pin"></i>
+        <div data-tool-name="MapGroupPos to Event">MapGroupPos to Event</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+		<a href="eventgroupcalc.html" class="menu-link">
+			<i class="menu-icon tf-icons ti ti-calculator"></i>
+			<div data-tool-name="Event Group Calculator">Event Group Calculator</div>
+		</a>
+	</li>
+    <li class="menu-item ">
+      <a href="effectconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="CfgEffect Converter">CfgEffect Converter</div>
+      </a>
+    </li>
+	<li class="menu-item ">
+      <a href="initctomgp.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-wand"></i>
+        <div data-tool-name="INIT.C to MapGroupPos">INIT.C to MapGroupPos</div>
+      </a>
+    </li>
+
+    <!-- Validators -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Validators</span>
+    </li>
+    <li class="menu-item ">
+      <a href="missionvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-checkbox"></i>
+        <div data-tool-name="Mission Folder Validator">Mission Folder Validator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsonvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-code"></i>
+        <div data-tool-name="JSON Validator">JSON Validator</div>
+      </a>
+    </li>
+    <li class="menu-item active">
+      <a href="xmlvalidator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="XML Validator">XML Validator</div>
+      </a>
+    </li>
+
+    <!-- Management Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Management Tools</span>
+    </li>
+	<li class="menu-item ">
+	  <a href="eventsorganize.html" class="menu-link">
+		<i class="menu-icon tf-icons ti ti-calendar-check"></i>
+		<div data-tool-name="Events Organizer">Events Organizer</div>
+	  </a>
+	</li>
+    <li class="menu-item ">
+      <a href="globals.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-world"></i>
+        <div data-tool-name="Globals Configurator">Globals Configurator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="weather.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sun-moon"></i>
+        <div data-tool-name="Weather Manager">Weather Manager</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="calculator.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-clock"></i>
+        <div data-tool-name="Day/Night Calculator">Day/Night Calculator</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="economy.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-coins"></i>
+        <div data-tool-name="Economy Editor">Economy Editor</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="proxycalc.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-calculator"></i>
+        <div data-tool-name="Proxy Calculator">Proxy Calculator</div>
+      </a>
+    </li>
+
+    <!-- Misc Tools -->
+    <li class="menu-header small">
+      <span class="menu-header-text">Misc Tools</span>
+    </li>
+    <li class="menu-item ">
+      <a href="praconverter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-transform"></i>
+        <div data-tool-name="PRA Converter">PRA Converter</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectmover.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-arrows-move"></i>
+        <div data-tool-name="SpawnObject Mover">SpawnObject Mover</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="spawnobjectorganize.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-sort-ascending"></i>
+        <div data-tool-name="SpawnObject Organizer">SpawnObject Organizer</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="classnamefinder.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-search"></i>
+        <div data-tool-name="Classname Finder">Classname Finder</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="jsontospawnobject.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-box"></i>
+        <div data-tool-name="JSON to SpawnObject">JSON to SpawnObject</div>
+      </a>
+    </li>
+    <li class="menu-item ">
+      <a href="splitter.html" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-file-code"></i>
+        <div data-tool-name="JSON Splitter">JSON Splitter</div>
+      </a>
+    </li>
+	
+    
+    <li class="menu-header small" style="height: 50px;"></li>
+	
+	
+	<li class="menu-header small" style="height: 50px;"></li>
+
+  </ul>
+</aside>        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="ti ti-menu-2 ti-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Language -->
+                
+                <!--/ Language -->
+
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown">
+                  <a
+                    class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-md"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class="ti ti-sun ti-md me-3"></i>Light</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                        <span class="align-middle"
+                          ><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- User -->
+                <!-- Login Button -->
+<li class="nav-item">
+  <a href="../../auth/login.html" class="btn btn-primary btn-lg rounded-pill shadow-sm" target="_blank">
+    <i class="tf-icons ti ti-brand-discord me-2"></i>
+    <span class="d-none d-md-inline">Login/Join DZB Discord</span>
+    <span class="d-inline d-md-none">Login</span>
+  </a>
+</li>
+                <!--/ User -->
+              </ul>
+            </div>
+
+            <!-- Search Small Screens -->
+            <div class="navbar-search-wrapper search-input-wrapper d-none">
+              <input
+                type="text"
+                class="form-control search-input container-xxl border-0"
+                placeholder="Search..."
+                aria-label="Search..." />
+              <i class="ti ti-x search-toggler cursor-pointer"></i>
+            </div>
+          </nav>
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+			  <div class="row mb-4">
+				  <div class="col-12">
+					<div class="card  border-0">
+					  <div class="card-body d-flex align-items-center p-4">
+						<div class="avatar avatar-lg rounded me-3">
+						  <i class="ti ti-file-code fs-2"></i>
+						</div>
+						<div>
+						  <h4 class="card-title mb-0">XML Validator</h4>
+						  <p class="card-text mb-0 text-muted">Validate your XML effortlessly with advanced features.</p>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+			  <div class="row">
+				<!-- Main Editor Card -->
+				<div class="col-xl-8 col-lg-7">
+				  <div class="card mb-4">
+					<div class="card-header d-flex justify-content-between align-items-center">
+					  <div>
+						<h5 class="card-title mb-0">XML Editor</h5>
+						<small class="card-subtitle">Validate and format your XML code</small>
+					  </div>
+					  <div class="card-actions">
+						<div class="btn-group">
+						  <button class="btn btn-text-secondary btn-icon dropdown-toggle hide-arrow" type="button" data-bs-toggle="dropdown">
+							<i class="ti ti-dots-vertical"></i>
+						  </button>
+						  <ul class="dropdown-menu dropdown-menu-end">
+							<li><a class="dropdown-item" href="javascript:void(0);" id="formatXml"><i class="ti ti-separator-horizontal me-2"></i>Format XML</a></li>
+							<li><a class="dropdown-item" href="javascript:void(0);" id="minifyXml"><i class="ti ti-separator me-2"></i>Minify XML</a></li>
+							<li><a class="dropdown-item" href="javascript:void(0);" id="clearEditor"><i class="ti ti-eraser me-2"></i>Clear Editor</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="javascript:void(0);" id="downloadXml"><i class="ti ti-download me-2"></i>Download XML</a></li>
+						  </ul>
+						</div>
+					  </div>
+					</div>
+					<div class="card-body">
+					  <div id="xmlValidationResult"></div>
+					  <form id="xmlValidatorForm" action="#" method="post" enctype="multipart/form-data">
+						<div class="editor-container mb-3" id="dropZone">
+						  <div id="xmlEditor"></div>
+						  <div class="upload-overlay d-none">
+							<div class="text-center">
+							  <i class="ti ti-upload mb-2"></i>
+							  <p class="mb-0">Drop your XML file here</p>
+							</div>
+						  </div>
+						</div>
+						
+						<div class="row g-3 mb-3">
+						  <div class="col-sm-6">
+							<label for="xmlFile" class="form-label">Upload XML File</label>
+							<input class="form-control" type="file" id="xmlFile" accept=".xml">
+						  </div>
+						</div>
+
+						<div class="row g-3">
+						  <div class="col">
+							<div class="d-flex gap-2">
+							  <button type="submit" class="btn btn-primary waves-effect">
+								<i class="ti ti-check me-1"></i> Validate XML
+							  </button>
+							  <button type="button" id="copyButton" class="btn btn-secondary waves-effect">
+								<i class="ti ti-copy me-1"></i> Copy to Clipboard
+							  </button>
+							  <div class="dropdown">
+								<button type="button" class="btn btn-outline-primary dropdown-toggle waves-effect" data-bs-toggle="dropdown">
+								  <i class="ti ti-tool me-1"></i> Tools
+								</button>
+								<ul class="dropdown-menu">
+								  <li><a class="dropdown-item" href="javascript:void(0);" id="compareXml">Compare with Another XML</a></li>
+								</ul>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </form>
+					</div>
+				  </div>
+				</div>
+
+				<!-- Analysis Panel -->
+				<div class="col-xl-4 col-lg-5">
+				  <div class="row">
+					<!-- Statistics Card -->
+					<div class="col-12">
+					  <div class="card mb-4">
+						<div class="card-header">
+						  <h5 class="card-title mb-0">XML Statistics</h5>
+						</div>
+						<div class="card-body">
+						  <div class="stats-container">
+							<div class="row g-3">
+							  <div class="col-sm-6">
+								<div class="d-flex align-items-center gap-2 mb-3">
+								  <div class="badge bg-label-primary rounded p-2">
+									<i class="ti ti-file-code ti-sm"></i>
+								  </div>
+								  <div>
+									<h6 class="mb-0" id="statFileSize">0 KB</h6>
+									<small>File Size</small>
+								  </div>
+								</div>
+							  </div>
+							  <div class="col-sm-6">
+								<div class="d-flex align-items-center gap-2 mb-3">
+								  <div class="badge bg-label-success rounded p-2">
+									<i class="ti ti-hierarchy-2 ti-sm"></i>
+								  </div>
+								  <div>
+									<h6 class="mb-0" id="statDepth">0</h6>
+									<small>Document Depth</small>
+								  </div>
+								</div>
+							  </div>
+							  <div class="col-sm-6">
+								<div class="d-flex align-items-center gap-2">
+								  <div class="badge bg-label-info rounded p-2">
+									<i class="ti ti-tags ti-sm"></i>
+								  </div>
+								  <div>
+									<h6 class="mb-0" id="statElements">0</h6>
+									<small>Total Elements</small>
+								  </div>
+								</div>
+							  </div>
+							  <div class="col-sm-6">
+								<div class="d-flex align-items-center gap-2">
+									<div class="badge bg-label-warning rounded p-2">
+										<i class="ti ti-stack ti-sm"></i>
+									</div>
+									<div>
+										<h6 class="mb-0" id="statComplexity">0%</h6>
+										<small>Complexity Score</small>
+									</div>
+								</div>
+							</div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+
+					<!-- Structure Analysis -->
+					<div class="col-12">
+					  <div class="card mb-4">
+						<div class="card-header">
+						  <h5 class="card-title mb-0">Structure Analysis <span class="badge bg-primary ms-2">BETA</span></h5>
+						</div>
+						<div class="card-body">
+						  <div id="xmlStructure" class="tree-view">
+							<!-- Tree structure will be populated by JS -->
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+
+			  <!-- Modals -->
+			  <div class="modal fade" id="compareModal" tabindex="-1">
+				<div class="modal-dialog modal-lg">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title">Compare XML</h5>
+					  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+					  <div class="alert alert-info">
+						<div class="alert-body">
+						  Compare your current XML with another XML to find differences.
+						</div>
+					  </div>
+					  <div class="mb-3">
+						<label class="form-label">Second XML Content</label>
+						<div id="compareEditor"></div>
+					  </div>
+					  <div class="mb-3">
+						<label class="form-label">Or upload XML file</label>
+						<input type="file" class="form-control" id="compareXmlFile" accept=".xml">
+					  </div>
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+					  <button type="button" class="btn btn-primary" id="runCompare">Compare</button>
+					</div>
+				  </div>
+				</div>
+			  </div>
+
+
+			</div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+  <style>
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #ff0000;
+      animation: heartbeat 1s infinite;
+    }
+  </style>
+  <div class="container-xxl">
+    <div class="row py-4">
+      <!-- Main Info Column -->
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold">©
+              <script>document.write(new Date().getFullYear());</script>
+            </span>
+            <span>DayZ Boosterz - Made with </span>
+            <span class="heart-icon">❤️</span>
+            <span> by </span>
+            <a href="https://dayzboosterz.com/" target="_blank" class="footer-link">OzzieHouso</a>
+          </div>
+          <small class="text-muted mb-3">
+            This website is not affiliated or authorized by Bohemia Interactive a.s. Bohemia Interactive, ARMA, DAYZ, 
+            and all associated logos and designs are trademarks or registered trademarks of Bohemia Interactive a.s.
+          </small>
+          <div class="text-muted small">Connected to us via: DZB-SERVER-1</div>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-12 col-lg-6">
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center h-100 gap-3">
+          <a href="https://dzbdiscord.com/" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-brand-discord me-2"></i>Join our Discord
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Documentation
+          </a>
+		  <a href="terms.html" class="btn btn-warning btn-sm" target="_blank">
+            <i class="ti ti-file-text me-2"></i>Terms of Use
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+	  
+	  		<div class="buy-now">
+			<a href="../../index.html#landingDonate" target="_blank" class="btn btn-danger btn-buy-now waves-effect waves-light">Support The Project</a>
+		</div>
+	
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../assets/vendor/js/bootstrap.js"></script>
+    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="../../assets/vendor/js/menu.js"></script>
+
+    <!-- XML Validator specific scripts -->
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/lint.min.js"></script>
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/lint/xml-lint.min.html"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
+	<script src="../../assets/vendor/libs/shepherd/shepherd.js"></script>
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+	
+	<script src="../../assets/js/tour/tour-xml5e1f.js?v=2"></script>
+	
+	<script>
+		// Initialize CodeMirror editors
+	let xmlEditor;
+	let compareEditor;
+
+	document.addEventListener('DOMContentLoaded', function() {
+		// Initialize the main XML editor
+		xmlEditor = CodeMirror(document.getElementById('xmlEditor'), {
+			mode: 'xml',
+			theme: 'darcula',
+			lineNumbers: true,
+			lineWrapping: true,
+			autoCloseTags: true,
+			matchBrackets: true,
+			indentUnit: 2,
+			tabSize: 2,
+			gutters: ['CodeMirror-lint-markers'],
+			lint: true
+		});
+
+		// Initialize the compare editor in the modal
+		compareEditor = CodeMirror(document.getElementById('compareEditor'), {
+			mode: 'xml',
+			theme: 'darcula',
+			lineNumbers: true,
+			lineWrapping: true,
+			autoCloseTags: true,
+			matchBrackets: true,
+			indentUnit: 2,
+			tabSize: 2
+		});
+
+		// Set up drag and drop functionality
+		setupDragAndDrop();
+		
+		// Set up event listeners
+		setupEventListeners();
+	});
+
+	function setupDragAndDrop() {
+		const dropZone = document.getElementById('dropZone');
+		const overlay = document.querySelector('.upload-overlay');
+
+		['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+			dropZone.addEventListener(eventName, preventDefaults, false);
+		});
+
+		function preventDefaults(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		}
+
+		['dragenter', 'dragover'].forEach(eventName => {
+			dropZone.addEventListener(eventName, () => {
+				overlay.classList.remove('d-none');
+			}, false);
+		});
+
+		['dragleave', 'drop'].forEach(eventName => {
+			dropZone.addEventListener(eventName, () => {
+				overlay.classList.add('d-none');
+			}, false);
+		});
+
+		dropZone.addEventListener('drop', handleDrop, false);
+	}
+
+	function handleDrop(e) {
+		const dt = e.dataTransfer;
+		const files = dt.files;
+
+		if (files.length) {
+			const file = files[0];
+			if (file.type === 'text/xml' || file.name.endsWith('.xml')) {
+				const reader = new FileReader();
+				reader.onload = function(e) {
+					xmlEditor.setValue(e.target.result);
+					updateStatistics();
+				};
+				reader.readAsText(file);
+			} else {
+				showAlert('Invalid file type', 'Please upload an XML file.', 'error');
+			}
+		}
+	}
+
+	function setupEventListeners() {
+		// Form submission
+		document.getElementById('xmlValidatorForm').addEventListener('submit', function(e) {
+			e.preventDefault();
+			validateXML();
+		});
+
+		// File input change
+		document.getElementById('xmlFile').addEventListener('change', function(e) {
+			const file = e.target.files[0];
+			if (file) {
+				const reader = new FileReader();
+				reader.onload = function(e) {
+					xmlEditor.setValue(e.target.result);
+					updateStatistics();
+				};
+				reader.readAsText(file);
+			}
+		});
+
+		// Button click handlers
+		document.getElementById('formatXml').addEventListener('click', formatXML);
+		document.getElementById('minifyXml').addEventListener('click', minifyXML);
+		document.getElementById('clearEditor').addEventListener('click', clearEditor);
+		document.getElementById('downloadXml').addEventListener('click', downloadXML);
+		document.getElementById('copyButton').addEventListener('click', copyToClipboard);
+		document.getElementById('compareXml').addEventListener('click', openCompareModal);
+		document.getElementById('runCompare').addEventListener('click', compareXMLContents);
+
+		// Compare file input change
+		document.getElementById('compareXmlFile').addEventListener('change', function(e) {
+			const file = e.target.files[0];
+			if (file) {
+				const reader = new FileReader();
+				reader.onload = function(e) {
+					compareEditor.setValue(e.target.result);
+				};
+				reader.readAsText(file);
+			}
+		});
+
+		// Editor change event
+		xmlEditor.on('change', updateStatistics);
+	}
+
+	async function validateXML() {
+		const xmlContent = xmlEditor.getValue();
+		if (!xmlContent.trim()) {
+			Swal.fire({
+				title: 'Empty Content',
+				text: 'Please enter some XML content to validate.',
+				icon: 'warning',
+				showConfirmButton: false,
+				timer: 2000,
+				timerProgressBar: true,
+				position: 'center',
+				toast: false
+			});
+			return;
+		}
+
+		try {
+			const parser = new DOMParser();
+			const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
+			const parserError = xmlDoc.querySelector('parsererror');
+
+			// Track validation attempt
+			await fetch('../../auth/track.html', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/xml',
+				},
+				body: JSON.stringify({ tool: 'XML Validator' }),
+			});
+
+			if (parserError) {
+				Swal.fire({
+					title: 'Invalid XML',
+					html: `
+						<div class="text-start">
+							<div class="alert alert-danger">
+								<div class="d-flex">
+									<i class="ti ti-alert-circle ti-sm me-2"></i>
+									<div>${parserError.textContent}</div>
+								</div>
+							</div>
+							<div class="mt-3">
+								<h6 class="mb-2">Common fixes:</h6>
+								<ul class="mb-0">
+									<li>Check for missing closing tags</li>
+									<li>Ensure all tags are properly nested</li>
+									<li>Verify special characters are properly escaped</li>
+									<li>Check for invalid character references</li>
+								</ul>
+							</div>
+						</div>
+					`,
+					icon: 'error',
+					confirmButtonText: 'Got it'
+				});
+			} else {
+				Swal.fire({
+					title: 'Valid XML',
+					text: 'XML is well-formed.',
+					icon: 'success',
+					showConfirmButton: false,
+					timer: 2000,
+					timerProgressBar: true,
+					position: 'center',
+					toast: false
+				});
+				updateStructureAnalysis(xmlDoc);
+			}
+		} catch (error) {
+			Swal.fire({
+				title: 'Error',
+				text: error.message,
+				icon: 'error',
+				confirmButtonText: 'OK'
+			});
+		}
+	}
+
+	function showValidationResult(isValid, message) {
+		const validationDetails = document.getElementById('validationDetails');
+		validationDetails.innerHTML = `
+			<div class="alert alert-${isValid ? 'success' : 'danger'} mb-0">
+				<div class="d-flex align-items-center">
+					<i class="ti ti-${isValid ? 'check' : 'x'} me-2"></i>
+					<span>${message}</span>
+				</div>
+			</div>
+		`;
+	}
+
+	function updateStatistics() {
+		const xmlContent = xmlEditor.getValue();
+		
+		// Update file size
+		const bytes = new Blob([xmlContent]).size;
+		document.getElementById('statFileSize').textContent = formatFileSize(bytes);
+
+		try {
+			const parser = new DOMParser();
+			const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
+
+			// Count elements
+			const elements = xmlDoc.getElementsByTagName('*').length;
+			document.getElementById('statElements').textContent = elements;
+
+			// Calculate depth
+			const depth = calculateXMLDepth(xmlDoc.documentElement);
+			document.getElementById('statDepth').textContent = depth;
+
+			// Calculate complexity score (new addition)
+			const complexity = calculateComplexity({
+				depth: depth,
+				elements: elements,
+				size: bytes,
+				attributes: countAttributes(xmlDoc)
+			});
+			document.getElementById('statComplexity').textContent = `${complexity}%`;
+
+		} catch (error) {
+			console.error('Error updating statistics:', error);
+		}
+	}
+
+	// Add these new helper functions after updateStatistics():
+	function countAttributes(xmlDoc) {
+		let count = 0;
+		const elements = xmlDoc.getElementsByTagName('*');
+		for (let element of elements) {
+			count += element.attributes.length;
+		}
+		return count;
+	}
+
+	function calculateComplexity(stats) {
+		// Weight factors
+		const weights = {
+			depth: 10,      // Depth has high impact
+			elements: 2,    // Each element adds some complexity
+			attributes: 1,  // Each attribute adds minimal complexity
+			size: 0.01     // File size has minimal impact
+		};
+
+		// Calculate weighted score
+		let score = 
+			(stats.depth * weights.depth) +
+			(stats.elements * weights.elements) +
+			(stats.attributes * weights.attributes) +
+			(stats.size * weights.size);
+
+		// Normalize to 0-100 range
+		const maxScore = 1000; 
+		score = Math.min(Math.round((score / maxScore) * 100), 100);
+
+		return score;
+	}
+
+	function calculateXMLDepth(node, currentDepth = 1) {
+		if (!node) return 0;
+		let maxDepth = currentDepth;
+		for (let child of node.children) {
+			const childDepth = calculateXMLDepth(child, currentDepth + 1);
+			maxDepth = Math.max(maxDepth, childDepth);
+		}
+		return maxDepth;
+	}
+
+	function countNamespaces(xmlDoc) {
+		const namespaces = new Set();
+		const elements = xmlDoc.getElementsByTagName('*');
+		for (let element of elements) {
+			for (let attr of element.attributes) {
+				if (attr.name.startsWith('xmlns:')) {
+					namespaces.add(attr.value);
+				}
+			}
+			if (element.namespaceURI) {
+				namespaces.add(element.namespaceURI);
+			}
+		}
+		return namespaces.size;
+	}
+
+	function formatFileSize(bytes) {
+		if (bytes === 0) return '0 Bytes';
+		const k = 1024;
+		const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+		const i = Math.floor(Math.log(bytes) / Math.log(k));
+		return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+	}
+
+	function updateStructureAnalysis(xmlDoc) {
+		const structure = document.getElementById('xmlStructure');
+		structure.innerHTML = '';
+		if (xmlDoc.documentElement) {
+			structure.appendChild(createTreeNode(xmlDoc.documentElement));
+		}
+	}
+
+	function createTreeNode(element) {
+		const container = document.createElement('div');
+		container.className = 'tree-node';
+
+		const header = document.createElement('div');
+		header.className = 'd-flex align-items-center py-1 cursor-pointer';
+
+		const hasChildren = element.children.length > 0;
+		const hasAttributes = element.attributes.length > 0;
+		const hasTextContent = element.childNodes.length === 1 && element.childNodes[0].nodeType === 3 && element.childNodes[0].textContent.trim();
+
+		// Icon section
+		const iconWrapper = document.createElement('div');
+		iconWrapper.className = 'me-2';
+		
+		const icon = document.createElement('i');
+		icon.className = hasChildren ? 'ti ti-chevron-right' : 'ti ti-point';
+		iconWrapper.appendChild(icon);
+
+		// Content section
+		const content = document.createElement('div');
+		content.className = 'node-content d-flex align-items-center flex-wrap';
+
+		// Tag name
+		const tagName = document.createElement('span');
+		tagName.className = 'text-primary';
+		tagName.textContent = `<${element.tagName}`;
+		content.appendChild(tagName);
+
+		// Attributes
+		if (hasAttributes) {
+			Array.from(element.attributes).forEach(attr => {
+				const attrSpan = document.createElement('span');
+				attrSpan.className = 'ms-1';
+				const attrName = document.createElement('span');
+				attrName.className = 'text-info';
+				attrName.textContent = attr.name;
+				const attrValue = document.createElement('span');
+				attrValue.className = 'text-warning';
+				attrValue.textContent = `="${attr.value}"`;
+				attrSpan.appendChild(attrName);
+				attrSpan.appendChild(attrValue);
+				content.appendChild(attrSpan);
+			});
+		}
+
+		// Close tag bracket
+		const closeTag = document.createElement('span');
+		closeTag.className = 'text-primary';
+		closeTag.textContent = '>';
+		content.appendChild(closeTag);
+
+		// Text content (if no children)
+		if (hasTextContent) {
+			const textSpan = document.createElement('span');
+			textSpan.className = 'ms-2 text-success';
+			textSpan.textContent = element.childNodes[0].textContent.trim();
+			content.appendChild(textSpan);
+		}
+
+		header.appendChild(iconWrapper);
+		header.appendChild(content);
+		container.appendChild(header);
+
+		if (hasChildren) {
+			const childContainer = document.createElement('div');
+			childContainer.className = 'ms-4 ps-2 border-start';
+			childContainer.style.display = 'none'; // Initially collapsed
+
+			Array.from(element.children).forEach(child => {
+				childContainer.appendChild(createTreeNode(child));
+			});
+
+			// Add closing tag
+			const closingHeader = document.createElement('div');
+			closingHeader.className = 'd-flex align-items-center py-1';
+			const closingTag = document.createElement('span');
+			closingTag.className = 'text-primary';
+			closingTag.textContent = `</${element.tagName}>`;
+			closingHeader.appendChild(closingTag);
+			childContainer.appendChild(closingHeader);
+
+			container.appendChild(childContainer);
+
+			// Add click handler for expansion/collapse
+			header.addEventListener('click', (e) => {
+				e.stopPropagation();
+				const isExpanded = childContainer.style.display === 'block';
+				childContainer.style.display = isExpanded ? 'none' : 'block';
+				icon.className = isExpanded ? 'ti ti-chevron-right' : 'ti ti-chevron-down';
+			});
+		} else if (hasTextContent) {
+			// Add closing tag for elements with text content
+			const closingTag = document.createElement('span');
+			closingTag.className = 'text-primary';
+			closingTag.textContent = `</${element.tagName}>`;
+			content.appendChild(closingTag);
+		}
+
+		// Add hover effect
+		header.addEventListener('mouseenter', () => {
+			header.classList.add('bg-label-primary', 'bg-opacity-10', 'rounded');
+		});
+		header.addEventListener('mouseleave', () => {
+			header.classList.remove('bg-label-primary', 'bg-opacity-10', 'rounded');
+		});
+
+		return container;
+	}
+
+	function formatXML() {
+		try {
+			const xmlContent = xmlEditor.getValue();
+			const formatted = formatXMLString(xmlContent);
+			xmlEditor.setValue(formatted);
+			showAlert('Success', 'XML formatted successfully.', 'success');
+		} catch (error) {
+			showAlert('Error', 'Failed to format XML: ' + error.message, 'error');
+		}
+	}
+
+	function formatXMLString(xml) {
+		const parser = new DOMParser();
+		const xmlDoc = parser.parseFromString(xml, 'text/xml');
+		const serializer = new XMLSerializer();
+		const formatted = serializer.serializeToString(xmlDoc)
+			.replace(/(>)(<)(\/*)/g, '$1\n$2$3')
+			.replace(/\t/g, '  ');
+		return formatted;
+	}
+
+	function minifyXML() {
+		try {
+			const xmlContent = xmlEditor.getValue();
+			const minified = xmlContent.replace(/>\s*</g, '><').trim();
+			xmlEditor.setValue(minified);
+			showAlert('Success', 'XML minified successfully.', 'success');
+		} catch (error) {
+			showAlert('Error', 'Failed to minify XML: ' + error.message, 'error');
+		}
+	}
+
+	function clearEditor() {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: 'This will clear all content in the editor.',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, clear it!',
+			cancelButtonText: 'Cancel'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				xmlEditor.setValue('');
+				updateStatistics();
+				showAlert('Success', 'Editor cleared successfully.', 'success');
+			}
+		});
+	}
+
+	async function downloadXML() {
+		const xmlContent = xmlEditor.getValue();
+		if (!xmlContent.trim()) {
+			showAlert('Empty Content', 'There is no content to download.', 'warning');
+			return;
+		}
+
+		try {
+			// Track tool usage
+			await fetch('../../auth/track.html', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/xml',
+				},
+				body: JSON.stringify({ tool: 'XML Validator' }),
+			});
+
+			// Proceed with the download
+			const blob = new Blob([xmlContent], { type: 'text/xml' });
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'validated.html';
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+			document.body.removeChild(a);
+		} catch (error) {
+			console.error('Error during download:', error);
+			showAlert('Error', 'Failed to download the file.', 'error');
+		}
+	}
+
+
+	function copyToClipboard() {
+		const xmlContent = xmlEditor.getValue();
+		navigator.clipboard.writeText(xmlContent).then(() => {
+			showAlert('Success', 'Content copied to clipboard.', 'success');
+		}).catch(err => {
+			showAlert('Error', 'Failed to copy content: ' + err.message, 'error');
+		});
+	}
+
+	function openCompareModal() {
+		const modal = new bootstrap.Modal(document.getElementById('compareModal'));
+		modal.show();
+	}
+
+	function compareXMLContents() {
+		const original = xmlEditor.getValue();
+		const comparison = compareEditor.getValue();
+
+		if (!original.trim() || !comparison.trim()) {
+			showAlert('Empty Content', 'Both editors must contain XML content to compare.', 'warning');
+			return;
+		}
+
+		try {
+			const differences = findXMLDifferences(original, comparison);
+			showComparisonResults(differences);
+		} catch (error) {
+			showAlert('Error', 'Failed to compare XML: ' + error.message, 'error');
+		}
+	}
+
+	function findXMLDifferences(xml1, xml2) {
+		const parser = new DOMParser();
+		const doc1 = parser.parseFromString(xml1, 'text/xml');
+		const doc2 = parser.parseFromString(xml2, 'text/xml');
+
+		const differences = [];
+		compareDOMNodes(doc1.documentElement, doc2.documentElement, differences, '../../index.html');
+		return differences;
+	}
+
+	function compareDOMNodes(node1, node2, differences, path) {
+		if (!node1 || !node2) {
+			differences.push({
+				path: path,
+				type: node1 ? 'extra' : 'missing',
+				value1: node1 ? node1.nodeName : undefined,
+				value2: node2 ? node2.nodeName : undefined
+			});
+			return;
+		}
+
+		if (node1.nodeName !== node2.nodeName) {
+			differences.push({
+				path: path,
+				type: 'value',
+				value1: node1.nodeName,
+				value2: node2.nodeName
+			});
+		}
+
+		// Compare attributes
+		const attrs1 = Array.from(node1.attributes || []);
+		const attrs2 = Array.from(node2.attributes || []);
+		
+		attrs1.forEach(attr1 => {
+			const attr2 = node2.getAttribute(attr1.name);
+			if (attr2 === null) {
+				differences.push({
+					path: `${path}/@${attr1.name}`,
+					type: 'missing',
+					value1: attr1.value,
+					value2: undefined
+				});
+			} else if (attr1.value !== attr2) {
+				differences.push({
+					path: `${path}/@${attr1.name}`,
+					type: 'value',
+					value1: attr1.value,
+					value2: attr2
+				});
+			}
+		});
+
+		attrs2.forEach(attr2 => {
+			if (!node1.hasAttribute(attr2.name)) {
+				differences.push({
+					path: `${path}/@${attr2.name}`,
+					type: 'extra',
+					value1: undefined,
+					value2: attr2.value
+				});
+			}
+		});
+
+		// Compare child nodes
+		const children1 = Array.from(node1.children);
+		const children2 = Array.from(node2.children);
+
+		const maxLength = Math.max(children1.length, children2.length);
+		for (let i = 0; i < maxLength; i++) {
+			const childPath = `${path}/${node1.nodeName}[${i}]`;
+			if (i < children1.length && i < children2.length) {
+				compareDOMNodes(children1[i], children2[i], differences, childPath);
+			} else if (i < children1.length) {
+				differences.push({
+					path: childPath,
+					type: 'extra',
+					value1: children1[i].nodeName,
+					value2: undefined
+				});
+			} else {
+				differences.push({
+					path: childPath,
+					type: 'missing',
+					value1: undefined,
+					value2: children2[i].nodeName
+				});
+			}
+		}
+	}
+
+	function showComparisonResults(differences) {
+		const resultDiv = document.getElementById('xmlValidationResult');
+		if (differences.length === 0) {
+			showAlert('Comparison Result', 'The XML documents are identical.', 'success');
+			return;
+		}
+
+		let diffHtml = `
+			<div class="comparison-results">
+				<div class="alert alert-warning alert-dismissible">
+					<h6 class="alert-heading">Found ${differences.length} difference${differences.length > 1 ? 's' : ''}</h6>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					<hr>
+					<div class="diff-container">
+		`;
+
+		differences.forEach((diff, index) => {
+			const getValueDisplay = (val) => {
+				if (val === undefined) return '<em class="text-muted">undefined</em>';
+				if (val === null) return '<em class="text-muted">null</em>';
+				if (typeof val === 'object') return `${JSON.stringify(val, null, 2)}`;
+				return `${String(val)}`;
+			};
+
+			const getDiffTypeLabel = (type) => {
+				const labels = {
+					'type': 'Type Mismatch',
+					'value': 'Value Different',
+					'missing': 'Missing in Second XML',
+					'extra': 'Extra in Second XML',
+					'structure': 'Structure Different'
+				};
+				return labels[type] || type;
+			};
+
+			diffHtml += `
+				<div class="diff-item mb-3 ${index !== differences.length - 1 ? 'border-bottom pb-3' : ''}">
+					<div class="mb-2">
+						<span class="badge bg-label-primary">${getDiffTypeLabel(diff.type)}</span>
+						<strong class="ms-2">Path:</strong> ${diff.path || 'root'}
+					</div>
+					<div class="row g-2">
+						<div class="col-md-6">
+							<div class="diff-value p-2 rounded bg-label-secondary bg-opacity-10">
+								<small class="text-muted d-block mb-1">Original:</small>
+								${getValueDisplay(diff.value1)}
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="diff-value p-2 rounded bg-label-secondary bg-opacity-10">
+								<small class="text-muted d-block mb-1">Compare:</small>
+								${getValueDisplay(diff.value2)}
+							</div>
+						</div>
+					</div>
+				</div>
+			`;
+		});
+
+		diffHtml += `
+					</div>
+				</div>
+			</div>
+		`;
+
+		resultDiv.innerHTML = diffHtml;
+	}
+
+	function showAlert(title, message, icon = 'success') {
+		Swal.fire({
+			title: title,
+			text: message,
+			icon: icon,
+			showConfirmButton: false,
+			timer: 2000,
+			timerProgressBar: true,
+			position: 'center',
+			toast: false
+		});
+	}
+	</script>
+
+  </body>
+
+<!-- Mirrored from app.dayzboosterz.com/apps/tools/xmlvalidator by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 17:27:54 GMT -->
+</html>
